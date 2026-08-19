@@ -1,7 +1,10 @@
 ---
 name: uninstall-skill
-description: Remove an installed skill — its home under ~/.agents/skills and its link in ~/.claude/skills.
+description: Remove an installed skill, both its home under ~/.agents/skills and its link in ~/.claude/skills.
 disable-model-invocation: true
+metadata:
+  author: "Mohammed Zaghloul <mohammed@devpluscoder.com>"
+  version: "0.1"
 ---
 
 # Uninstall skill
@@ -12,19 +15,19 @@ The name is this skill's argument. With no argument, list what is installed and 
 
 ## 1. Find both sides
 
-Inspect both paths. The two sides drift apart, and each state is removed differently:
+Inspect both paths. The two sides drift apart, and each state calls for a different removal:
 
-- **Home is a real directory** — removing it deletes the skill's only copy.
-- **Home is itself a symlink**, as a skill vendored by a plugin or marketplace is — remove the symlink and leave its target where it is.
-- **Home missing, link present** — a dangling link; the link alone goes.
-- **Link missing, home present** — the home alone goes.
-- **Neither present** — report that nothing is installed under that name and stop.
+- **Home is a real directory.** Removing it deletes the skill's only copy.
+- **Home is itself a symlink.** A skill vendored by a plugin or marketplace looks like this. Remove the symlink and leave its target alone.
+- **Home missing, link present.** A dangling link. The link alone goes.
+- **Link missing, home present.** The home alone goes.
+- **Neither present.** Report that nothing is installed under that name and stop.
 
 Done when: the state of both paths is reported.
 
 ## 2. Confirm
 
-Show the human exactly what disappears: each path, whether it is a real copy or a symlink, and for a real directory the files it holds. A real home with no copy anywhere else is gone for good — say so when that is the case. Ask for a yes.
+Show the human exactly what disappears: each path, whether it is a real copy or a symlink, and for a real directory the files it holds. A real home with no copy anywhere else is gone for good. Say so when that is the case. Ask for a yes.
 
 Done when: the human has said yes, or the run has stopped.
 
@@ -42,7 +45,7 @@ Done when: every check has been run and its result recorded.
 
 ## 4. Reload
 
-Make the running session forget the skill. Ask the host to re-read its skill index — in Claude Code, list the available skills and confirm `<name>` no longer appears. When the host offers no way to re-read the index mid-session, say so plainly and tell the human it disappears in a new session — never present a restart-only host as a reload that worked.
+Make the running session forget the skill. Ask the host to re-read its skill index. In Claude Code, list the available skills and confirm `<name>` no longer appears. When the host offers no way to re-read the index mid-session, say so plainly and tell the human it disappears in a new session. Never present a restart-only host as a reload that worked.
 
 Done when: `<name>` is confirmed gone from this session, or the human has been told a new session is needed.
 
