@@ -3,8 +3,8 @@ name: install-skill
 description: Install a skill from a path or URL into the global skill home and link it for Claude Code.
 disable-model-invocation: true
 metadata:
-  author: "Mohammed Zaghloul <mohammed@devpluscoder.com>"
-  version: "0.1"
+  author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
+  version: "0.1.1"
 ---
 
 # Install skill
@@ -84,11 +84,13 @@ Then delete the scratch root recorded in step 1 and confirm the path is gone. A 
 
 Done when: every check above has been run and its result recorded, and the scratch root no longer exists.
 
-## 7. Reload
+## 7. Reload and test
 
-Make the running session see the new skill. Ask the host to re-read its skill index. In Claude Code, list the available skills and look for `<name>`. When it appears, the reload took. When the host offers no way to re-read the index mid-session, say so plainly and tell the human a new session picks it up. Never present a restart-only host as a reload that worked.
+Reload the skill index (`/reload-skills`, or tell the user a new session picks
+it up), then run the skill once on a real case and report what it produced.
 
-Done when: `<name>` is confirmed visible in this session, or the human has been told a new session is needed.
+Done when: the skill shows in the skill index and one real invocation has run
+and been reported.
 
 ## 8. Report
 
