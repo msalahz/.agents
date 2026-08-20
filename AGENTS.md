@@ -7,6 +7,7 @@ or `## Agent skills` section always wins over these defaults.
 
 - Invoke the `unslop` skill before writing anything in a session, then hold to it
   for every response and artifact after.
+- Write subagent prompts with the `writing-for-agents` and `unslop` skills applied.
 - Label every unverified claim `unconfirmed`. Say when you do not know.
 - Ask about missing important details when interactive. When unattended, make the
   safest assumption and label it.
