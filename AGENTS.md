@@ -11,6 +11,7 @@ or `## Agent skills` section always wins over these defaults.
 - Label every unverified claim `unconfirmed`. Say when you do not know.
 - Ask about missing important details when interactive. When unattended, make the
   safest assumption and label it.
+- Put each item of a list on a new line.
 
 ## Coding
 

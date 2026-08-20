@@ -1,10 +1,9 @@
 ---
 name: unslop-writing-for-agents
-description: Run a text by the writing-for-agents and unslop skills, then apply every fix.
-disable-model-invocation: true
+description: Run a text by the writing-for-agents and unslop skills, then apply every fix. Use when reviewing or polishing a skill, AGENTS.md, or other agent-facing text.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.1"
+  version: "0.2.0"
 ---
 
 # Unslop writing for agents
