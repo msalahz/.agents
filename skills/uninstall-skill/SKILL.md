@@ -3,8 +3,8 @@ name: uninstall-skill
 description: Remove an installed skill, both its home under ~/.agents/skills and its link in ~/.claude/skills.
 disable-model-invocation: true
 metadata:
-  author: "Mohammed Zaghloul <mohammed@devpluscoder.com>"
-  version: "0.1"
+  author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
+  version: "0.1.1"
 ---
 
 # Uninstall skill
@@ -43,11 +43,14 @@ Verify from the filesystem:
 
 Done when: every check has been run and its result recorded.
 
-## 4. Reload
+## 4. Reload and test
 
-Make the running session forget the skill. Ask the host to re-read its skill index. In Claude Code, list the available skills and confirm `<name>` no longer appears. When the host offers no way to re-read the index mid-session, say so plainly and tell the human it disappears in a new session. Never present a restart-only host as a reload that worked.
+Reload the skill index (`/reload-skills`, or tell the user a new session picks
+it up), then confirm `<name>` no longer shows in the skill index and report
+its absence.
 
-Done when: `<name>` is confirmed gone from this session, or the human has been told a new session is needed.
+Done when: the skill is gone from the skill index and its absence has been
+reported.
 
 ## 5. Report
 
