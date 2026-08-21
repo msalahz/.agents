@@ -17,9 +17,6 @@ or `## Agent skills` section always wins over these defaults.
 
 - KISS: the simplest solution that meets all the requirements.
 - Make code self-explanatory. Refactor until the names carry the meaning, and write no comments.
-- A *why* (constraint, invariant, workaround) goes in `docs/code-notes.md`, under a
-  heading per source-file path.
-- A decision goes in `docs/adr/`.
 
 ## Code review
 
