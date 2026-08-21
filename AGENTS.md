@@ -49,4 +49,4 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 ### Grilling
 
-Each round asks at most 3 questions from the frontier, most valuable first. The rest waits for later rounds.
+Each round asks at most 3 questions per round.
