@@ -1,8 +1,9 @@
 # Domain Docs
 
-**Global default for all repos: single-context.** A repo with multiple bounded contexts may override this by adding a `CONTEXT-MAP.md` at its root (and its own `docs/agents/domain.md` if the consumer rules differ).
+**Global default for all repos: single-context.** A repo with multiple bounded contexts overrides this by adding a `CONTEXT-MAP.md` at its root, and its own `docs/agents/domain.md` if the consumer rules differ.
 
-How the engineering skills should consume a repo's domain documentation when exploring the codebase.
+
+How the engineering skills should consume this repo's domain documentation when exploring the codebase.
 
 ## Before exploring, read these
 
@@ -14,7 +15,7 @@ If any of these files don't exist, **proceed silently**. Don't flag their absenc
 
 ## File structure
 
-Single-context repo (most repos, and the global default):
+Single-context repo (most repos):
 
 ```
 /

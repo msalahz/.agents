@@ -40,7 +40,7 @@ The engineering skills read their per-repo configuration from `docs/agents/*.md`
 
 ### Issue tracker
 
-Issues and specs live as local markdown files under `docs/scratch/<NN>-<feature-slug>/` in each repo. See `~/.agents/docs/agents/issue-tracker.md`, or the repo's `docs/agents/issue-tracker.md` if present.
+Issues and specs live as local markdown files under `docs/.scratch/<feature-slug>/` in each repo. See `~/.agents/docs/agents/issue-tracker.md`, or the repo's `docs/agents/issue-tracker.md` if present.
 
 ### Triage labels
 
