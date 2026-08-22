@@ -11,7 +11,7 @@ or `## Agent skills` section always wins over these defaults.
 - Label every unverified claim `unconfirmed`. Say when you do not know.
 - Ask about missing important details when interactive. When unattended, make the
   safest assumption and label it.
-- Put each item of a list on a new line.
+- Put each list item on its own line.
 
 ## Coding
 
@@ -50,3 +50,5 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 ### Grilling
 
 Each round asks at most 3 questions per round.
+Any enumeration inside a question (choices, examples, criteria, or other items)
+is a list with each item on its own line.
