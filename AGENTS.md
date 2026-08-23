@@ -50,6 +50,5 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 ### Grilling
 
-Each round asks at most 3 questions per round.
-Any enumeration inside a question (choices, examples, criteria, or other items)
-is a list with each item on its own line.
+Each round asks at most 3 questions.
+Any enumeration inside a question is a list, its items labelled `a`, `b`, `c`.
