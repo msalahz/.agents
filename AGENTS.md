@@ -17,6 +17,7 @@ or `## Agent skills` section always wins over these defaults.
 
 - KISS: the simplest solution that meets all the requirements.
 - Make code self-explanatory. Refactor until the names carry the meaning, and write no comments.
+- End any session that changed code by running `pnpm validate`; the session is done only when it passes.
 
 ## Code review
 
