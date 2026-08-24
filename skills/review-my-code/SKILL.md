@@ -3,12 +3,14 @@ name: review-my-code
 description: Senior-engineer review of changed code for logic, readability, performance, and safety, with stack-specific checks loaded per repo. Use when the user asks to review their changes, a branch, a PR, the working tree, or "review since X".
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Review my code
 
 Review the changed code as a senior engineer would: find the bug, the slow path, and the line the next developer will misread, and say what to change. Three reviewers run in parallel, one per aspect group; the skill merges their findings into one report the user applies by ID.
+
+Steps 1 through 4 print nothing. The report in step 5 is the run's entire output.
 
 Arguments, in any order, both optional: a fixed point (commit, branch, tag, `HEAD~3`) and `scope=a|b|c`.
 
@@ -24,7 +26,7 @@ Check the ref resolves with `git rev-parse` and the diff is non-empty. A bad ref
 
 Record the diff command (`git diff <fixed-point>...HEAD` for a ref, `git diff HEAD` plus untracked files for the working tree) and the commit list from `git log <fixed-point>..HEAD --oneline`.
 
-Done when: the resolved range is printed as the first line of output and the diff command is recorded.
+Done when: the diff command is recorded.
 
 ## 2. Choose the scope
 
@@ -33,6 +35,8 @@ Read `scope=` from the arguments. When absent, ask the user to pick one of the t
 - **a. Changed lines.** Findings only on lines in the diff. Surrounding code is read for judgement.
 - **b. Touched units.** Findings on any function, component, or module the diff touches, including its unchanged lines.
 - **c. Blast radius.** b plus every caller of and callee from the touched units.
+
+Scope a keeps the recorded diff command; b and c rewrite it with `-U0`, since those scopes read surrounding code straight from the files.
 
 Done when: one scope letter is recorded.
 
@@ -49,13 +53,13 @@ Done when: the loaded file list is recorded, in load order, with each replacemen
 
 ## 4. Run the three reviewers
 
-Dispatch three sub-agents in parallel, one per group in the aspects table below. Each prompt carries:
+List the touched units; scope c extends the list with their callers and callees. Dispatch three sub-agents in parallel, one per group in the aspects table below. Build each prompt with the `unslop-writing-for-agents` skill from the parts below:
 
-- The diff command, the commit list, and the scope letter with its definition from step 2.
+- The diff command, the commit list, the scope letter with its definition from step 2, and the touched-unit paths.
 - The group's aspects with their definitions from the table.
 - Every `## <Aspect>` section belonging to the group, from every loaded file, pasted in full and labelled with its source file.
 - The finding contract and the report rules below, pasted in full.
-- The brief: "Review as a senior engineer whose job is to make this code correct, readable, and fast. Read each touched unit in full before judging the diff. Report only what you can point at with `path:line`. Skip anything the repo's lint, typecheck, or formatter already enforces."
+- The brief: "Review as a senior engineer whose job is to make this code correct, readable, and fast. Read each touched unit in full before judging the diff. Return your top eight findings by risk. Report only what you can point at with `path:line`. Skip anything the repo's lint, typecheck, or formatter already enforces."
 
 Done when: three reports are back.
 
@@ -107,7 +111,8 @@ Every finding opens with one header line, then a body:
 - Risk: high, medium, or low.
 - Recommendation: fix, defer, or ignore.
 - `unchanged line` only when the line is outside the diff (scope b or c).
-- Body: one paragraph on what breaks or costs, and why, then a code snippet with the proposed change when it fits in about 15 lines. Larger changes get a description of the steps.
+- Body: high and medium risk get at most two sentences, what breaks then why. Low risk stops at the header line.
+- Snippet: the proposed change in at most 8 lines, changed lines only, `...` marking each gap. Include one when the recommendation alone cannot carry the fix. Larger changes get one sentence naming the steps.
 
 ## Report rules
 
