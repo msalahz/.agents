@@ -11,15 +11,6 @@
       "installedAt": "2026-07-18T08:28:38.829Z",
       "updatedAt": "2026-07-18T08:28:38.829Z"
     },
-    "code-review": {
-      "source": "coderabbitai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/coderabbitai/skills.git",
-      "skillPath": "skills/code-review/SKILL.md",
-      "skillFolderHash": "5049a0877f3e224666b7bdfe4a42aaccd78b3379",
-      "installedAt": "2026-07-18T08:28:38.832Z",
-      "updatedAt": "2026-08-04T09:06:55.406Z"
-    },
     "codebase-design": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -199,16 +190,6 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-07-18T08:28:38.844Z",
       "updatedAt": "2026-07-24T03:32:13.136Z"
-    },
-    "writing-great-skills": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
-      "skillFolderHash": "81d36946d48842f90358d8af54e3cdcc141f8e01",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-07-18T08:28:38.844Z",
-      "updatedAt": "2026-07-18T08:28:38.844Z"
     },
     "find-skills": {
       "source": "vercel-labs/skills",

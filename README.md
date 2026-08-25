@@ -1,6 +1,6 @@
-# Agent home for [Mohammed Zaghoul](https://github.com/msalahz)
+# Agent home for [Mohammed Zaghloul](https://github.com/msalahz)
 
-`~/.agents` is the tracked home for [Mohammed Zaghoul](https://github.com/msalahz) global agent memory and for the skills I
+`~/.agents` is the tracked home for [Mohammed Zaghloul](https://github.com/msalahz)'s global agent memory and for the skills I
 write myself. Claude Code keeps no copy of any of it. `~/.claude` imports and
 symlinks straight back here, so this repo is the one place to edit.
 
@@ -10,8 +10,8 @@ symlinks straight back here, so this repo is the one place to edit.
 ~/.agents/
 ├── AGENTS.md          global memory, loaded in every session
 ├── docs/agents/       defaults for repos that ship none of their own
-├── skills/            36 skills, some written here, some symlinked out
-└── .skill-lock.json   where the GitHub-installed skills came from
+├── skills/            43 skills, some written here, some symlinked out
+└── .skill-lock.json   where the `npx skills`-installed skills came from
 ```
 
 `AGENTS.md` is the one that matters most. `~/.claude/CLAUDE.md` imports it, so it
@@ -22,13 +22,18 @@ loads in every session, in every repo. A repo's own `docs/agents/*.md`,
 
 ### Where they came from
 
-Five are mine, written here. Twenty-five are Matt Pocock's, symlinked into his
-marketplace checkout, so they update when he ships. The other six are copies
-pulled from GitHub.
+Eight are mine, written here. Twenty-five are Matt Pocock's, symlinked into his
+marketplace checkout, so they update when he ships. The other ten are copies
+pulled from GitHub. The pstack ones were copied by hand, so they are not in
+`.skill-lock.json`.
 
 | Skill             | From                                                                     |
 | ----------------- | ------------------------------------------------------------------------ |
 | `unslop`          | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
+| `arena`           | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
+| `blast-radius`    | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
+| `how`             | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
+| `why`             | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
 | `humanizer`       | [`blader/humanizer`](https://github.com/blader/humanizer)                |
 | `frontend-design` | [`anthropics/skills`](https://github.com/anthropics/skills)              |
 | `find-skills`     | [`vercel-labs/skills`](https://github.com/vercel-labs/skills)            |
@@ -43,6 +48,7 @@ Being copies, they see no upstream changes until I reinstall them.
 | ---------------------------- | ------------------------------------------------- |
 | `/write-skill`               | Builds a new skill end to end, then installs it   |
 | `/install-skill <path\|url>` | Copies a source into `skills/<name>` and links it |
+| `/update-skill <name>`       | Edits a skill in place and bumps its version      |
 | `/uninstall-skill <name>`    | Removes the directory and the link                |
 
 Go through the skills rather than moving directories by hand, so the home and the
@@ -50,23 +56,26 @@ link never disagree.
 
 ## My skills
 
-The five I wrote. They live in this repo as real directories, so an edit here is
+The eight I wrote. They live in this repo as real directories, so an edit here is
 live after a reload.
 
 **User-invoked**
 
 - **[uninstall-skill](./skills/uninstall-skill/SKILL.md).** Remove a skill's home here and its link in `~/.claude/skills`. The one destructive skill in the set, so it stays behind the slash command.
+- **[review-my-code](./skills/review-my-code/SKILL.md).** Senior-engineer review of the changed code for logic, readability, performance, and safety, with stack-specific checks loaded per repo.
 
 **Model-invoked**
 
 - **[install-skill](./skills/install-skill/SKILL.md).** Install a skill from a path, archive, or git URL into `skills/<name>`, review it against `writing-for-agents`, then link it for Claude Code.
+- **[update-skill](./skills/update-skill/SKILL.md).** Edit an installed skill in place and bump its version. The counterpart to `install-skill`.
 - **[unslop-writing-for-agents](./skills/unslop-writing-for-agents/SKILL.md).** Review a text against `writing-for-agents` and `unslop`, show every fix as a diff, apply on approval.
 - **[write-skill](./skills/write-skill/SKILL.md).** Draft, install, and live-test a new skill end to end. Drives `unslop-writing-for-agents` and `install-skill`.
 - **[spin-peer-claude-session](./skills/spin-peer-claude-session/SKILL.md).** Launch an independent peer Claude session with its own model, effort, and instructions.
+- **[to-html](./skills/to-html/SKILL.md).** Render a session deliverable as one styled, self-contained HTML file in the repo.
 
 ## Skills from others
 
-The other 31. They split on one axis, who can invoke them. **User-invoked**
+The other 35. They split on one axis, who can invoke them. **User-invoked**
 skills only run when I type them, like `/grill-me`. **Model-invoked** skills run
 when I type them or when the agent reaches for one because the task fits.
 
@@ -83,12 +92,16 @@ when I type them or when the agent reaches for one because the task fits.
 - **[wayfinder](./skills/wayfinder/SKILL.md).** Plan work too big for one session as a map of decision tickets, resolved one at a time.
 - **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md).** Survey a codebase for deepening opportunities, report them, grill through the one I pick.
 - **[setup-matt-pocock-skills](./skills/setup-matt-pocock-skills/SKILL.md).** Configure a repo for the engineering skills. Run once per repo.
+- **[code-review](./skills/code-review/SKILL.md).** Reviews a diff on two axes, standards and spec, in parallel sub-agents.
+- **[arena](./skills/arena/SKILL.md).** Spawn N candidates at one task in parallel, pick a base, graft the strongest parts of the losers into it. For work where a single attempt would lock in the wrong shape. Reads its runner models from Cursor's `pstack-models.mdc`; unconfirmed under Claude Code.
+- **[blast-radius](./skills/blast-radius/SKILL.md).** Find what a change could break beyond its own diff, then prove the one fact its safety rests on by running real code instead of writing it up.
 
 **Model-invoked**
 
 - **[tdd](./skills/tdd/SKILL.md).** Red-green-refactor, one vertical slice at a time.
+- **[how](./skills/how/SKILL.md).** Explain how a subsystem works, walk code before a change, and answer placement and layering questions. Pairs with `why`.
+- **[why](./skills/why/SKILL.md).** Answer why something works or was decided this way, querying every available evidence source in parallel and returning a cited read. Pairs with `how`.
 - **[diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md).** Gated diagnosis loop for hard bugs and performance regressions.
-- **[code-review](./skills/code-review/SKILL.md).** Reviews a diff on two axes, standards and spec, in parallel sub-agents.
 - **[codebase-design](./skills/codebase-design/SKILL.md).** Vocabulary for deep modules: much behaviour, small interface, clean seam.
 - **[domain-modeling](./skills/domain-modeling/SKILL.md).** Sharpen a project's domain model and record it in `CONTEXT.md` and ADRs.
 - **[prototype](./skills/prototype/SKILL.md).** Throwaway prototype to answer one design question.
