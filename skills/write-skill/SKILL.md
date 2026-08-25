@@ -3,7 +3,7 @@ name: write-skill
 description: Build, install, and live-test a new personal skill end to end. Use when the user asks to create, add, write, or scaffold a new skill.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.1"
+  version: "0.3.0"
 ---
 
 # Write skill
@@ -51,9 +51,9 @@ it up), then run the skill once on a real case and report what it produced.
 Done when: the skill shows in the skill index and one real invocation has run
 and been reported.
 
-## 5. Version later edits
+## 5. Edit later
 
-On every later edit, bump `version`: minor when a step or report contract
-changes, patch for wording.
+Make every later edit with `~/.claude/skills/update-skill/SKILL.md`; it
+carries the version rule.
 
-Done when: the version reflects the edit.
+Done when: the later edit went through update-skill.
