@@ -1,9 +1,10 @@
 ---
 name: review-my-code
-description: Senior-engineer review of changed code for logic, readability, performance, and safety, with stack-specific checks loaded per repo. Use when the user asks to review their changes, a branch, a PR, the working tree, or "review since X".
+description: Senior-engineer review of changed code for logic, readability, performance, and safety, with stack-specific checks loaded per repo.
+disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.5.0"
 ---
 
 # Review my code
@@ -59,7 +60,7 @@ List the touched units; scope c extends the list with their callers and callees.
 - The group's aspects with their definitions from the table.
 - Every `## <Aspect>` section belonging to the group, from every loaded file, pasted in full and labelled with its source file.
 - The finding contract and the report rules below, pasted in full.
-- The brief: "Review as a senior engineer whose job is to make this code correct, readable, and fast. Read each touched unit in full before judging the diff. Return your top eight findings by risk. Report only what you can point at with `path:line`. Skip anything the repo's lint, typecheck, or formatter already enforces."
+- The brief: "Review as a senior engineer whose job is to make this code correct, readable, and fast. Read each touched unit in full before judging the diff. Report every finding that meets the finding contract, and only what you can point at with `path:line`. Skip anything the repo's lint, typecheck, or formatter already enforces."
 
 Done when: three reports are back.
 
@@ -69,7 +70,7 @@ Print the report in this order:
 
 1. Header: the resolved range, the scope letter, the loaded check files.
 2. One section per group, in table order. Each section opens with a line giving the finding count and the worst risk, then the findings.
-3. Footer: total findings, findings dropped by the cap per group.
+3. Footer: total findings.
 
 When two groups report the same `path:line`, keep the finding with the higher risk, add the other finding's aspect name and ID to it, and list the absorbed IDs at the end of their own group's section. IDs stay as the reviewers assigned them. Keep everything else verbatim.
 
@@ -102,21 +103,20 @@ A check file translates an aspect into concrete checks for a stack. The report a
 Every finding opens with one header line, then a body:
 
 ```
-**S1** `path:line` | Aspect | risk | recommendation | unchanged line
+**S1** `path:line` | Aspect | risk | unchanged line
 ```
 
 - ID: group prefix plus a number, `S1`, `P2`, `X3`, numbered per group in report order.
 - `path:line`. A finding without one is dropped.
 - Aspect name from the table.
-- Risk: high, medium, or low.
-- Recommendation: fix, defer, or ignore.
+- Risk: high or medium.
 - `unchanged line` only when the line is outside the diff (scope b or c).
-- Body: high and medium risk get at most two sentences, what breaks then why. Low risk stops at the header line.
-- Snippet: the proposed change in at most 8 lines, changed lines only, `...` marking each gap. Include one when the recommendation alone cannot carry the fix. Larger changes get one sentence naming the steps.
+- Body: at most three sentences: what breaks, why, and the fix.
+- Fix: prose that names the change, the identifiers it touches, and where. A larger change gets one sentence per step. The body carries the whole fix in words; code blocks and diff lines stay out of the report.
 
 ## Report rules
 
 - A reviewer's report opens with one line giving its finding count and worst risk, then the findings, nothing else.
-- At most 8 findings per group. Over the cap, drop the lowest risk first and state how many were dropped.
+- A finding is reported when the reviewer would fix it now. Low risk findings and anything the reviewer would defer or ignore stay out.
 - One finding per root cause. The same bug in three call sites is one finding listing three lines.
 - Risk follows consequence, not aspect: a cognitive-load finding that hides a data leak is high.
