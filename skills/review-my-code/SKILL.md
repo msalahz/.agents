@@ -4,7 +4,7 @@ description: Senior-engineer review of changed code for logic, readability, perf
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.5.0"
+  version: "0.6.0"
 ---
 
 # Review my code
@@ -68,13 +68,18 @@ Done when: three reports are back.
 
 Print the report in this order:
 
-1. Header: the resolved range, the scope letter, the loaded check files.
-2. One section per group, in table order. Each section opens with a line giving the finding count and the worst risk, then the findings.
-3. Footer: total findings.
+1. Header, one line per item: the resolved range, the scope letter, the loaded check files.
+2. Index: one table with a row per finding in report order, columns ID, `path:line`, Aspect, Risk. The reader scans it and jumps to an ID.
+3. One section per group, in table order. Each section opens with a line giving the finding count and the worst risk, then the findings.
+4. Footer: total findings, then the one finding to fix first, named by ID in one sentence.
 
-When two groups report the same `path:line`, keep the finding with the higher risk, add the other finding's aspect name and ID to it, and list the absorbed IDs at the end of their own group's section. IDs stay as the reviewers assigned them. Keep everything else verbatim.
+Merge before printing:
 
-Done when: the report is printed and every finding has an ID.
+- Two groups report the same `path:line`: keep the finding with the higher risk, add the other finding's aspect name and ID to its heading, and list the absorbed IDs at the end of their own group's section.
+- Two groups report the same identifier failing the same way at different lines: merge the same way, and list every line in the kept finding's heading.
+- IDs stay as the reviewers assigned them. Keep everything else verbatim.
+
+Done when: the report is printed, every finding has an ID, and the index lists every ID.
 
 ## 6. Apply by ID
 
@@ -100,19 +105,33 @@ A check file translates an aspect into concrete checks for a stack. The report a
 
 ## Finding contract
 
-Every finding opens with one header line, then a body:
+Every finding is a level-3 heading followed by one bullet list:
 
 ```
-**S1** `path:line` | Aspect | risk | unchanged line
+### S1 `path:line` | Aspect | risk | unchanged line
+
+- Breaks: what the user or the next developer hits.
+- Why: the mechanism, in one sentence.
+- Fix: the change, the identifiers it touches, and where.
+- Evidence: `path:line`, `path:line`.
+- Unconfirmed: the claim the reviewer could not verify.
 ```
+
+Heading:
 
 - ID: group prefix plus a number, `S1`, `P2`, `X3`, numbered per group in report order.
-- `path:line`. A finding without one is dropped.
+- `path:line`. A finding without one is dropped. A finding on several lines lists each, comma-separated.
 - Aspect name from the table.
 - Risk: high or medium.
 - `unchanged line` only when the line is outside the diff (scope b or c).
-- Body: at most three sentences: what breaks, why, and the fix.
-- Fix: prose that names the change, the identifiers it touches, and where. A larger change gets one sentence per step. The body carries the whole fix in words; code blocks and diff lines stay out of the report.
+
+Bullets:
+
+- One sentence per bullet, each on its own line. A sentence the reader has to reread splits in two.
+- Breaks, Why, and Fix always appear, in that order. Evidence and Unconfirmed appear only when the finding has some.
+- Fix: a larger change becomes a nested list under the Fix bullet, one step per line, in the order to apply them. The bullets carry the whole fix in words; code blocks and diff lines stay out of the report.
+- Evidence: every `path:line` outside the heading, plus version and config facts the finding rests on. Breaks, Why, and Fix then name identifiers only.
+- Unconfirmed: every claim the reviewer did not verify by reading or running, one per line.
 
 ## Report rules
 

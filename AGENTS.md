@@ -52,3 +52,7 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 Each round asks at most 3 questions.
 Any enumeration inside a question is a list, its items labelled `a`, `b`, `c`.
+
+### Background subagents
+
+Agent types `bg-low`, `bg-medium`, `bg-high`, `bg-xhigh`, and `bg-max` run any task as a background subagent at that reasoning effort; the launch call sets the model. Any skill that spins a subagent at a named effort launches one of them. `/spin-bg-agent` is the full workflow. Definitions live in `~/.claude/agents/`, source in `~/.agents/skills/spin-bg-agent/agents/`.
