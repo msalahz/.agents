@@ -1,142 +1,126 @@
 # Agent home for [Mohammed Zaghloul](https://github.com/msalahz)
 
-`~/.agents` is the tracked home for [Mohammed Zaghloul](https://github.com/msalahz)'s global agent memory and for the skills I
-write myself. Claude Code keeps no copy of any of it. `~/.claude` imports and
-symlinks straight back here, so this repo is the one place to edit.
+`~/.agents` is the tracked home for my global agent instructions, repository
+defaults, and installed skills. Edit them here.
+
+Claude Code loads the instructions through `~/.claude/CLAUDE.md`, which imports
+`~/.agents/AGENTS.md`. Personal and copied skills are linked from
+`~/.claude/skills` back into this repo. Skills from Matt Pocock point the other
+way: entries under `skills/` are symlinks into his Claude Code marketplace
+checkout.
 
 ## Layout
 
-```
+```text
 ~/.agents/
-├── AGENTS.md          global memory, loaded in every session
-├── docs/agents/       defaults for repos that ship none of their own
-├── skills/            43 skills, some written here, some symlinked out
-└── .skill-lock.json   where the `npx skills`-installed skills came from
+├── AGENTS.md                  global instructions loaded in every repo
+├── docs/agents/               defaults for repos without their own guidance
+│   ├── code-review/           Drizzle, React, TanStack Start, and TypeScript
+│   ├── domain.md              domain-documentation conventions
+│   ├── issue-tracker.md       local issue-tracker conventions
+│   └── triage-labels.md       triage roles and state transitions
+├── skills/                    39 installed skills
+├── .skill-lock.json           metadata written by `npx skills`
+└── README.md
 ```
 
-`AGENTS.md` is the one that matters most. `~/.claude/CLAUDE.md` imports it, so it
-loads in every session, in every repo. A repo's own `docs/agents/*.md`,
-`CONTEXT.md`, `CONTEXT-MAP.md`, or `## Agent skills` section overrides it.
+A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
+`CONTEXT-MAP.md`, or `## Agent skills` section.
 
-## Skills
+## Skill inventory
 
-### Where they came from
+The 39 entries under `skills/` have three different ownership models.
 
-Eight are mine, written here. Twenty-five are Matt Pocock's, symlinked into his
-marketplace checkout, so they update when he ships. The other ten are copies
-pulled from GitHub. The pstack ones were copied by hand, so they are not in
-`.skill-lock.json`.
+| Kind | Count | Update path |
+| --- | ---: | --- |
+| Personal skills | 10 | Edit the directory in this repo |
+| Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
+| Copied third-party skills | 5 | Reinstall or update the local copy |
 
-| Skill             | From                                                                     |
-| ----------------- | ------------------------------------------------------------------------ |
-| `unslop`          | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
-| `arena`           | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
-| `blast-radius`    | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
-| `how`             | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
-| `why`             | [`pstack`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
-| `humanizer`       | [`blader/humanizer`](https://github.com/blader/humanizer)                |
-| `frontend-design` | [`anthropics/skills`](https://github.com/anthropics/skills)              |
-| `find-skills`     | [`vercel-labs/skills`](https://github.com/vercel-labs/skills)            |
-| `autofix`         | [`coderabbitai/skills`](https://github.com/coderabbitai/skills)          |
-| `varlock`         | [`dmno-dev/varlock`](https://github.com/dmno-dev/varlock)                |
+### Personal skills
 
-Being copies, they see no upstream changes until I reinstall them.
+These are real directories tracked in this repo.
 
-### Adding and removing
+- [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
+- [`review-loop`](./skills/review-loop/SKILL.md) alternates peer review and fixes until both sessions agree.
+- [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
+- [`spin-peer-claude-session`](./skills/spin-peer-claude-session/SKILL.md) launches an independent Claude session.
+- [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
+- [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
+- [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.
+- [`update-skill`](./skills/update-skill/SKILL.md) edits an installed skill and bumps its version.
+- [`worktree-stash`](./skills/worktree-stash/SKILL.md) completes work in a worktree and returns it as a named stash.
+- [`write-skill`](./skills/write-skill/SKILL.md) builds, installs, and live-tests a personal skill.
 
-| Command                      | Does                                              |
-| ---------------------------- | ------------------------------------------------- |
-| `/write-skill`               | Builds a new skill end to end, then installs it   |
-| `/install-skill <path\|url>` | Copies a source into `skills/<name>` and links it |
-| `/update-skill <name>`       | Edits a skill in place and bumps its version      |
-| `/uninstall-skill <name>`    | Removes the directory and the link                |
+### Matt Pocock skills
 
-Go through the skills rather than moving directories by hand, so the home and the
-link never disagree.
+These entries are symlinks into
+`~/.claude/plugins/marketplaces/mattpocock/skills/`.
 
-## My skills
+**Engineering**
 
-The eight I wrote. They live in this repo as real directories, so an edit here is
-live after a reload.
+- [`ask-matt`](./skills/ask-matt/SKILL.md) routes a task to the right skill or workflow.
+- [`codebase-design`](./skills/codebase-design/SKILL.md) supplies the shared vocabulary for deep modules and clean seams.
+- [`diagnosing-bugs`](./skills/diagnosing-bugs/SKILL.md) runs the evidence-first loop for bugs and regressions.
+- [`domain-modeling`](./skills/domain-modeling/SKILL.md) sharpens domain terms and records decisions.
+- [`grill-with-docs`](./skills/grill-with-docs/SKILL.md) stress-tests a plan while maintaining domain docs.
+- [`implement`](./skills/implement/SKILL.md) implements work described by a spec or ticket set.
+- [`improve-codebase-architecture`](./skills/improve-codebase-architecture/SKILL.md) finds and works through module-deepening opportunities.
+- [`prototype`](./skills/prototype/SKILL.md) builds a throwaway implementation to answer one design question.
+- [`research`](./skills/research/SKILL.md) researches primary sources and writes the findings into the repo.
+- [`resolving-merge-conflicts`](./skills/resolving-merge-conflicts/SKILL.md) resolves an in-progress merge or rebase hunk by hunk.
+- [`setup-matt-pocock-skills`](./skills/setup-matt-pocock-skills/SKILL.md) installs the repo-level defaults used by the engineering workflows.
+- [`tdd`](./skills/tdd/SKILL.md) works red, green, refactor in vertical slices.
+- [`to-spec`](./skills/to-spec/SKILL.md) turns the current conversation into a spec.
+- [`to-tickets`](./skills/to-tickets/SKILL.md) splits a plan into tracer-bullet tickets with blocking edges.
+- [`triage`](./skills/triage/SKILL.md) moves issues and external PRs through the triage states.
+- [`wayfinder`](./skills/wayfinder/SKILL.md) maps work too large for one session into decision tickets.
+- [`wizard`](./skills/wizard/SKILL.md) writes an interactive shell guide for human-only operations.
 
-**User-invoked**
+**Productivity and writing**
 
-- **[uninstall-skill](./skills/uninstall-skill/SKILL.md).** Remove a skill's home here and its link in `~/.claude/skills`. The one destructive skill in the set, so it stays behind the slash command.
-- **[review-my-code](./skills/review-my-code/SKILL.md).** Senior-engineer review of the changed code for logic, readability, performance, and safety, with stack-specific checks loaded per repo.
+- [`grill-me`](./skills/grill-me/SKILL.md) stress-tests a plan or design through questions.
+- [`grilling`](./skills/grilling/SKILL.md) provides the interview loop used by the grill skills.
+- [`handoff`](./skills/handoff/SKILL.md) compacts a conversation into a handoff document.
+- [`teach`](./skills/teach/SKILL.md) teaches a concept using the current workspace.
+- [`to-questionnaire`](./skills/to-questionnaire/SKILL.md) turns an unresolved decision into questions for the person who can answer them.
+- [`wait-what`](./skills/wait-what/SKILL.md) asks the agent to re-pitch a message that did not land.
+- [`writing-for-agents`](./skills/writing-for-agents/SKILL.md) defines how to write skills and other agent-facing instructions.
 
-**Model-invoked**
+### Copied third-party skills
 
-- **[install-skill](./skills/install-skill/SKILL.md).** Install a skill from a path, archive, or git URL into `skills/<name>`, review it against `writing-for-agents`, then link it for Claude Code.
-- **[update-skill](./skills/update-skill/SKILL.md).** Edit an installed skill in place and bump its version. The counterpart to `install-skill`.
-- **[unslop-writing-for-agents](./skills/unslop-writing-for-agents/SKILL.md).** Review a text against `writing-for-agents` and `unslop`, show every fix as a diff, apply on approval.
-- **[write-skill](./skills/write-skill/SKILL.md).** Draft, install, and live-test a new skill end to end. Drives `unslop-writing-for-agents` and `install-skill`.
-- **[spin-peer-claude-session](./skills/spin-peer-claude-session/SKILL.md).** Launch an independent peer Claude session with its own model, effort, and instructions.
-- **[to-html](./skills/to-html/SKILL.md).** Render a session deliverable as one styled, self-contained HTML file in the repo.
+These are real directories in this repo. They do not receive upstream changes
+until they are updated or reinstalled.
 
-## Skills from others
+| Skill | Source |
+| --- | --- |
+| [`autofix`](./skills/autofix/SKILL.md) | [`coderabbitai/skills`](https://github.com/coderabbitai/skills) |
+| [`find-skills`](./skills/find-skills/SKILL.md) | [`vercel-labs/skills`](https://github.com/vercel-labs/skills) |
+| [`frontend-design`](./skills/frontend-design/SKILL.md) | [`anthropics/skills`](https://github.com/anthropics/skills) |
+| [`unslop`](./skills/unslop/SKILL.md) | [`cursor/plugins`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
+| [`varlock`](./skills/varlock/SKILL.md) | [`dmno-dev/varlock`](https://github.com/dmno-dev/varlock) |
 
-The other 35. They split on one axis, who can invoke them. **User-invoked**
-skills only run when I type them, like `/grill-me`. **Model-invoked** skills run
-when I type them or when the agent reaches for one because the task fits.
+`.skill-lock.json` is installer metadata, not the authoritative inventory. it does not list every marketplace symlink.
 
-### Engineering
+## Managing skills
 
-**User-invoked**
+| Command | Action |
+| --- | --- |
+| `/write-skill` | Build, install, and test a new personal skill |
+| `/install-skill <path-or-url>` | Copy a skill into `skills/<name>` and link it |
+| `/update-skill <name>` | Edit an installed skill and bump its version |
+| `/uninstall-skill <name>` | Remove the skill directory and its link |
 
-- **[ask-matt](./skills/ask-matt/SKILL.md).** Router over Matt Pocock's user-invoked skills. Ask it which one fits.
-- **[grill-with-docs](./skills/grill-with-docs/SKILL.md).** Grilling session that also writes `CONTEXT.md` and ADRs as terms get resolved.
-- **[to-spec](./skills/to-spec/SKILL.md).** Turn the current conversation into a spec, no interview.
-- **[to-tickets](./skills/to-tickets/SKILL.md).** Break a plan or spec into tracer-bullet tickets with their blocking edges.
-- **[implement](./skills/implement/SKILL.md).** Build the work a spec or ticket set describes, driving `/tdd` and closing with `/code-review`.
-- **[triage](./skills/triage/SKILL.md).** Move issues and external PRs through the triage state machine.
-- **[wayfinder](./skills/wayfinder/SKILL.md).** Plan work too big for one session as a map of decision tickets, resolved one at a time.
-- **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md).** Survey a codebase for deepening opportunities, report them, grill through the one I pick.
-- **[setup-matt-pocock-skills](./skills/setup-matt-pocock-skills/SKILL.md).** Configure a repo for the engineering skills. Run once per repo.
-- **[code-review](./skills/code-review/SKILL.md).** Reviews a diff on two axes, standards and spec, in parallel sub-agents.
-- **[arena](./skills/arena/SKILL.md).** Spawn N candidates at one task in parallel, pick a base, graft the strongest parts of the losers into it. For work where a single attempt would lock in the wrong shape. Reads its runner models from Cursor's `pstack-models.mdc`; unconfirmed under Claude Code.
-- **[blast-radius](./skills/blast-radius/SKILL.md).** Find what a change could break beyond its own diff, then prove the one fact its safety rests on by running real code instead of writing it up.
-
-**Model-invoked**
-
-- **[tdd](./skills/tdd/SKILL.md).** Red-green-refactor, one vertical slice at a time.
-- **[how](./skills/how/SKILL.md).** Explain how a subsystem works, walk code before a change, and answer placement and layering questions. Pairs with `why`.
-- **[why](./skills/why/SKILL.md).** Answer why something works or was decided this way, querying every available evidence source in parallel and returning a cited read. Pairs with `how`.
-- **[diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md).** Gated diagnosis loop for hard bugs and performance regressions.
-- **[codebase-design](./skills/codebase-design/SKILL.md).** Vocabulary for deep modules: much behaviour, small interface, clean seam.
-- **[domain-modeling](./skills/domain-modeling/SKILL.md).** Sharpen a project's domain model and record it in `CONTEXT.md` and ADRs.
-- **[prototype](./skills/prototype/SKILL.md).** Throwaway prototype to answer one design question.
-- **[research](./skills/research/SKILL.md).** Background agent that answers a question from primary sources and files the findings.
-- **[resolving-merge-conflicts](./skills/resolving-merge-conflicts/SKILL.md).** Work a merge or rebase conflict hunk by hunk. Never `--abort`.
-- **[wizard](./skills/wizard/SKILL.md).** Generate a bash wizard for steps only a human can do.
-- **[autofix](./skills/autofix/SKILL.md).** Apply CodeRabbit review-thread feedback with per-change approval.
-- **[varlock](./skills/varlock/SKILL.md).** Handle secrets and env vars without leaking them into logs or context.
-- **[frontend-design](./skills/frontend-design/SKILL.md).** Visual direction for new UI that does not read as a template.
-
-### Productivity
-
-**User-invoked**
-
-- **[grill-me](./skills/grill-me/SKILL.md).** Relentless interview about a plan until every branch is resolved.
-- **[handoff](./skills/handoff/SKILL.md).** Compact this conversation into a handoff doc for the next agent.
-- **[teach](./skills/teach/SKILL.md).** Teach me a concept across sessions, using the current directory as the workspace.
-- **[to-questionnaire](./skills/to-questionnaire/SKILL.md).** Turn a decision I cannot make alone into a questionnaire for whoever can.
-- **[wait-what](./skills/wait-what/SKILL.md).** Fire this the moment a message does not land. The agent re-pitches it.
-
-**Model-invoked**
-
-- **[grilling](./skills/grilling/SKILL.md).** The interview loop the grill skills are built on.
-- **[find-skills](./skills/find-skills/SKILL.md).** Search for a skill that does the thing I just described.
-
-### Writing
-
-**Model-invoked**
-
-- **[unslop](./skills/unslop/SKILL.md).** Cut AI tells from any writing. Always on.
-- **[writing-for-agents](./skills/writing-for-agents/SKILL.md).** How to write anything an agent reads: skills, `AGENTS.md`, pointer docs.
-- **[humanizer](./skills/humanizer/SKILL.md).** The same job as `unslop`, from Wikipedia's signs-of-AI-writing guide.
+Use these workflows instead of moving skill directories by hand. They keep this
+home and `~/.claude/skills` in sync.
 
 ## House rules
 
-`AGENTS.md` carries them. The short version: `unslop` before writing anything,
-label unverified claims, keep code self-explanatory with no comments, and leave
-deploys, remote databases, and Drizzle CLI commands to a human.
+[`AGENTS.md`](./AGENTS.md) is the source of truth. In short:
+
+- Run `unslop` before writing.
+- Mark every claim that has not been verified as `unconfirmed`.
+- Prefer the simplest implementation that meets the requirements.
+- Use self-explanatory code instead of comments.
+- Run `pnpm validate` after changing code.
+- Leave deploys, remote database operations, and Drizzle CLI commands to a human.

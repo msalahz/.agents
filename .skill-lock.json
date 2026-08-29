@@ -200,15 +200,6 @@
       "installedAt": "2026-07-18T08:33:01.122Z",
       "updatedAt": "2026-07-18T08:33:01.122Z"
     },
-    "humanizer": {
-      "source": "blader/humanizer",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/blader/humanizer.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "1b48564898e999219882660237fde01bf4843a0f",
-      "installedAt": "2026-07-18T08:33:56.441Z",
-      "updatedAt": "2026-07-18T08:33:56.441Z"
-    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
