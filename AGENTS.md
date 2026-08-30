@@ -38,7 +38,7 @@ The engineering skills read their per-repo configuration from `docs/agents/*.md`
 
 ### Issue tracker
 
-Issues and specs live as local markdown files under `docs/.scratch/<feature-slug>/` in each repo. See `~/.agents/docs/agents/issue-tracker.md`, or the repo's `docs/agents/issue-tracker.md` if present.
+Specs live in the repo as markdown at `docs/.scratch/<feature-slug>/spec.md`; issues live on GitHub, via the `gh` CLI. Repos with no GitHub remote keep their tickets on disk beside the spec. See `~/.agents/docs/agents/issue-tracker.md`, or the repo's `docs/agents/issue-tracker.md` if present.
 
 ### Triage labels
 
