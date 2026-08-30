@@ -31,7 +31,7 @@ SOCKET_PATH = os.path.join(CLAUDE_DIR, "codex-peer.sock")
 LOG_PATH = os.path.join(CLAUDE_DIR, "codex-peer.log")
 PID_PATH = os.path.join(CLAUDE_DIR, "codex-peer.pid")
 CLIENT_NAME = "spin-peer-codex-session"
-CLIENT_VERSION = "0.1.0"
+CLIENT_VERSION = "0.2.0"
 UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
 START_WAIT_SECONDS = 30
 
@@ -282,9 +282,11 @@ def resolve(client, ref):
     if UUID_RE.match(ref):
         return ref
     threads = client.request("thread/list", {"limit": 200})["data"]
-    for thread in threads:
-        if thread.get("name") == ref:
-            return thread["id"]
+    matches = [thread for thread in threads if thread.get("name") == ref]
+    if len(matches) == 1:
+        return matches[0]["id"]
+    if len(matches) > 1:
+        raise SystemExit(f"multiple threads named {ref!r}; use a thread id")
     raise SystemExit(f"no thread named {ref!r}")
 
 
@@ -292,8 +294,8 @@ def last_agent_message(thread):
     for turn in reversed(thread.get("turns") or []):
         for item in reversed(turn.get("items") or []):
             if item.get("type") == "agentMessage":
-                return turn, item["text"]
-    return (thread.get("turns") or [None])[-1], ""
+                return item["text"]
+    return ""
 
 
 def print_reply(text):
@@ -350,10 +352,11 @@ def cmd_read(args):
     client = connect(None)
     thread_id = resolve(client, args.thread)
     thread = client.request("thread/read", {"threadId": thread_id, "includeTurns": True})["thread"]
-    turn, text = last_agent_message(thread)
-    status = (turn or {}).get("status") or "unknown"
+    turns = thread.get("turns") or []
+    latest_turn = turns[-1] if turns else None
+    status = (latest_turn or {}).get("status") or "unknown"
     log(f"thread {thread_id}, last turn {status}")
-    print_reply(text)
+    print_reply(last_agent_message(thread))
 
 
 def cmd_stop(args):
