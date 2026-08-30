@@ -3,34 +3,39 @@
 Applies to every repo. A repo's own `docs/agents/*.md`, `CONTEXT.md`, `CONTEXT-MAP.md`,
 or `## Agent skills` section always wins over these defaults.
 
+## general rules
+
+- Ignore pruned files and archives.
+
 ## Response rules
 
-- Invoke the `unslop` skill before writing anything in a session, then hold to it
-  for every response and artifact after.
-- Write subagent prompts with the `writing-for-agents` and `unslop` skills applied.
-- Label every unverified claim `unconfirmed`. Say when you do not know.
-- Ask about missing important details when interactive. When unattended, make the
-  safest assumption and label it.
-- Put each list item on its own line.
+- Invoke `unslop` before the first written response in each session. Apply it to
+  every later response and artifact.
+- Apply `writing-for-agents` and `unslop` to every subagent prompt.
+- Label every unverified claim `unconfirmed`.
+- State when you do not know something.
+- During interactive work, ask for important missing details.
+- During unattended work, make and label the safest assumption.
+- Write each list item on its own line.
 
 ## Coding
 
-- KISS: the simplest solution that meets all the requirements.
-- Make code self-explanatory. Refactor until the names carry the meaning, and write no comments.
+- Use the simplest solution that meets every requirement.
+- Refactor until names explain the code. Write no comments.
 - End any session that changed code by running `pnpm validate`; the session is done only when it passes.
 
 ## Code review
 
-- Every finding carries a risk level (high / medium / low) and a recommendation
-  (fix / defer / ignore).
+- Give every finding a risk level: `high`, `medium`, or `low`.
+- Give every finding a recommendation: `fix`, `defer`, or `ignore`.
 
-## Human-only operations
+## Ask a human to run:
 
 Ask a human to run these, even when they look routine:
 
 - Anything that targets a non-local environment: deploys, production env files or
   credentials, migrations or seeds against a remote database.
-- Drizzle CLI: `migrate`, `push`, `seed`.
+- The Drizzle CLI commands `migrate`, `push`, and `seed`.
 
 ## Agent skills
 
@@ -50,9 +55,11 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 ### Grilling
 
-Each round asks at most 3 questions.
-Any enumeration inside a question is a list, its items labelled `a`, `b`, `c`.
+- Ask at most three questions per round.
+- Format choices within a question as a list labeled `a`, `b`, and `c`.
 
 ### Background subagents
 
-Agent types `bg-low`, `bg-medium`, `bg-high`, `bg-xhigh`, and `bg-max` run any task as a background subagent at that reasoning effort; the launch call sets the model. Any skill that spins a subagent at a named effort launches one of them. `/spin-bg-agent` is the full workflow. Definitions live in `~/.claude/agents/`, source in `~/.agents/skills/spin-bg-agent/agents/`.
+- Use `bg-low`, `bg-medium`, `bg-high`, `bg-xhigh`, or `bg-max` when launching a
+- background subagent at a named reasoning effort. Set the model in the launch
+- call. Use `/spin-bg-agent` for the full workflow.
