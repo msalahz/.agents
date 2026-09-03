@@ -3,26 +3,30 @@
 Applies to every repo. A repo's own `docs/agents/*.md`, `CONTEXT.md`, `CONTEXT-MAP.md`,
 or `## Agent skills` section always wins over these defaults.
 
-## general rules
+## General rules
 
-- Ignore pruned files and archives.
+- Ignore pruned files and archives. If they are deleted, treat them as if they never existed.
 
 ## Response rules
 
 - Invoke `unslop` before the first written response in each session. Apply it to
   every later response and artifact.
 - Apply `writing-for-agents` and `unslop` to every subagent prompt.
-- Label every unverified claim `unconfirmed`.
+- Label every unverified claim `unverified`.
 - State when you do not know something.
-- During interactive work, ask for important missing details.
-- During unattended work, make and label the safest assumption.
-- Write each list item on its own line.
+- Treat a session as unattended when the harness says the user is not watching, or when you run as a subagent. Otherwise treat it as interactive.
+- Interactive: ask for important missing details, at most three per round.
+- Unattended: make the safest assumption, label it, and put any real question at the end of a turn that also delivers progress.
+- Use lists when content has parallel items or three or more steps. Keep conversational replies in plain prose. Bold only lead-ins that introduce new detail. Each list item on its own line.
 
 ## Coding
 
 - Use the simplest solution that meets every requirement.
-- Refactor until names explain the code. Write no comments.
-- End any session that changed code by running `pnpm validate`; the session is done only when it passes.
+- In code you write or change, refactor until names explain it. Write no comments. Leave other code alone.
+- If you find a pre-existing bug or an improvement the task does not mention, do not fix it. Report it as a follow-up in your summary.
+- Commit tests only where the task asks for them or the repo already keeps tests for that kind of change. Do not turn scratch checks into permanent test files.
+- Edit files surgically. Rewrite a whole file only when it is short or most of it changes.
+- End any session that changed code by running `pnpm validate`. If the repo has no such script, run its lint, typecheck, and test scripts instead and name what you ran. The session is done only when that passes.
 
 ## Code review
 
@@ -57,9 +61,3 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 - Ask at most three questions per round.
 - Format choices within a question as a list labeled `a`, `b`, and `c`.
-
-### Background subagents
-
-- Use `bg-low`, `bg-medium`, `bg-high`, `bg-xhigh`, or `bg-max` when launching a
-- background subagent at a named reasoning effort. Set the model in the launch
-- call. Use `/spin-bg-agent` for the full workflow.
