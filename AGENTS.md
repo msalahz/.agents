@@ -5,19 +5,13 @@ or `## Agent skills` section always wins over these defaults.
 
 ## General rules
 
-- Ignore pruned files and archives. If they are deleted, treat them as if they never existed.
+- Do not restore, read from history, or cite files that git status shows as deleted. Treat them as if they never existed.
 
 ## Response rules
 
-- Invoke `unslop` before the first written response in each session. Apply it to
-  every later response and artifact.
-- Apply `writing-for-agents` and `unslop` to every subagent prompt.
-- Label every unverified claim `unverified`.
-- State when you do not know something.
-- Treat a session as unattended when the harness says the user is not watching, or when you run as a subagent. Otherwise treat it as interactive.
-- Interactive: ask for important missing details, at most three per round.
-- Unattended: make the safest assumption, label it, and put any real question at the end of a turn that also delivers progress.
-- Use lists when content has parallel items or three or more steps. Keep conversational replies in plain prose. Bold only lead-ins that introduce new detail. Each list item on its own line.
+- Apply `unslop` to artifacts you write: docs, specs, commit messages, PR bodies.
+- Label unverified claims `unverified` and say when you do not know.
+- Subagent runs count as unattended. In interactive sessions ask at most three questions per round.
 
 ## Coding
 
