@@ -53,7 +53,7 @@ python3 ~/.claude/skills/spin-peer-codex-session/scripts/codex_peer.py new \
   --sandbox read-only --approval never "<prompt>"
 ```
 
-Omit `--model` and `--effort` when the user named none. The output opens with a `thread_id` line; record it. The first turn is round 1, so the output's reply is the round 1 reply. Exit 2 means the turn is still running; handle it as in step 3. Any other non-zero exit is a failed launch; report its output verbatim and stop.
+Include `--model` only when the user named a model, and `--effort` only when the user named an effort. The output opens with a `thread_id` line; record it. The first turn is round 1, so the output's reply is the round 1 reply. Exit 2 means the turn is still running; handle it as in step 3. Any other non-zero exit is a failed launch; report its output verbatim and stop.
 
 Done when: the session ID or thread ID is recorded, and with `claude` the name is listed.
 
@@ -69,7 +69,7 @@ With `codex`, send it as a background command:
 python3 ~/.claude/skills/spin-peer-codex-session/scripts/codex_peer.py send <thread_id> "<message>"
 ```
 
-Exit 0 prints the reply. Exit 2 means the turn outlived the timeout and is still running; poll `codex_peer.py read <thread_id>` until it shows the turn ended, and take its message as the reply. Exit 1 means the reviewer stopped.
+Exit 0 prints the reply. Exit 2 means the turn outlived the timeout and is still running; poll `codex_peer.py read <thread_id>` until its stderr status line ends in `last turn completed`, then take its stdout as the reply. A status line ending in any other finished status (`failed`, `interrupted`) means the reviewer stopped. Exit 1 is an error, not a stop: report its output verbatim and end the loop.
 
 On each reply:
 
