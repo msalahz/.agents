@@ -3,12 +3,12 @@ name: install-skill
 description: Install a skill from a path or URL into the global skill home and link it for Claude Code. Use when the user asks to install a skill, or another skill needs one installed.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.2.1"
 ---
 
 # Install skill
 
-Install a skill from the **source** the human names into its **home** at `~/.agents/skills/<name>`, then **link** it at `~/.claude/skills/<name>`. Fetching and extracting happen under one **scratch** root that is gone by the end.
+Install a skill from the **source** the human names into its **home** at `~/.agents/skills/<name>`, then **link** it at `~/.claude/skills/<name>`. Codex reads `~/.agents/skills` directly and needs no link. Fetching and extracting happen under one **scratch** root that is gone by the end.
 
 The source is this skill's argument, a path or a URL. With no argument, ask for it before anything else.
 

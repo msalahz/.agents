@@ -5,9 +5,9 @@ defaults, and installed skills. Edit them here.
 
 Claude Code loads the instructions through `~/.claude/CLAUDE.md`, which imports
 `~/.agents/AGENTS.md`. Personal and copied skills are linked from
-`~/.claude/skills` back into this repo. Skills from Matt Pocock point the other
-way: entries under `skills/` are symlinks into his Claude Code marketplace
-checkout.
+`~/.claude/skills` back into this repo. Codex reads `skills/` here directly. Plugin skills
+point the other way: entries under `skills/` are symlinks into the Claude Code
+marketplace checkouts.
 
 ## Layout
 
@@ -19,7 +19,7 @@ checkout.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    39 installed skills
+├── skills/                    45 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,28 +29,33 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 39 entries under `skills/` have three different ownership models.
+The 45 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 10 | Edit the directory in this repo |
+| Personal skills | 14 | Edit the directory in this repo |
 | Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
+| Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
 
 ### Personal skills
 
 These are real directories tracked in this repo.
 
+- [`claude-delegate`](./skills/claude-delegate/SKILL.md) hands a coding task to a separate Claude Code process and reviews its diff.
+- [`codex-delegate`](./skills/codex-delegate/SKILL.md) hands a coding task to the Codex CLI and reviews its diff.
+- [`delegate-setup`](./skills/delegate-setup/SKILL.md) configures which implementer CLI handles which kind of work.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`review-loop`](./skills/review-loop/SKILL.md) alternates peer review and fixes until both sessions agree.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
 - [`spin-peer-claude-session`](./skills/spin-peer-claude-session/SKILL.md) launches an independent Claude session.
+- [`spin-peer-codex-session`](./skills/spin-peer-codex-session/SKILL.md) launches an independent Codex session.
 - [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
 - [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.
-- [`update-skill`](./skills/update-skill/SKILL.md) edits an installed skill and bumps its version.
+- [`update-skill`](./skills/update-skill/SKILL.md) edits an installed skill through `skill-creator` and bumps its version.
 - [`worktree-stash`](./skills/worktree-stash/SKILL.md) completes work in a worktree and returns it as a named stash.
-- [`write-skill`](./skills/write-skill/SKILL.md) builds, installs, and live-tests a personal skill.
+- [`write-skill`](./skills/write-skill/SKILL.md) designs a skill with `skill-creator`, installs it, and live-tests it.
 
 ### Matt Pocock skills
 
@@ -87,6 +92,15 @@ These entries are symlinks into
 - [`wait-what`](./skills/wait-what/SKILL.md) asks the agent to re-pitch a message that did not land.
 - [`writing-for-agents`](./skills/writing-for-agents/SKILL.md) defines how to write skills and other agent-facing instructions.
 
+### Other plugin skills
+
+These entries are symlinks into other marketplace checkouts under
+`~/.claude/plugins/marketplaces/`. Claude Code registers them through the
+plugin, so they have no link in `~/.claude/skills`.
+
+- [`eli5`](./skills/eli5/SKILL.md) explains a topic with a dead-simple picture.
+- [`skill-creator`](./skills/skill-creator/SKILL.md) is Anthropic's skill design, eval, and description-optimization loop. `write-skill` and `update-skill` wrap it; the "Skill home" section of `AGENTS.md` tells it where skills live here.
+
 ### Copied third-party skills
 
 These are real directories in this repo. They do not receive upstream changes
@@ -106,13 +120,14 @@ until they are updated or reinstalled.
 
 | Command | Action |
 | --- | --- |
-| `/write-skill` | Build, install, and test a new personal skill |
+| `/write-skill` | Design a skill with `skill-creator`, install it, and test it |
 | `/install-skill <path-or-url>` | Copy a skill into `skills/<name>` and link it |
-| `/update-skill <name>` | Edit an installed skill and bump its version |
+| `/update-skill <name>` | Edit an installed skill, test it, and bump its version |
 | `/uninstall-skill <name>` | Remove the skill directory and its link |
 
 Use these workflows instead of moving skill directories by hand. They keep this
-home and `~/.claude/skills` in sync.
+home and `~/.claude/skills` in sync. Eval workspaces go to
+`.scratch/`, which git ignores.
 
 ## House rules
 

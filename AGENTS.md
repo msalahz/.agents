@@ -55,3 +55,19 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 - Ask at most three questions per round.
 - Format choices within a question as a list labeled `a`, `b`, and `c`.
+
+### Skill home
+
+`~/.claude/CLAUDE.md` imports this file with `@~/.agents/AGENTS.md`. This file is the source of truth; edit here, not there. `~/.agents/skills` is the one inventory of every skill on this machine. Two kinds of entry live there, linked in opposite directions:
+
+- **Personal and copied skills.** Real directories, tracked in this repo. Each is linked into Claude Code with `ln -s ../../.agents/skills/<name> ~/.claude/skills/<name>`. Codex reads `~/.agents/skills` directly and needs no link.
+- **Plugin skills.** Installed by Claude Code under `~/.claude/plugins/` and updated by it. The link runs the opposite way: the plugin's skill directory stays where Claude Code put it, and a symlink is created in the home with `ln -s ~/.claude/plugins/marketplaces/<marketplace>/<path-to-skill> ~/.agents/skills/<name>`, then listed in `.gitignore`. Never copy a plugin skill into the home or link it into `~/.claude/skills`, since the plugin already registers it and would overwrite edits.
+
+Any skill that creates or edits a skill, `skill-creator` included, follows these rules:
+
+- Draft and edit in a scratch copy, never in the home. Put eval workspaces at `~/.agents/.scratch/<name>/`, not beside the skill.
+- Install and remove only through `install-skill` and `uninstall-skill`, which keep the home and the link in sync. Do not package a `.skill` file.
+- Edit a personal skill only through `update-skill`. A home that resolves outside `~/.agents/skills` is a plugin skill and is not edited here.
+- Frontmatter carries `name`, `description`, and a `metadata` block with quoted `author` and `version`. `disable-model-invocation` is allowed even though `quick_validate.py` rejects it.
+- Body uses one `## N. Title` section per step, each ending with a `Done when:` line.
+- Descriptions state what the skill does and when it triggers, without padding. Prove triggering with skill-creator's eval loop instead of a pushy description.
