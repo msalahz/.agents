@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    45 installed skills
+├── skills/                    47 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 45 entries under `skills/` have four different ownership models.
+The 47 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 14 | Edit the directory in this repo |
+| Personal skills | 16 | Edit the directory in this repo |
 | Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
@@ -46,10 +46,12 @@ These are real directories tracked in this repo.
 - [`codex-delegate`](./skills/codex-delegate/SKILL.md) hands a coding task to the Codex CLI and reviews its diff.
 - [`delegate-setup`](./skills/delegate-setup/SKILL.md) configures which implementer CLI handles which kind of work.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
+- [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
 - [`review-loop`](./skills/review-loop/SKILL.md) alternates peer review and fixes until both sessions agree.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
 - [`spin-peer-claude-session`](./skills/spin-peer-claude-session/SKILL.md) launches an independent Claude session.
 - [`spin-peer-codex-session`](./skills/spin-peer-codex-session/SKILL.md) launches an independent Codex session.
+- [`supervisor`](./skills/supervisor/SKILL.md) plans, delegates, and gates a large goal through small background workers.
 - [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
 - [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.

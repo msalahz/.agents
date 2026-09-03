@@ -1,10 +1,10 @@
 ---
 name: reply
-description: Answer a question in text and take no other action.
+description: Answer a question in text without changing anything.
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Reply
@@ -13,6 +13,6 @@ Question: $ARGUMENTS
 
 ## 1. Answer
 
-Answer the question in plain text from what is already in context. The text reply is the whole response: no tool calls, no file edits.
+Reply with an answer to the question in plain text. Read and run whatever finding the answer needs, and change nothing: no file edits, no commands that alter state.
 
-Done when: the answer is written and nothing else has run.
+Done when: the answer is written and nothing has changed.
