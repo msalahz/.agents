@@ -3,7 +3,7 @@ name: spin-bg-agent
 description: Launch a background managed subagent with chosen model, effort, and instructions. Use when the user asks for a background agent or subagent that reports back to this session.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.1"
+  version: "0.3.0"
 ---
 
 # Spin bg agent
@@ -24,11 +24,11 @@ Done when: the fixed prompt is recorded.
 
 ## 3. Pick the agent type
 
-Effort lives in the agent definition, not in the launch call, so this skill ships one definition per level in its `agents/` folder: `bg-low`, `bg-medium`, `bg-high`, `bg-xhigh`, `bg-max`. Any skill that launches a subagent at a named effort uses them the same way. The type is `bg-<effort>` when the user named an effort, otherwise `general-purpose`.
+Effort lives in the agent definition, not in the launch call, so `~/.agents/agents/` holds one definition per level: `bg-low`, `bg-medium`, `bg-high`, `bg-xhigh`, `bg-max`. Any skill that launches a subagent at a named effort uses them the same way. The type is `bg-<effort>` when the user named an effort, otherwise `general-purpose`.
 
-A definition written during a session stays invisible to that session's Agent tool. When `~/.claude/agents/bg-<effort>.md` is missing, copy it there from `agents/`, tell the user a new session picks it up, and stop.
+Claude Code reads definitions from `~/.claude/agents/` only, and the Agent tool sees a definition added there from the next turn on. When `~/.claude/agents/bg-<effort>.md` is missing, link it with `ln -s ../../.agents/agents/bg-<effort>.md ~/.claude/agents/bg-<effort>.md`, tell the user, and stop; the launch runs on the next turn.
 
-Done when: the type is recorded and its definition exists under `~/.claude/agents/`.
+Done when: the type is recorded and `~/.claude/agents/bg-<effort>.md` resolves to `~/.agents/agents/bg-<effort>.md`.
 
 ## 4. Launch
 
