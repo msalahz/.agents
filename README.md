@@ -33,18 +33,15 @@ The 47 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 16 | Edit the directory in this repo |
+| Personal skills | 13 | Edit the directory in this repo |
 | Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
-| Copied third-party skills | 5 | Reinstall or update the local copy |
+| Copied third-party skills | 8 | Reinstall or update the local copy |
 
 ### Personal skills
 
 These are real directories tracked in this repo.
 
-- [`claude-delegate`](./skills/claude-delegate/SKILL.md) hands a coding task to a separate Claude Code process and reviews its diff.
-- [`codex-delegate`](./skills/codex-delegate/SKILL.md) hands a coding task to the Codex CLI and reviews its diff.
-- [`delegate-setup`](./skills/delegate-setup/SKILL.md) configures which implementer CLI handles which kind of work.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
 - [`review-loop`](./skills/review-loop/SKILL.md) alternates peer review and fixes until both sessions agree.
@@ -111,6 +108,9 @@ until they are updated or reinstalled.
 | Skill | Source |
 | --- | --- |
 | [`autofix`](./skills/autofix/SKILL.md) | [`coderabbitai/skills`](https://github.com/coderabbitai/skills) |
+| [`claude-delegate`](./skills/claude-delegate/SKILL.md) | [`amElnagdy/delegate-skills`](https://github.com/amElnagdy/delegate-skills) |
+| [`codex-delegate`](./skills/codex-delegate/SKILL.md) | [`amElnagdy/delegate-skills`](https://github.com/amElnagdy/delegate-skills) |
+| [`delegate-setup`](./skills/delegate-setup/SKILL.md) | [`amElnagdy/delegate-skills`](https://github.com/amElnagdy/delegate-skills) |
 | [`find-skills`](./skills/find-skills/SKILL.md) | [`vercel-labs/skills`](https://github.com/vercel-labs/skills) |
 | [`frontend-design`](./skills/frontend-design/SKILL.md) | [`anthropics/skills`](https://github.com/anthropics/skills) |
 | [`unslop`](./skills/unslop/SKILL.md) | [`cursor/plugins`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
