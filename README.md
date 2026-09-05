@@ -108,9 +108,6 @@ until they are updated or reinstalled.
 | Skill | Source |
 | --- | --- |
 | [`autofix`](./skills/autofix/SKILL.md) | [`coderabbitai/skills`](https://github.com/coderabbitai/skills) |
-| [`claude-delegate`](./skills/claude-delegate/SKILL.md) | [`amElnagdy/delegate-skills`](https://github.com/amElnagdy/delegate-skills) |
-| [`codex-delegate`](./skills/codex-delegate/SKILL.md) | [`amElnagdy/delegate-skills`](https://github.com/amElnagdy/delegate-skills) |
-| [`delegate-setup`](./skills/delegate-setup/SKILL.md) | [`amElnagdy/delegate-skills`](https://github.com/amElnagdy/delegate-skills) |
 | [`find-skills`](./skills/find-skills/SKILL.md) | [`vercel-labs/skills`](https://github.com/vercel-labs/skills) |
 | [`frontend-design`](./skills/frontend-design/SKILL.md) | [`anthropics/skills`](https://github.com/anthropics/skills) |
 | [`unslop`](./skills/unslop/SKILL.md) | [`cursor/plugins`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |

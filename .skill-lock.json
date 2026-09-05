@@ -227,33 +227,6 @@
       "skillFolderHash": "6bf6634dc86f933da9a9ade797c2d9cc8d49a886",
       "installedAt": "2026-08-04T09:06:55.404Z",
       "updatedAt": "2026-08-04T09:06:55.404Z"
-    },
-    "claude-delegate": {
-      "source": "amElnagdy/delegate-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/amElnagdy/delegate-skills.git",
-      "skillPath": "skills/claude-delegate/SKILL.md",
-      "skillFolderHash": "63210002e8b3e173a5cb2767d96628da91f23f85",
-      "installedAt": "2026-08-30T13:48:17.396Z",
-      "updatedAt": "2026-08-30T13:48:17.396Z"
-    },
-    "codex-delegate": {
-      "source": "amElnagdy/delegate-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/amElnagdy/delegate-skills.git",
-      "skillPath": "skills/codex-delegate/SKILL.md",
-      "skillFolderHash": "835fb320ef5bf2faef0fbfbcaa0eb341cb257b0f",
-      "installedAt": "2026-08-30T13:48:17.399Z",
-      "updatedAt": "2026-08-30T13:48:17.399Z"
-    },
-    "delegate-setup": {
-      "source": "amElnagdy/delegate-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/amElnagdy/delegate-skills.git",
-      "skillPath": "skills/delegate-setup/SKILL.md",
-      "skillFolderHash": "c0d895b36dfaeb168fb86f6742fd3e98a1a8f1d2",
-      "installedAt": "2026-08-30T13:48:17.400Z",
-      "updatedAt": "2026-08-30T13:48:17.400Z"
     }
   },
   "dismissed": {
