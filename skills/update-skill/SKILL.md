@@ -3,7 +3,7 @@ name: update-skill
 description: Edit an installed skill in place and bump its version. Use when the user asks to change an existing skill, or another skill needs one edited.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.4.0"
 ---
 
 # Update skill
@@ -36,9 +36,17 @@ Done when: the human has approved the diff.
 
 ## 4. Test the edit
 
-When the change touches a step, follow skill-creator's "Running and evaluating test cases" with the snapshot as the baseline and the edited copy as the skill, under `~/.agents/.scratch/<name>/`. For wording changes, or when the user asks to skip evals, run the edited copy once on one real case instead.
+Ask the user to choose before running evals:
 
-Done when: the user has accepted the test results.
+- Skip all evals. The version bump and file and link checks still apply.
+- Run one eval case focused on the changed behaviour.
+- Follow skill-creator's default eval flow.
+
+Recommend one case for a small change and the default flow for changes spanning several steps or branches. If the user already chose for this update, use that choice. Otherwise, wait for their answer.
+
+For either eval option, read `~/.agents/skills/skill-creator/SKILL.md` and follow its "Running and evaluating test cases" workflow with the snapshot as the baseline and the edited copy as the skill, under `~/.agents/.scratch/<name>/`. The one-case option limits the run to one comparison; the default option follows skill-creator's case-selection guidance. Show the results to the user.
+
+Done when: the choice is recorded and either the user chose to skip all evals or has accepted the selected eval results.
 
 ## 5. Bump the version
 
@@ -56,8 +64,8 @@ Copy the approved draft over the home, then delete `~/.agents/.scratch/<name>/`.
 
 Done when: every check has been run and its result recorded, and the scratch directory is gone.
 
-## 7. Reload and test
+## 7. Reload and report
 
-Reload the skill index (`/reload-skills`, or tell the user a new session picks it up), then run the skill once on a real case and report what it produced.
+Reload the skill index if supported, or tell the user a new session picks it up. Report the eval results from step 4, or state that the user chose to skip all evals. Reloading adds no eval runs.
 
-Done when: the skill shows in the skill index and one real invocation has run and been reported.
+Done when: the reload status or new-session instruction is reported, along with the eval results or explicit skip.
