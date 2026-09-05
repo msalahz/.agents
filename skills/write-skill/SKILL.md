@@ -1,14 +1,14 @@
 ---
 name: write-skill
-description: Build, install, and live-test a new personal skill end to end. Use when the user asks to create, add, write, or scaffold a new skill.
+description: Create and install a personal skill, offer eval choices, and add it to the README. Use when the user asks to create, add, write, or scaffold a new skill.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Write skill
 
-Turn a request into an installed, tested skill by chaining three flows: design and test with `skill-creator`, polish with unslop-writing-for-agents, install with install-skill. The "Skill home" section of `~/.agents/AGENTS.md` holds the paths and format rules every step follows.
+Turn a request into an installed skill listed in `~/.agents/README.md`. Use `skill-creator` for design and selected evals, unslop-writing-for-agents for polish, and install-skill for installation. The "Skill home" section of `~/.agents/AGENTS.md` holds the paths and format rules every step follows.
 
 ## 1. Verify the facts
 
@@ -18,7 +18,7 @@ Done when: every fact the draft states has been run and confirmed.
 
 ## 2. Design and draft
 
-Invoke the `skill-creator` skill for its capture-intent, interview, and draft steps. Draft at `~/.agents/.scratch/<name>/skill/` and keep evals and run outputs under `~/.agents/.scratch/<name>/`. Skip skill-creator's package step; step 4 installs instead.
+Invoke the `skill-creator` skill for its capture-intent, interview, and draft steps. Draft at `~/.agents/.scratch/<name>/skill/` and keep evals and run outputs under `~/.agents/.scratch/<name>/`. Skip skill-creator's package step; step 5 installs instead. Step 3 governs all eval runs.
 
 Before showing the draft, apply the house format: frontmatter `name` (lowercase letters, digits, hyphens), `description`, and a `metadata:` block with quoted `author: "<User Name> <<user email>>"` (from `git config user.name` and `git config user.email`) and `version: "0.1.0"`; body as one `## N. Title` section per step, each ending with a `Done when:` line. The user's dictated formats go in verbatim.
 
@@ -28,23 +28,41 @@ Done when: the human has approved the prose.
 
 ## 3. Test the draft
 
-Follow skill-creator's "Running and evaluating test cases" on the scratch draft: with-skill and baseline runs, assertions, grading, and the viewer. When the user asks to skip evals, run the draft once on one real case instead. Fold what the results show back into the draft and repeat until the user is satisfied.
+Ask the user to choose before running evals:
 
-Done when: the user has accepted the test results.
+- Skip all evals. The file and link checks still apply.
+- Run one eval case focused on the skill's main behavior.
+- Follow skill-creator's default eval flow.
 
-## 4. Install
+Recommend one case for a skill with a single, narrow workflow and the default flow for skills spanning several steps or branches. If the user already chose for this creation, use that choice. Otherwise, wait for their answer.
 
-Install the scratch draft by following `~/.claude/skills/install-skill/SKILL.md` with `~/.agents/.scratch/<name>/skill/` as the source.
+For either eval option, read `~/.agents/skills/skill-creator/SKILL.md` and follow its "Running and evaluating test cases" workflow with the scratch draft as the skill and no skill as the baseline. Keep the runs under `~/.agents/.scratch/<name>/`. The one-case option limits the run to one comparison; the default option follows skill-creator's case-selection guidance. Show the results to the user. Fold amendments into the draft and repeat the selected eval flow until the user accepts the results.
 
-Done when: install-skill's checks pass.
+Done when: the choice is recorded and either the user chose to skip all evals or has accepted the selected eval results.
 
-## 5. Reload and test
+## 4. Confirm README placement
 
-Reload the skill index (`/reload-skills`, or tell the user a new session picks it up), then run the installed skill once on a real case and report what it produced.
+Read `~/.agents/README.md` and recommend the section and position that fit the new skill and the existing ordering. Show the proposed entry with a relative link to `./skills/<name>/SKILL.md`, a short description, and enough surrounding text to make the placement clear. Include any inventory counts affected by the addition, verified against the installed inventory and planned addition.
 
-Done when: the skill shows in the skill index and one real invocation has run and been reported.
+Polish the proposed README change with unslop-writing-for-agents. Show it as a unified diff and ask the user to confirm the recommended placement and wording before editing the README. Reuse an explicit placement approval already given for this creation. Fold amendments in and show the revised diff for approval.
 
-## 6. Edit later
+Done when: the user has approved the README diff, including the section and position of the entry.
+
+## 5. Install and update README
+
+Install the scratch draft by following `~/.claude/skills/install-skill/SKILL.md` with `~/.agents/.scratch/<name>/skill/` as the source. For this workflow, replace install-skill's "Reload and test" step with step 6 below. The eval choice in step 3 governs testing throughout installation and reload; neither adds a real-case invocation.
+
+After installation checks pass, apply the approved README diff. Confirm the skill appears once in the approved location, its relative link resolves to the installed `SKILL.md`, and affected counts match the installed inventory. If the README has changed since approval, preserve those edits and seek approval again if the proposed placement or wording must change.
+
+Done when: install-skill's file and link checks pass and the approved README entry and affected counts are verified.
+
+## 6. Reload and report
+
+Reload the skill index if supported, or tell the user a new session picks it up. Report the installed skill, its README section, and the eval results from step 3 or the user's explicit skip.
+
+Done when: the reload status or new-session instruction, README location, and eval results or explicit skip are reported.
+
+## 7. Edit later
 
 Make every later edit with `~/.claude/skills/update-skill/SKILL.md`; it carries the version rule.
 
