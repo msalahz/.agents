@@ -3,7 +3,7 @@ name: review-loop
 description: Run a review loop, a peer session reviewing work while this session fixes the findings, until both agree. Use when the user asks for a review loop, or for a peer session to review work until agreed.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Review loop
@@ -28,7 +28,7 @@ You are the reviewer in a review loop. The author session messages you each roun
 Work under review: <work>
 Focus: <focus>
 
-Each round, read the work as it is on disk now, then reply with one finding per line in the form `<high|medium|low> <fix|defer|ignore> <file:line or location> <what is wrong and what would fix it>`, ordered by risk. When the author pushes back on a finding, withdraw it or say why it stands. End every reply with `verdict: agree` when no finding you recommend fixing remains, otherwise `verdict: findings`.
+Each round, run the `reviewer` skill against the work as it is on disk now and reply with the report it returns, and nothing else.
 ```
 
 The slug is the work's name in lowercase with hyphens: a path's basename, a branch name, or a spec title. A name already in ListAgents gets `-2`, `-3`, and so on. The prompt file below takes the same slug.
@@ -50,11 +50,15 @@ Done when: the session ID is recorded.
 
 A round is one message to the reviewer, sent with SendMessage and `notify_when_idle: true`. Round 1 is `Round 1: review <work> as it is on disk now and reply with findings and a verdict.` An idle notice with no reply means the reviewer stopped.
 
+Each reply is a `reviewer` report: a `scope:` line, one line per lens with its pass or fail, findings as `<lens> <high|medium|low> <fix|defer|ignore> <file:line or location> <what is wrong and what would fix it>`, one or more `checks:` lines, any `notes:` lines, and a closing `verdict:` line. A finding whose last field opens with `pre-existing:` names a defect the work did not cause.
+
 On each reply:
 
 - Fix every `fix` finding the author agrees with.
 - Push back, with a reason, on every finding the author disagrees with.
 - Record `defer` and `ignore` findings for the report.
+
+Carry each finding's lens through to the report.
 
 The next round carries, per finding from the last reply, what changed on disk or the reason the author disagrees.
 
@@ -69,9 +73,10 @@ Done when: the loop ended by agreement, round cap, or second stop, and every ope
 Report in this format:
 
 Review loop: <work>. Reviewer <name> (<id>), <model>, <effort>. <n> rounds, <agreed | round cap hit | reviewer stopped>.
-Fixed: one line per finding fixed.
-Deferred: one line per finding deferred, with the reason.
-Disagreed: one line per open finding, with the author's and the reviewer's position.
+Lenses: the five lens verdicts from the last reply.
+Fixed: one line per finding fixed, with its lens.
+Deferred: one line per finding deferred, with its lens and the reason.
+Disagreed: one line per open finding, with its lens and the author's and the reviewer's position.
 Please review the result.
 
 Then stop the reviewer with `claude stop <id>` and delete the prompt file.
