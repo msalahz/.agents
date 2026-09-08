@@ -20,7 +20,7 @@ marketplace checkouts.
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   ├── reviewer.md            checks a review runs and documents it reads
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    45 installed skills
+├── skills/                    46 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -30,11 +30,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 45 entries under `skills/` have four different ownership models.
+The 46 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 14 | Edit the directory in this repo |
+| Personal skills | 15 | Edit the directory in this repo |
 | Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
@@ -43,6 +43,7 @@ The 45 entries under `skills/` have four different ownership models.
 
 These are real directories tracked in this repo.
 
+- [`coordinator`](./skills/coordinator/SKILL.md) makes the session a coordinator only, dispatching every task to its own Operative peer session and gating completion on a verifying Operative.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
 - [`reviewer`](./skills/reviewer/SKILL.md) judges a change against five lenses and returns one report with a verdict per lens.

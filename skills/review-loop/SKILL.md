@@ -3,7 +3,7 @@ name: review-loop
 description: Run a review loop, a peer session reviewing work while this session fixes the findings, until both agree. Use when the user asks for a review loop, or for a peer session to review work until agreed.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.5.0"
+  version: "0.6.0"
 ---
 
 # Review loop
@@ -12,16 +12,16 @@ This session is the author. A peer session started with `claude --bg` is the rev
 
 ## 1. Collect the request
 
-Collect from the request: the work under review (paths, a branch or diff, a spec, a plan), what the review should focus on, model, and effort. Defaults: model `opus` and effort `high`. Effort is one of `low`, `medium`, `high`, `xhigh`, or `max`. Any value the user names replaces its default.
+Collect from the request: the work under review (paths, a branch or diff, a spec, a plan), what the review should focus on, model, and effort. The author name is this session's own name, reported on the first line of ListAgents. Defaults: model `opus` and effort `high`. Effort is one of `low`, `medium`, `high`, `xhigh`, or `max`. Any value the user names replaces its default.
 
-Done when: work, focus, model, and effort are recorded.
+Done when: author name, work, focus, model, and effort are recorded.
 
 ## 2. Launch the reviewer
 
-Fill the work and focus into this prompt.
+Fill the author name, the work, and the focus into this prompt.
 
 ```
-Reply with SendMessage, copying the message's `from` attribute as your `to`.
+Reply with SendMessage to "<author name>", the author session's name, rather than to the message's `from` address.
 
 You are the reviewer in a review loop. The author session messages you each round.
 
@@ -30,6 +30,8 @@ Focus: <focus>
 
 Each round, run the `reviewer` skill against the work as it is on disk now and reply with the report it returns, and nothing else.
 ```
+
+The prompt names the author by session name because a `from` address is a process socket. A session that moves to another process, as it does when the user reconnects from another device, leaves the old socket accepting replies that never reach the author.
 
 The slug is the work's name in lowercase with hyphens: a path's basename, a branch name, or a spec title. A name already in ListAgents gets `-2`, `-3`, and so on. The prompt file below takes the same slug.
 
