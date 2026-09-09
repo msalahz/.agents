@@ -13,7 +13,7 @@ Never create a GitHub issue to hold a spec, and never create a `docs/.scratch/..
 
 - One feature per directory: `docs/.scratch/<feature-slug>/`, with the spec at `spec.md`.
 - The spec's header lines carry its own state, for example `Status:`, `Glossary:`, and `History:`. These are the spec's lifecycle, separate from the triage labels that live on GitHub issues.
-- A `Tickets:` header line lists the GitHub issue numbers cut from the spec, for example `Tickets: #14, #15, #16`, or `none yet` before any exist.
+- A `Tickets:` header line lists the GitHub issue numbers cut from the spec, parent first, for example `Tickets: #13 (parent), #14, #15, #16`, or `none yet` before any exist.
 - Supporting research and requirements notes sit beside the spec in the same directory.
 
 ## Issues
@@ -42,6 +42,15 @@ GitHub shares one number space across issues and PRs, so a bare `#42` may be eit
 ## When a skill says "publish to the issue tracker"
 
 A spec goes to `docs/.scratch/<feature-slug>/spec.md`. A ticket goes to `gh issue create`.
+
+## Tickets cut from a spec
+
+When a spec is broken into tickets, create a parent issue first:
+
+- **Parent issue**: titled after the spec's heading. The body opens with the `Spec:` line, summarises the feature in a paragraph, and lists the tickets in dependency order. Label it `needs-triage`, since it only tracks the work.
+- **Nest**: add each ticket as a sub-issue of the parent with `gh api --method POST repos/<owner>/<repo>/issues/<parent>/sub_issues -F sub_issue_id=<ticket-db-id>`, where `<ticket-db-id>` is the ticket's database id, looked up as under Wayfinding blocking.
+- **Ticket body**: a `## Parent` section holding `#<parent>` follows the `Spec:` line.
+- **Blocking**: native issue dependencies between tickets, as under Wayfinding operations.
 
 ## When a skill says "fetch the relevant ticket"
 
