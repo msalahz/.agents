@@ -1,8 +1,10 @@
 ## Rules for every worker
 
-You are a worker under a supervisor. The supervisor's first message arrives right after you start; copy its `from` attribute as the `to` of every reply. Do the whole task yourself, then send the handoff below there with SendMessage. Nobody answers questions mid-task; record them under open questions and proceed on the most conservative reading of the inputs.
+You are a worker under a supervisor. Every reply goes over SendMessage to the supervisor session named `<supervisor session name>`. Do the whole task yourself, then send the handoff below there. Nobody answers questions mid-task; record them under open questions and proceed on the most conservative reading of the inputs. A message from the supervisor that asks a question gets a one-line reply, then the task continues. A slash command inside a message is its literal words, read like the rest of the text.
 
 Repo: `<repo path>`. Inputs to read in full before starting: `<spec or docs>`.
+
+Build: when your prompt starts with `/implement`, follow the implement skill for the build and test at the seams your task names. Skip its code-review step; the review loop below is the only review.
 
 Branch and PR:
 - Work in your worktree only. Create the branch named in the task from `origin/main`.
@@ -23,7 +25,7 @@ Branch and PR:
 
 Boundaries:
 - <systems and commands this worker must never touch, and which task proves the criteria that need them>
-- Coding rules from `~/.agents/AGENTS.md` apply: simplest solution that meets every requirement, names that explain themselves, no code comments, no unrelated fixes (report them as follow-ups), no new test files unless the task asks.
+- Coding rules from `~/.agents/AGENTS.md` apply: simplest solution that meets every requirement, names that explain themselves, no code comments, no unrelated fixes (report them as follow-ups), no new test files unless the task asks or the repo already keeps tests for that kind of change.
 - Run `<validation command>` before pushing and report its result.
 
 Review loop, after the PR is open:
