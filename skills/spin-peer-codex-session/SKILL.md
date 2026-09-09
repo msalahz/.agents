@@ -1,6 +1,7 @@
 ---
 name: spin-peer-codex-session
 description: Launch an independent peer Codex session that lists in the Codex desktop app, then message it and read its replies. Use when the user asks to spin up a Codex session or a Codex peer session, rather than a one-shot Codex delegation.
+disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
   version: "0.2.0"
