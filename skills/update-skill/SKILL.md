@@ -3,7 +3,7 @@ name: update-skill
 description: Edit an installed skill in place and bump its version. Use when the user asks to change an existing skill, or another skill needs one edited.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.5.0"
+  version: "0.6.0"
 ---
 
 # Update skill
@@ -32,9 +32,9 @@ Done when: the human has approved the diff.
 
 ## 4. Test the edit
 
-Offer three choices: skip all evals, run one eval case on the changed behaviour, or follow skill-creator's default eval flow. Recommend one case for a small change and the default flow for changes spanning several steps or branches. A choice already made for this update stands. Evals follow skill-creator's "Running and evaluating test cases" workflow under the scratch directory, with the installed version as the baseline.
+Run one eval case on the changed behaviour. Skip evals or follow skill-creator's default eval flow only when the user asked for it, and a choice already made for this update stands. Evals follow skill-creator's "Running and evaluating test cases" workflow under the scratch directory, with the installed version as the baseline.
 
-Done when: the choice is recorded and either the user chose to skip all evals or has accepted the selected eval results.
+Done when: the user has accepted the eval results or asked to skip evals.
 
 ## 5. Bump the version
 

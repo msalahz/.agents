@@ -1,14 +1,14 @@
 ---
 name: write-skill
-description: Create and install a personal skill, offer eval choices, and add it to the README. Use when the user asks to create, add, write, or scaffold a new skill.
+description: Create and install a personal skill, run one eval case, and add it to the README. Use when the user asks to create, add, write, or scaffold a new skill.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.6.0"
+  version: "0.7.0"
 ---
 
 # Write skill
 
-Turn a request into an installed skill listed in `~/.agents/README.md`. Use `skill-creator` for design and selected evals, unslop-writing-for-agents for polish, and install-skill for installation. The "Skill home" section of `~/.agents/AGENTS.md` holds the paths and format rules every step follows.
+Turn a request into an installed skill listed in `~/.agents/README.md`. Use `skill-creator` for design and evals, unslop-writing-for-agents for polish, and install-skill for installation. The "Skill home" section of `~/.agents/AGENTS.md` holds the paths and format rules every step follows.
 
 ## 1. Verify the facts
 
@@ -24,9 +24,9 @@ Done when: the human has approved the prose.
 
 ## 3. Test the draft
 
-Offer three choices: skip all evals, run one eval case on the skill's main behavior, or follow skill-creator's default eval flow. Recommend one case for a single narrow workflow and the default flow for skills spanning several steps or branches. A choice already made for this creation stands. Evals follow skill-creator's "Running and evaluating test cases" workflow under the scratch directory, with no skill as the baseline.
+Run one eval case on the skill's main behavior. Skip evals or follow skill-creator's default eval flow only when the user asked for it, and a choice already made for this creation stands. Evals follow skill-creator's "Running and evaluating test cases" workflow under the scratch directory, with no skill as the baseline.
 
-Done when: the choice is recorded and either the user chose to skip all evals or has accepted the selected eval results.
+Done when: the user has accepted the eval results or asked to skip evals.
 
 ## 4. Confirm README placement
 
