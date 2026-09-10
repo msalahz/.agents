@@ -18,9 +18,8 @@ marketplace checkouts.
 │   ├── code-review/           Drizzle, React, TanStack Start, and TypeScript
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
-│   ├── reviewer.md            checks a review runs and documents it reads
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    46 installed skills
+├── skills/                    42 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -30,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 46 entries under `skills/` have four different ownership models.
+The 42 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 15 | Edit the directory in this repo |
+| Personal skills | 11 | Edit the directory in this repo |
 | Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
@@ -43,15 +42,11 @@ The 46 entries under `skills/` have four different ownership models.
 
 These are real directories tracked in this repo.
 
-- [`coordinator`](./skills/coordinator/SKILL.md) makes the session a coordinator only, dispatching every task to its own Operative peer session and gating completion on a verifying Operative.
+- [`archive-skill`](./skills/archive-skill/SKILL.md) moves a skill and everything it touched into `archive/<name>` so it can be restored.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
-- [`reviewer`](./skills/reviewer/SKILL.md) judges a change against five lenses and returns one report with a verdict per lens.
-- [`review-loop`](./skills/review-loop/SKILL.md) runs `reviewer` in a peer session and alternates review and fixes until both sessions agree.
+- [`simplify-skill`](./skills/simplify-skill/SKILL.md) cuts a skill down to its outcome and the constraints the agent cannot discover.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
-- [`spin-peer-claude-session`](./skills/spin-peer-claude-session/SKILL.md) launches an independent Claude session.
-- [`spin-peer-codex-session`](./skills/spin-peer-codex-session/SKILL.md) launches an independent Codex session.
-- [`supervisor`](./skills/supervisor/SKILL.md) plans, delegates, and gates a large goal through small background workers.
 - [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
 - [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.
@@ -126,6 +121,7 @@ until they are updated or reinstalled.
 | `/install-skill <path-or-url>` | Copy a skill into `skills/<name>` and link it |
 | `/update-skill <name>` | Edit an installed skill, test it, and bump its version |
 | `/uninstall-skill <name>` | Remove the skill directory and its link |
+| `/simplify-skill <name>` | Cut a skill down to outcome and constraints |
 
 Use these workflows instead of moving skill directories by hand. They keep this
 home and `~/.claude/skills` in sync. Eval workspaces go to
