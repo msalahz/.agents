@@ -1,0 +1,17 @@
+{
+  "skill_name": "ticket-to-pr",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use the ticket-to-pr workflow on docs/.scratch/widgets/issues/07-add-widget-archive.md. I am at the keyboard; stop at your first question.",
+      "expected_output": "A two-line summary, the acceptance criteria, and one question about scope with a recommendation, with no worktree created.",
+      "files": [],
+      "expectations": [
+        "Shows a summary of the ticket and its acceptance criteria",
+        "Asks whether the scope is right and states a recommendation",
+        "Creates no worktree and no branch before the human answers",
+        "Any proposed worktree name has at most four hyphen-separated parts"
+      ]
+    }
+  ]
+}

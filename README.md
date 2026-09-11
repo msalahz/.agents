@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    42 installed skills
+├── skills/                    43 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 42 entries under `skills/` have four different ownership models.
+The 43 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 11 | Edit the directory in this repo |
+| Personal skills | 12 | Edit the directory in this repo |
 | Matt Pocock skills | 24 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
@@ -47,6 +47,7 @@ These are real directories tracked in this repo.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
 - [`simplify-skill`](./skills/simplify-skill/SKILL.md) cuts a skill down to its outcome and the constraints the agent cannot discover.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
+- [`ticket-to-pr`](./skills/ticket-to-pr/SKILL.md) carries a ticket to an open pull request through a background agent, asking at each step.
 - [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
 - [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.
