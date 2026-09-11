@@ -12,6 +12,21 @@
         "Creates no worktree and no branch before the human answers",
         "Any proposed worktree name has at most four hyphen-separated parts"
       ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use the ticket-to-pr workflow on the ticket file at <workspace>/fixtures/64-status-colour-swatch.md for the repo at /Users/mohammedz/dentselect/dshub. Steps 1 to 3 are already settled: scope is the ticket's three criteria with ticket 65 out of scope, the worktree is named 64-status-colour-swatch at .claude/worktrees/64-status-colour-swatch, and the runtime is opus at high effort with the mattpocock implement skill. Do not create the worktree. Do step 4 only: write the agent prompt to <outputs>/agent-prompt.md and stop before asking for approval or launching.",
+      "expected_output": "An agent prompt file that carries the frontend-design skill path and a rule to match the existing patterns, abstractions, and design choices in the prior-art files.",
+      "files": [
+        "fixtures/64-status-colour-swatch.md"
+      ],
+      "expectations": [
+        "Prompt names the frontend-design skill path ~/.agents/skills/frontend-design/SKILL.md",
+        "Prompt tells the agent to match existing code patterns, abstractions, and design choices",
+        "Prompt tells the agent to extend an existing abstraction before adding a new one",
+        "Prompt names ServiceStatusesTable.tsx as prior art to match",
+        "Prompt still carries the implement skill path and the no-commit rule"
+      ]
     }
   ]
 }

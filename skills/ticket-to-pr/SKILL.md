@@ -3,7 +3,7 @@ name: ticket-to-pr
 description: Carry a GitHub issue or ticket file to an open pull request through a background agent, pausing at each step with a recommendation. Use when the user asks to implement or ship a ticket with a background agent.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Ticket to PR
@@ -47,6 +47,8 @@ Draft the agent prompt with these parts, in this order, as plain paragraphs and 
 - The ticket, by number and title, and the repo.
 - The worktree path and branch, with every command run from there and `pnpm install` first when `node_modules` is missing.
 - The implementation skill path, followed at every step except two: the agent commits nothing, and the review is done by the parent session.
+- When the ticket adds or reshapes UI, the `frontend-design` skill path at `~/.agents/skills/frontend-design/SKILL.md`, followed for every UI change.
+- Match the existing code patterns, abstractions, and design choices in the prior-art files and their neighbours. Extend an abstraction that already exists before adding a new one. Where the ticket leaves a choice open, name the file being matched.
 - Files to read before changing anything: the ticket, the spec sections the ticket names, the binding `docs/decisions/` file, the `CONTEXT.md` entries, `AGENTS.md`, the output of `pnpm dlx @tanstack/intent@latest list` with any matching skill loaded, and the prior-art files the ticket points at.
 - Scope as the acceptance criteria from step 1, numbered.
 - Out of scope, naming the sibling tickets that own each item.
