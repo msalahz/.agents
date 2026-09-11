@@ -3,7 +3,7 @@ name: ticket-to-pr
 description: Carry a GitHub issue or ticket file to an open pull request through a background agent, pausing at each step with a recommendation. Use when the user asks to implement or ship a ticket with a background agent.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.3.0"
 ---
 
 # Ticket to PR
@@ -75,14 +75,15 @@ Done when: the human and the agent agree nothing is left to fix, and the repo's 
 
 ## 7. Ship
 
-Ask before each of these four, recommending all four:
+Ask before each of these five, recommending all five:
 
 1. Commit on the worktree branch, ending the message with the trailers the session's attribution guidance names.
 2. Push the branch with `git push -u origin <name>`.
 3. Open the pull request with `gh pr create`, with a body that says `Closes #<number>` and ends with the attribution the session names for pull requests.
 4. Comment on the ticket with the PR URL through `gh issue comment`.
+5. Mark the ticket as in review. Change its triage label to `ready-for-human` with `gh issue edit --remove-label <agent label> --add-label ready-for-human`, reading both names from the triage-labels doc. When the issue sits on a GitHub Project, set its Status field to In review with `gh project item-edit`; a token without the `project` scope needs `gh auth refresh -s project`, which the human runs. The issue closes when the PR merges, through the `Closes` line; leave it open.
 
-A file-based ticket has no issue to close or comment on; steps 3 and 4 then link the ticket path in the PR body instead.
+A file-based ticket has no issue to close, comment on, or relabel; steps 3 to 5 then link the ticket path in the PR body instead.
 
 Done when: each step the human approved has run and its URL or hash is recorded.
 
