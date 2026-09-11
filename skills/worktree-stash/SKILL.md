@@ -3,7 +3,7 @@ name: worktree-stash
 description: Work a code task inside a git worktree, then stash every change under a named stash and report the name. Use when the user asks to work in a worktree or to hand changes back as a stash.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.5.0"
+  version: "0.5.1"
 ---
 
 # Worktree stash

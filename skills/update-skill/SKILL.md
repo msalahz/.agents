@@ -3,7 +3,7 @@ name: update-skill
 description: Edit an installed skill in place and bump its version. Use when the user asks to change an existing skill, or another skill needs one edited.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.6.0"
+  version: "0.7.0"
 ---
 
 # Update skill
@@ -26,7 +26,7 @@ Done when: every fact the edit states has been run and confirmed.
 
 ## 3. Draft the edit
 
-Draft under `~/.agents/.scratch/<name>/`, never in the home. Fix what the change leaves behind, such as a rule now stated twice or a step that still names the removed thing, and say so when showing the draft. Run the draft through unslop-writing-for-agents before showing it as a unified diff against the installed file.
+Draft under `~/.agents/.scratch/<name>/`, never in the home. Write `agents/openai.yaml` in the shape the "Skill home" rules give when the home has none, and re-sync it when the edit changes the display name, the short description, or `disable-model-invocation`. Fix what the change leaves behind, such as a rule now stated twice or a step that still names the removed thing, and say so when showing the draft. Run the draft through unslop-writing-for-agents before showing it as a unified diff against the installed file.
 
 Done when: the human has approved the diff.
 
@@ -44,7 +44,7 @@ Done when: `version` in the draft differs from the recorded one and follows the 
 
 ## 6. Write and verify
 
-Done when: the home holds the approved draft, its frontmatter `name` still equals `<name>`, every sibling file `SKILL.md` links to exists inside the home, `readlink ~/.claude/skills/<name>` still resolves to the home, and the scratch directory is gone.
+Done when: the home holds the approved draft, its frontmatter `name` still equals `<name>`, `agents/openai.yaml` sits beside `SKILL.md`, every sibling file `SKILL.md` links to exists inside the home, `readlink ~/.claude/skills/<name>` still resolves to the home, and the scratch directory is gone.
 
 ## 7. Reload and report
 

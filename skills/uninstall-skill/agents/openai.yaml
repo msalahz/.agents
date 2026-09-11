@@ -1,0 +1,5 @@
+interface:
+  display_name: "Uninstall Skill"
+  short_description: "Remove a skill and clean up after it"
+policy:
+  allow_implicit_invocation: false

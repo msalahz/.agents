@@ -3,7 +3,7 @@ name: spin-bg-agent
 description: Launch a background managed subagent with chosen model, effort, and instructions. Use when the user asks for a background agent or subagent that reports back to this session.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.4.0"
+  version: "0.4.1"
 ---
 
 # Spin bg agent

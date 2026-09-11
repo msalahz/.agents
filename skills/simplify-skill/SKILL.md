@@ -4,7 +4,7 @@ description: Cut a skill down to its outcome and the constraints the agent canno
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Simplify skill

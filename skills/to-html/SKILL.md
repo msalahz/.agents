@@ -3,7 +3,7 @@ name: to-html
 description: Render a report, summary, or other session deliverable as one styled self-contained HTML file in the repo. Use when the user asks for an HTML version of something, or to restyle one already produced.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # To HTML

@@ -4,7 +4,7 @@ description: Move a skill and everything it touched into ~/.agents/archive/<name
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Archive skill

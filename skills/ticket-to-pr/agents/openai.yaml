@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ticket to PR"
+  short_description: "Carry a ticket to an open pull request"

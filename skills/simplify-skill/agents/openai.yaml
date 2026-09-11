@@ -1,0 +1,5 @@
+interface:
+  display_name: "Simplify Skill"
+  short_description: "Cut a skill down to outcome and constraints"
+policy:
+  allow_implicit_invocation: false

@@ -4,7 +4,7 @@ description: Uninstall a skill and clean up its related files, configuration, re
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Uninstall skill

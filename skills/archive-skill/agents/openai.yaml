@@ -1,0 +1,5 @@
+interface:
+  display_name: "Archive Skill"
+  short_description: "Archive a skill so it can be restored"
+policy:
+  allow_implicit_invocation: false

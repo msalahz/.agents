@@ -3,7 +3,7 @@ name: install-skill
 description: Install a skill from a path or URL into the global skill home and link it for Claude Code. Use when the user asks to install a skill, or another skill needs one installed.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.3.1"
 ---
 
 # Install skill

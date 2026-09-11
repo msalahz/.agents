@@ -3,7 +3,7 @@ name: unslop-writing-for-agents
 description: Run a text by the writing-for-agents and unslop skills, then apply every fix. Use when reviewing or polishing a skill, AGENTS.md, or other agent-facing text.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.3.1"
 ---
 
 # Unslop writing for agents

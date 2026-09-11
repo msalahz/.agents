@@ -1,0 +1,5 @@
+interface:
+  display_name: "Reply"
+  short_description: "Answer a question without changing anything"
+policy:
+  allow_implicit_invocation: false

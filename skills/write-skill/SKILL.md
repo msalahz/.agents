@@ -3,7 +3,7 @@ name: write-skill
 description: Create and install a personal skill, run one eval case, and add it to the README. Use when the user asks to create, add, write, or scaffold a new skill.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.7.0"
+  version: "0.8.0"
 ---
 
 # Write skill
@@ -18,7 +18,7 @@ Done when: every fact the draft states has been run and confirmed.
 
 ## 2. Design and draft
 
-Invoke `skill-creator` for its capture-intent, interview and draft steps, skipping its package step. Draft under `~/.agents/.scratch/<name>/`. Frontmatter carries `author` from `git config` and `version: "0.1.0"`; formats the user dictates go in verbatim. Run the draft through unslop-writing-for-agents before showing it.
+Invoke `skill-creator` for its capture-intent, interview and draft steps, skipping its package step. Draft under `~/.agents/.scratch/<name>/`. Frontmatter carries `author` from `git config` and `version: "0.1.0"`; formats the user dictates go in verbatim. `agents/openai.yaml` goes in beside `SKILL.md` in the shape the "Skill home" rules give. Run the draft through unslop-writing-for-agents before showing it.
 
 Done when: the human has approved the prose.
 
@@ -38,7 +38,7 @@ Done when: the user has approved the README diff, including the section and posi
 
 Install the scratch draft through install-skill, with step 6 below in place of its "Reload and test" step so no real-case invocation is added beyond the eval choice in step 3. Apply the README diff after the install checks pass, preserving any README edits made since approval and seeking approval again if the placement or wording must change.
 
-Done when: install-skill's file and link checks pass, the entry appears once in the approved location, its link resolves to the installed `SKILL.md`, and affected counts match the installed inventory.
+Done when: install-skill's file and link checks pass, the installed home holds `agents/openai.yaml`, the entry appears once in the approved location, its link resolves to the installed `SKILL.md`, and affected counts match the installed inventory.
 
 ## 6. Reload and report
 

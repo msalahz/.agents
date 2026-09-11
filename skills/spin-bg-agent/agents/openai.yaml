@@ -1,0 +1,3 @@
+interface:
+  display_name: "Spin Background Agent"
+  short_description: "Launch a background subagent"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Write Skill"
+  short_description: "Create, install, and test a new skill"

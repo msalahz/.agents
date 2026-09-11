@@ -1,0 +1,3 @@
+interface:
+  display_name: "Worktree Stash"
+  short_description: "Work in a worktree and return a named stash"

@@ -69,5 +69,6 @@ Any skill that creates or edits a skill, `skill-creator` included, follows these
 - Install and remove only through `install-skill` and `uninstall-skill`, which keep the home and the link in sync. Do not package a `.skill` file.
 - Edit a personal skill only through `update-skill`. A home that resolves outside `~/.agents/skills` is a plugin skill and is not edited here.
 - Frontmatter carries `name`, `description`, and a `metadata` block with quoted `author` and `version`. `disable-model-invocation` is allowed even though `quick_validate.py` rejects it.
+- `agents/openai.yaml` sits beside `SKILL.md` with `interface.display_name` and a 25 to 64 character `interface.short_description`. A skill carrying `disable-model-invocation: true` also sets `policy.allow_implicit_invocation: false`, which keeps Codex from loading it until the human types `$<name>`.
 - Body uses one `## N. Title` section per step, each ending with a `Done when:` line.
 - Descriptions state what the skill does and when it triggers, without padding. Prove triggering with skill-creator's eval loop instead of a pushy description.

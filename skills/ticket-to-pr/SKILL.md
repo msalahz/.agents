@@ -3,7 +3,7 @@ name: ticket-to-pr
 description: Carry a GitHub issue or ticket file to an open pull request through a background agent, pausing at each step with a recommendation. Use when the user asks to implement or ship a ticket with a background agent.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.4.0"
+  version: "0.4.1"
 ---
 
 # Ticket to PR

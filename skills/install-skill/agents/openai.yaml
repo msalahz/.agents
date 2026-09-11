@@ -1,0 +1,3 @@
+interface:
+  display_name: "Install Skill"
+  short_description: "Install a skill from a path or URL"
