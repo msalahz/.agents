@@ -21,6 +21,7 @@ or `## Agent skills` section always wins over these defaults.
 - Commit tests only where the task asks for them or the repo already keeps tests for that kind of change. Do not turn scratch checks into permanent test files.
 - Edit files surgically. Rewrite a whole file only when it is short or most of it changes.
 - End any session that changed code by running `pnpm validate`. If the repo has no such script, run its lint, typecheck, and test scripts instead and name what you ran. The session is done only when that passes.
+- Match the existing code patterns, abstractions, and design choices in the prior-art files and their neighbours. Extend an abstraction that already exists before adding a new one.
 
 ## Code review
 
