@@ -1,0 +1,5 @@
+interface:
+  display_name: "Knowledge Wiki"
+  short_description: "Keep a verbatim wiki of domain expert answers"
+policy:
+  allow_implicit_invocation: false

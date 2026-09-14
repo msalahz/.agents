@@ -1,0 +1,22 @@
+{
+  "skill_name": "import-source",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run the import-source skill on notes/billing-questionnaire.md inside the repo at <workspace>/repo. The human has already answered the destination question: use docs/sources/. Write the imported file under <workspace>/repo/docs/sources/ and copy it, plus a report.md holding your final report, to <outputs>/.",
+      "expected_output": "One markdown file under docs/sources/ with the Source, Retrieved, and Formatting convention header, every question as a ### heading, every answer as a > **Answer:** blockquote keeping the Priya: prefix, and the ninety-day question marked > **Unanswered in source.**, plus a report naming that one anomaly.",
+      "files": [
+        "fixtures/repo/docs/agents/import-source.md",
+        "fixtures/repo/notes/billing-questionnaire.md"
+      ],
+      "expectations": [
+        "Imported file starts with a # title followed by **Source:**, **Retrieved:**, and **Formatting convention:** lines and a --- rule",
+        "Every one of the four questions appears as a ### heading with its wording unchanged",
+        "Every one of the three answers appears as a > **Answer:** blockquote keeping the Priya: prefix and its wording unchanged",
+        "The ninety-day question is followed by > **Unanswered in source.**",
+        "Both framing paragraphs appear as plain prose with their wording unchanged",
+        "The report names the file written, the destination docs/sources/, and exactly one anomaly, the unanswered ninety-day question"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "skill_name": "knowledge-wiki",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use the knowledge-wiki skill on the empty git repo at <workspace>/fixture-repo. Nobody is at the keyboard, so take your own recommended option at every question and add the AGENTS.md pointer line without asking. Run these in order: setup; copy <workspace>/fixtures/pricing-questionnaire.md into raw/ and ingest it, using the pages pricing and invoicing; ask \"Can a Paid invoice be corrected?\" and write the answer to <outputs>/ask-1.md; copy <workspace>/fixtures/alignment-questionnaire.md into raw/ and ingest it; ask the same question again and write the answer to <outputs>/ask-2.md; lint and write the report to <outputs>/lint.md. Copy the finished docs/ tree to <outputs>/docs/.",
+      "expected_output": "A docs/knowledge tree with two raw files, pricing and invoicing pages holding the answers word for word with citations, an index, a log with two Ingested lines and one Superseded line, a first ask answering that a Paid invoice cannot be edited, a second ask answering that the owner may correct one and saying the earlier answer was superseded, and a lint report with no findings.",
+      "files": [
+        "fixtures/pricing-questionnaire.md",
+        "fixtures/alignment-questionnaire.md"
+      ],
+      "expectations": [
+        "docs/agents/knowledge-wiki.md exists with Location docs/knowledge/ and a Supersession marker section",
+        "Every answer blockquote on the pricing and invoicing pages matches its raw text word for word",
+        "Every verbatim block on a page ends with a (source: ...) citation that resolves",
+        "wiki/log.md carries an Ingested line for each raw file naming the pages written",
+        "The invoicing page holds both Paid-invoice answers, each with a connector note linking the other, and the log carries a Superseded line",
+        "ask-1.md answers that a Paid invoice cannot be edited and cites the invoicing page",
+        "ask-2.md answers that the owner may correct a Paid invoice and says the earlier answer was superseded",
+        "lint.md reports no findings"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use the knowledge-wiki skill on the empty git repo at <workspace>/fixture-repo. Nobody is at the keyboard, so take your own recommended option at every question and add the AGENTS.md pointer line without asking. Run these in order: setup; copy <workspace>/fixtures/case-workflow-memo.md into raw/ and ingest it, choosing the topical pages yourself; ask \"Who pays for a remake?\" and write the answer to <outputs>/ask.md; lint and write the report to <outputs>/lint.md. Copy the finished docs/ tree to <outputs>/docs/.",
+      "expected_output": "A docs/knowledge tree with the memo in raw/, two or more topical pages that together carry every paragraph, list, and table row of the memo word for word with citations, an index listing each page, a log with one Ingested line, an ask answer that says the lab pays when the fault is the lab's and the doctor pays when the impression or prescription caused it, and a lint report with no findings.",
+      "files": [
+        "fixtures/case-workflow-memo.md"
+      ],
+      "expectations": [
+        "docs/agents/knowledge-wiki.md exists with Location docs/knowledge/",
+        "At least two topical pages exist and each carries the Summary, Sources, Last updated header",
+        "Every paragraph, list item, and table row of the memo appears word for word on some page",
+        "The turnaround table appears intact on one page with all three case-type rows",
+        "Every section on a page ends with a (source: ...) citation that resolves",
+        "wiki/index.md links every topical page and wiki/log.md carries an Ingested line naming the pages written",
+        "ask.md says the lab pays when the fault is the lab's and the doctor pays when the impression or prescription caused it, and cites a page",
+        "lint.md reports no findings"
+      ]
+    }
+  ]
+}
