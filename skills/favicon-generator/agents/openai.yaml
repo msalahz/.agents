@@ -1,0 +1,3 @@
+interface:
+  display_name: "Favicon Generator"
+  short_description: "Generate favicons and a web manifest from a logo"

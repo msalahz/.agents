@@ -1,0 +1,13 @@
+{
+  "name": "favicon-generator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx generate-favicons.ts"
+  },
+  "dependencies": {
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.35.4",
+    "tsx": "^4.20.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "source": "/absolute/path/to/logo.png",
+  "outputDir": "/absolute/path/to/repo/public",
+  "glyphColor": "#77767d",
+  "glyphCoverage": 1,
+  "touchIcon": {
+    "glyphColor": "#ffffff",
+    "background": "#1f1f1f",
+    "glyphCoverage": 0.7
+  },
+  "manifest": {
+    "name": "Brand",
+    "short_name": "Brand",
+    "theme_color": "#1f1f1f",
+    "background_color": "#1f1f1f",
+    "display": "standalone"
+  }
+}
