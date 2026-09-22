@@ -1,0 +1,5 @@
+interface:
+  display_name: "Arbitrate Review"
+  short_description: "Settle a review loop that ran out of rounds"
+policy:
+  allow_implicit_invocation: false

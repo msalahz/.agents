@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    46 installed skills
+├── skills/                    50 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,7 +29,7 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 46 entries under `skills/` have four different ownership models.
+The 50 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
@@ -42,14 +42,18 @@ The 46 entries under `skills/` have four different ownership models.
 
 These are real directories tracked in this repo.
 
+- [`arbitrate-review`](./skills/arbitrate-review/SKILL.md) settles a review loop that ran out of rounds by deciding and applying each open finding.
 - [`archive-skill`](./skills/archive-skill/SKILL.md) moves a skill and everything it touched into `archive/<name>` so it can be restored.
+- [`author-ticket`](./skills/author-ticket/SKILL.md) implements one sub-issue in a worktree, opens the PR, and runs the review loop with a reviewer session.
 - [`favicon-generator`](./skills/favicon-generator/SKILL.md) generates favicons, touch icons, and a web manifest from a brand logo.
 - [`import-source`](./skills/import-source/SKILL.md) writes one source document word for word as a markdown file under `docs/`.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`knowledge-wiki`](./skills/knowledge-wiki/SKILL.md) keeps a verbatim wiki of domain expert answers inside a repo, with setup, ingest, ask, and lint.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
+- [`review-pr`](./skills/review-pr/SKILL.md) reviews a PR against its ticket's acceptance criteria, hunts bugs, and sends the author a verdict.
 - [`simplify-skill`](./skills/simplify-skill/SKILL.md) cuts a skill down to its outcome and the constraints the agent cannot discover.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
+- [`supervise-issue`](./skills/supervise-issue/SKILL.md) drives a parent issue to completion through author and reviewer sessions, merging each approved PR.
 - [`ticket-to-pr`](./skills/ticket-to-pr/SKILL.md) carries a ticket to an open pull request through a background agent, asking at each step.
 - [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.

@@ -12,6 +12,7 @@ or `## Agent skills` section always wins over these defaults.
 - Apply `unslop` to artifacts you write: docs, specs, commit messages, PR bodies.
 - Label unverified claims `unverified` and say when you do not know.
 - Subagent runs count as unattended. In interactive sessions ask at most three questions per round.
+- Before context compaction, write a handoff note naming what is done, what remains, key file paths, decisions made, and the current round, then continue from it after compaction. Skills name the note's path; otherwise use `~/.agents/.scratch/handoff-<session>.md`.
 
 ## Coding
 

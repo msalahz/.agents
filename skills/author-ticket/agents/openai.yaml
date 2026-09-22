@@ -1,0 +1,5 @@
+interface:
+  display_name: "Author Ticket"
+  short_description: "Implement one sub-issue and run its review loop"
+policy:
+  allow_implicit_invocation: false

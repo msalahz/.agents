@@ -1,0 +1,5 @@
+interface:
+  display_name: "Supervise Issue"
+  short_description: "Drive a parent issue through author and reviewer sessions"
+policy:
+  allow_implicit_invocation: false
