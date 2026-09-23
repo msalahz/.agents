@@ -5,23 +5,22 @@ or `## Agent skills` section always wins over these defaults. Apply each rule on
 
 ## General rules
 
-- Work from files that exist in the working tree. Files git status shows as deleted were removed on purpose, so do not restore them, read them from history, or cite them.
-- Treat a question as a request for an answer, and change nothing until I say to act. "Go" or "apply" approves only the item just discussed.
-- Work on the current branch unless I name another. Use a worktree only when I ask for one or a ticket or PR flow needs it.
+- Files git status shows as deleted were removed on purpose, so do not restore them, read them from history, or cite them.
+- In an interactive session, treat a question about code or a plan as a request for an answer, and change nothing until I say to act. A question that names the change to make is a request. "Go" or "apply" approves only the item just discussed.
+- Work on the current branch, including main, unless I or the skill you are running name another. Use a worktree only when I ask for one or a ticket or PR flow needs it.
 - If a request seems mistaken or a better approach exists, say so in a sentence and continue as asked.
 
 ## Response rules
 
 - Apply `unslop` to artifacts you write: docs, specs, commit messages, PR bodies.
 - Label unverified claims `unverified` and say when you do not know.
-- Write reports as short bullets, one item per line. Use plain words that make sense on their own, without pointers to step numbers elsewhere.
-- Ask at most three questions per round. Label each question's choices `a`, `b`, and `c`, and mark the one you recommend.
+- Ask at most three questions per round. When a question has options, label them `a`, `b`, `c` and mark the one you recommend.
 
 ## Subagents
 
-- In a subagent or background run, no one answers questions. Make the call yourself, keep going until the task is done or blocked, and end with what you did, what you found, and what a human still has to run.
+- In a subagent or background run, no one answers questions. Make the call yourself, keep going until the task is done or blocked, and end with what you did, what you found, and what a human still has to run. The "Ask a human to run" list still applies, so report those as steps a human runs.
 - Name the skills a subagent should use in its brief, since it does not inherit them.
-- Do work that takes a handful of tool calls yourself, and delegate larger work.
+- Delegate only work that runs apart from your current thread, such as parallel searches or a sibling task. Steps of the skill you are running stay in this session unless the skill says to delegate them.
 
 ## Coding
 
@@ -31,13 +30,13 @@ or `## Agent skills` section always wins over these defaults. Apply each rule on
 - End any session that changed code by running `pnpm validate`. If the repo has no such script, run its lint, typecheck, and test scripts instead and name what you ran. The session is done only when that passes.
 - Match the existing code patterns, abstractions, design choices, theme, and file layout in the prior-art files and their neighbours. Extend an abstraction that already exists before adding a new one.
 - Pin dependencies to exact versions instead of `latest`.
-- Check UI changes in my open Chrome tab against the running dev server before calling them done. Subagents use that server instead of starting their own.
+- Before calling a UI change done, open it in my Chrome tab on the dev server. Use the server already running; if none is, start one and say so. Subagents share the running server.
 - In scripts and wizards a human runs, automate every step a script can do, and give every prompt that needs input a recommended default.
 
 ## Docs and content
 
 - Docs describe the current state. Git keeps the history, so leave out fixed issues and past changes.
-- Keep extracted or transcribed text verbatim and change only its formatting. Treat raw source files and ingested knowledge files as read-only.
+- Keep extracted or transcribed text verbatim and change only its formatting. Treat imported sources, such as a knowledge wiki's `raw/` folder, as read-only.
 
 ## Code review
 
