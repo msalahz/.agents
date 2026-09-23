@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    49 installed skills
+├── skills/                    48 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 49 entries under `skills/` have four different ownership models.
+The 48 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 19 | Edit the directory in this repo |
+| Personal skills | 18 | Edit the directory in this repo |
 | Matt Pocock skills | 25 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 4 | Update the plugin in Claude Code |
 | Copied third-party skills | 1 | Reinstall or update the local copy |
@@ -133,6 +133,72 @@ Use these workflows instead of moving skill directories by hand. They keep this
 home and `~/.claude/skills` in sync. Skills are created and edited in place
 under `skills/`; review changes with `git diff` and revert with git. Eval
 workspaces go to `.scratch/`, which git ignores.
+
+## Supervised issue flow
+
+`/supervise-issue <parent>` completes a parent GitHub issue one sub-issue at a
+time. Every sub-issue gets its own worktree, author session, and reviewer
+session. The supervisor writes no code. It plans, launches sessions, merges
+approved PRs, and moves the project board.
+
+```text
+supervisor-<parent>        supervise-issue    plans, merges, tracks the board
+├── author-<n>             author-ticket      one per sub-issue, in .claude/worktrees/<n>-<slug>
+│   └── reviewer-<n>       review-pr          launched by the author, read-only
+└── arbiter-<n>            arbitrate-review   only after 3 unresolved review rounds
+```
+
+1. **Preflight.** The supervisor checks that `.claude/settings.local.json`
+   allows `Bash(gh pr merge *)`, that you ran `/rename supervisor-<parent>`,
+   that `.claude/worktrees` is git-ignored, and that the default branch has
+   nothing unpushed. The parent should sit on a project board whose Status
+   field holds Backlog, Ready, In progress, In review, and Done. Without one
+   it falls back to labels.
+2. **Plan.** It reads each sub-issue's `## Blocked by` list, labels, and spec
+   path, then marks the ticket as agent or human work with `high` or `medium`
+   effort. It posts that table on the parent and waits for you to confirm it.
+3. **Launch a wave.** A wave is every agent ticket whose blockers have merged.
+   Each one gets a worktree branched from origin, an `author-<n>` session on
+   Opus running `/author-ticket`, and In progress on the board.
+4. **Author.** The author reads the ticket, spec, ADRs, and prior art,
+   implements through `implement`, runs the repo's gates, and opens the PR.
+   Acceptance criteria that need a remote environment go back to the
+   supervisor as human-only.
+5. **Review.** The author launches `reviewer-<n>` with `/review-pr`. The
+   reviewer runs a spec pass and a bug pass in subagents and sends risk-rated
+   findings that end in a verdict. The author fixes or rebuts them for up to
+   three rounds, then writes the outcome into a `## Review` section of the PR
+   body. A same-account PR cannot carry a GitHub approval, so that section is
+   the review record.
+6. **Arbitrate.** When three rounds end with findings still open, the
+   supervisor launches `arbiter-<n>` on Fable with `/arbitrate-review`. The
+   arbiter upholds or dismisses each finding, pushes fixes for the ones it
+   upholds, and reports.
+7. **Merge.** The supervisor merges only when the PR is mergeable and every CI
+   check passes. It stops the ticket's sessions, removes the worktree,
+   squash-merges, deletes the branch, and moves the ticket to Done. Then it
+   tells the other open authors to rebase and launches the next wave. A
+   conflict goes back to the author as `Rebase #<n> onto <default>`, followed
+   by one review round on the resolution.
+8. **Hand back.** When only human tickets remain, the supervisor sets them to
+   Ready, comments on the parent with the merged PRs, review rounds, and
+   follow-ups, and stops. Once you say the parent is complete, it removes the
+   sessions, closes the parent, and deletes its state.
+
+Sessions talk over SendMessage. The supervisor acts on these first lines:
+
+| Report line | From | Supervisor action |
+| --- | --- | --- |
+| `PR #<pr> opened for #<n>` | author | Board to In review |
+| `PR #<pr> approved for #<n> after round <k>` | author | Merge |
+| `PR #<pr> rebased and approved` | author | Merge |
+| `PR #<pr> unresolved for #<n> after 3 rounds` | author | Launch the arbiter |
+| `PR #<pr> arbitrated for #<n>` | arbiter | Merge |
+
+The supervisor keeps its state in `.scratch/<repo>-issue-<parent>/state.md`, so a
+resumed supervisor picks up where the last one stopped. No session in the flow
+deploys, reads production secrets, or changes a remote environment. Those
+steps stay on the human tickets.
 
 ## House rules
 
