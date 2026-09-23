@@ -4,7 +4,7 @@ description: Drive a parent GitHub issue to completion by running one author ses
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Supervise issue
@@ -13,7 +13,7 @@ The argument is a parent issue, as a number or URL. This session is the supervis
 
 Sessions talk over SendMessage. The author launches its own `review-pr` session and runs the review loop; the supervisor hears only the fixed report lines listed under step 5. A loop that runs out of rounds goes to an `arbitrate-review` session.
 
-State lives at `~/.agents/.scratch/<repo>-issue-<n>/state.md`: a table of ticket, worktree, branch, author id, reviewer id, PR, status, plus the launch and cleanup recipes below, kept current so a resumed or compacted session can carry on from it. The handoff rule in `~/.agents/AGENTS.md` applies; this session's note is that file.
+State lives at `~/.agents/.scratch/<repo>-issue-<n>/state.md`: a table of ticket, worktree, branch, author id, reviewer id, PR, status, plus the launch and cleanup recipes below, kept current so a resumed session can carry on from it.
 
 Three helpers sit in `scripts/`:
 
@@ -28,7 +28,6 @@ Every git command names its checkout with `git -C <path>`, and every launch runs
 Check each item and collect the misses. Ask the user to fix them in one message, since the classifier refuses to let this session edit its own settings:
 
 - `.claude/settings.local.json` allows `Bash(gh pr merge *)`. Without it the classifier refuses every merge as "Merge Without Review".
-- `~/.claude/settings.json` sets `autoCompactWindow` and the Response rules in `~/.agents/AGENTS.md` carry the handoff-note line. Both apply to every launched session.
 - The user has run `/rename supervisor-<n>` so the session name stays put. Names are otherwise generated from the first prompt and change after the first turn.
 - `git check-ignore .claude/worktrees` succeeds, and `git log origin/<default>..<default>` prints nothing, so the default branch has nothing unpushed. Sub-issue branches start from origin.
 - The implement skill exists at `~/.claude/plugins/marketplaces/mattpocock/skills/engineering/implement/SKILL.md` or the cache copy under `~/.claude/plugins/cache/claude-plugins-official/mattpocock-skills/`, and `resolving-merge-conflicts` sits beside it. Both are human-invocation skills, so authors read them by path.
@@ -71,7 +70,6 @@ Act on these:
 
 - An author idle with no report and no reviewer running: read `claude logs <id>`, then message it with what is missing.
 - An author exited: `claude agents --json --all` shows it as done. Resume it with `claude --bg --resume $(scripts/session-uuid.sh author-<n> <worktree>) --permission-mode auto "<what to do next>"` from the worktree. The short id opens an interactive picker and hangs, so only the full id works.
-- A session past the cap: it compacts on its own; if it lost the thread, resume it pointing at its handoff note under `~/.agents/.scratch/<repo>-issue-<n>/`.
 - An author reporting a human-only acceptance criterion: propose moving it to the human ticket, strikethrough on the source with a "moved to #m" note, the criterion appended on the target, one comment on the source. Do it only on the user's yes.
 
 Done when: every live session has a subscription and every notice has been handled or dismissed.

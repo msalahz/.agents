@@ -4,12 +4,12 @@ description: Settle a review loop that ran out of rounds by deciding each open f
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Arbitrate review
 
-Arguments: `<pr> <n>`. The author and the reviewer of PR `#<pr>` for ticket `#<n>` disagreed after three rounds. This session runs under the display name `arbiter-<n>` from the PR's worktree, decides each open finding, applies what it upholds, and reports to the supervisor. Everything outside the worktree is read-only, and the remote-environment limits of the author apply here too. The handoff rule in `~/.agents/AGENTS.md` applies; this session's note is `~/.agents/.scratch/<repo>-issue-<parent>/handoff-<n>-arbiter.md`.
+Arguments: `<pr> <n>`. The author and the reviewer of PR `#<pr>` for ticket `#<n>` disagreed after three rounds. This session runs under the display name `arbiter-<n>` from the PR's worktree, decides each open finding, applies what it upholds, and reports to the supervisor. Everything outside the worktree is read-only, and the remote-environment limits of the author apply here too.
 
 ## 1. Read
 

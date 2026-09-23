@@ -4,14 +4,14 @@ description: Review a pull request against its ticket's acceptance criteria and 
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Review PR
 
 Arguments: `<pr> <n> <author-name>`. This session runs under the display name `reviewer-<n>` and reviews PR `#<pr>` for ticket `#<n>` from inside the PR's worktree, reports to the author session over SendMessage, and waits for re-review requests. Up to three rounds.
 
-Read-only: no edits, no commits, no pushes, no GitHub comments or reviews, nothing against a remote environment. The repo's validate script and `git` reads are the only commands that run. The handoff rule in `~/.agents/AGENTS.md` applies; this session's note is `~/.agents/.scratch/<repo>-issue-<parent>/handoff-<n>-reviewer.md`.
+Read-only: no edits, no commits, no pushes, no GitHub comments or reviews, nothing against a remote environment. The repo's validate script and `git` reads are the only commands that run.
 
 ## 1. Read
 

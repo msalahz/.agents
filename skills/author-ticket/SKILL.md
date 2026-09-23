@@ -4,14 +4,14 @@ description: Implement one GitHub sub-issue in its own worktree as the author se
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Author ticket
 
 Arguments: `<n> <worktree> <supervisor-name>`. This session runs under the display name `author-<n>`, set by the supervisor at launch. It implements ticket `#<n>` in `.claude/worktrees/<worktree>` on the branch of the same name, opens the PR, launches its own reviewer, and reports to the supervisor with the fixed lines in step 6. It never merges, never force-pushes except a rebase the supervisor asked for, and never touches a remote environment.
 
-Every command runs inside the worktree; `pnpm install` comes first when `node_modules` is missing. The handoff rule in `~/.agents/AGENTS.md` applies; this session's note is `~/.agents/.scratch/<repo>-issue-<parent>/handoff-<n>.md`.
+Every command runs inside the worktree; `pnpm install` comes first when `node_modules` is missing.
 
 ## 1. Read
 
@@ -26,7 +26,7 @@ In this order, before changing anything:
 
 Scope is exactly the ticket's acceptance criteria. Sibling tickets under the same parent own everything else, even when adjacent. A gap that belongs to a sibling goes in the PR body, not the diff. A criterion that needs a remote environment or credentials goes to the supervisor in the PR-opened report as a human-only criterion; do not attempt it.
 
-Done when: every file above has been read and the criteria are listed, numbered, in the handoff note.
+Done when: every file above has been read and the criteria are listed, numbered.
 
 ## 2. Implement
 
@@ -34,13 +34,13 @@ Follow the implement skill at `~/.claude/plugins/marketplaces/mattpocock/skills/
 
 Limits that hold whatever the ticket says: no deploys, no `tofu apply`, no `gcloud` mutations, no DNS changes, no reading of production or staging secrets. `tofu init -backend=false`, `tofu validate`, and offline plans are fine.
 
-Done when: every numbered criterion is met by the diff, or named in the handoff note as human-only.
+Done when: every numbered criterion is met by the diff, or marked human-only.
 
 ## 3. Gate
 
 Run the repo's validate script, its build, and for infrastructure changes `tofu fmt -check` and `tofu validate`. Read the real exit code of each: no `| tail`, no `| head` on a gate, and `set -o pipefail` when a pipe is unavoidable. A local build that fails only because a secret manager is unreachable is reported as such, with CI as the arbiter; anything else is fixed before commit.
 
-Done when: each gate's exit code is recorded in the handoff note.
+Done when: each gate's real exit code has been read.
 
 ## 4. Commit and open the PR
 
