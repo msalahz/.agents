@@ -50,7 +50,7 @@ These are real directories tracked in this repo.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`knowledge-wiki`](./skills/knowledge-wiki/SKILL.md) keeps a verbatim wiki of domain expert answers inside a repo, with setup, ingest, ask, and lint.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
-- [`review-loop`](./skills/review-loop/SKILL.md) has a peer session review work while this session fixes the findings, until both agree.
+- [`review-loop`](./skills/review-loop/SKILL.md) has a peer session review work against its spec while this session fixes the findings, until the reviewer agrees or 5 rounds pass and this session arbitrates.
 - [`review-pr`](./skills/review-pr/SKILL.md) reviews a PR against its ticket's acceptance criteria, hunts bugs, and sends the author a verdict.
 - [`simplify-skill`](./skills/simplify-skill/SKILL.md) cuts a skill down to its outcome and the constraints the agent cannot discover.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
@@ -121,7 +121,7 @@ until they are updated or reinstalled.
 | [`unslop`](./skills/unslop/SKILL.md) | [`cursor/plugins`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
 | [`varlock`](./skills/varlock/SKILL.md) | [`dmno-dev/varlock`](https://github.com/dmno-dev/varlock) |
 
-`.skill-lock.json` is installer metadata, not the authoritative inventory. it does not list every marketplace symlink.
+`.skill-lock.json` is installer metadata, not the authoritative inventory. It does not list every marketplace symlink.
 
 ## Managing skills
 
@@ -143,7 +143,7 @@ workspaces go to `.scratch/`, which git ignores.
 [`AGENTS.md`](./AGENTS.md) is the source of truth. In short:
 
 - Run `unslop` before writing.
-- Mark every claim that has not been verified as `unconfirmed`.
+- Mark every claim that has not been verified as `unverified`.
 - Prefer the simplest implementation that meets the requirements.
 - Use self-explanatory code instead of comments.
 - Run `pnpm validate` after changing code.
