@@ -1,0 +1,3 @@
+interface:
+  display_name: "Spin Peer Session"
+  short_description: "Launch an independent background Claude session"
