@@ -1,32 +1,33 @@
 .DS_Store
 
 # Symlinked skills
-skills/ask-matt
-skills/codebase-design
-skills/diagnosing-bugs
-skills/domain-modeling
-skills/grill-me
-skills/grill-with-docs
-skills/grilling
-skills/handoff
-skills/implement
-skills/improve-codebase-architecture
-skills/prototype
-skills/research
-skills/resolving-merge-conflicts
-skills/setup-matt-pocock-skills
-skills/tdd
-skills/teach
-skills/to-questionnaire
-skills/to-spec
-skills/to-tickets
-skills/triage
-skills/wait-what
-skills/wayfinder
-skills/wizard
-skills/writing-for-agents
 skills/eli5
 skills/skill-creator
+skills/ask-matt
+skills/diagnosing-bugs
+skills/grill-with-docs
+skills/triage
+skills/improve-codebase-architecture
+skills/setup-matt-pocock-skills
+skills/tdd
+skills/to-spec
+skills/to-tickets
+skills/wayfinder
+skills/implement
+skills/prototype
+skills/research
+skills/domain-modeling
+skills/codebase-design
+skills/code-review
+skills/resolving-merge-conflicts
+skills/wizard
+skills/grill-me
+skills/grilling
+skills/handoff
+skills/teach
+skills/to-questionnaire
+skills/wait-what
+skills/writing-for-agents
 
 # Scratch
 .scratch/

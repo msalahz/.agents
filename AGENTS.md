@@ -1,28 +1,43 @@
 # Global agent memory
 
 Applies to every repo. A repo's own `docs/agents/*.md`, `CONTEXT.md`, `CONTEXT-MAP.md`,
-or `## Agent skills` section always wins over these defaults.
+or `## Agent skills` section always wins over these defaults. Apply each rule only to the kind of task it names.
 
 ## General rules
 
-- Do not restore, read from history, or cite files that git status shows as deleted. Treat them as if they never existed.
+- Work from files that exist in the working tree. Files git status shows as deleted were removed on purpose, so do not restore them, read them from history, or cite them.
+- Treat a question as a request for an answer, and change nothing until I say to act. "Go" or "apply" approves only the item just discussed.
+- Work on the current branch unless I name another. Use a worktree only when I ask for one or a ticket or PR flow needs it.
+- If a request seems mistaken or a better approach exists, say so in a sentence and continue as asked.
 
 ## Response rules
 
 - Apply `unslop` to artifacts you write: docs, specs, commit messages, PR bodies.
 - Label unverified claims `unverified` and say when you do not know.
-- Subagent runs count as unattended. In interactive sessions ask at most three questions per round.
-- Before context compaction, write a handoff note naming what is done, what remains, key file paths, decisions made, and the current round, then continue from it after compaction. Skills name the note's path; otherwise use `~/.agents/.scratch/handoff-<session>.md`.
+- Write reports as short bullets, one item per line. Use plain words that make sense on their own, without pointers to step numbers elsewhere.
+- Ask at most three questions per round. Label each question's choices `a`, `b`, and `c`, and mark the one you recommend.
+
+## Subagents
+
+- In a subagent or background run, no one answers questions. Make the call yourself, keep going until the task is done or blocked, and end with what you did, what you found, and what a human still has to run.
+- Name the skills a subagent should use in its brief, since it does not inherit them.
+- Do work that takes a handful of tool calls yourself, and delegate larger work.
 
 ## Coding
 
 - Use the simplest solution that meets every requirement.
 - In code you write or change, refactor until names explain it. Write no comments. Leave other code alone.
 - If you find a pre-existing bug or an improvement the task does not mention, do not fix it. Report it as a follow-up in your summary.
-- Commit tests only where the task asks for them or the repo already keeps tests for that kind of change. Do not turn scratch checks into permanent test files.
-- Edit files surgically. Rewrite a whole file only when it is short or most of it changes.
 - End any session that changed code by running `pnpm validate`. If the repo has no such script, run its lint, typecheck, and test scripts instead and name what you ran. The session is done only when that passes.
-- Match the existing code patterns, abstractions, and design choices in the prior-art files and their neighbours. Extend an abstraction that already exists before adding a new one.
+- Match the existing code patterns, abstractions, design choices, theme, and file layout in the prior-art files and their neighbours. Extend an abstraction that already exists before adding a new one.
+- Pin dependencies to exact versions instead of `latest`.
+- Check UI changes in my open Chrome tab against the running dev server before calling them done. Subagents use that server instead of starting their own.
+- In scripts and wizards a human runs, automate every step a script can do, and give every prompt that needs input a recommended default.
+
+## Docs and content
+
+- Docs describe the current state. Git keeps the history, so leave out fixed issues and past changes.
+- Keep extracted or transcribed text verbatim and change only its formatting. Treat raw source files and ingested knowledge files as read-only.
 
 ## Code review
 
@@ -31,7 +46,7 @@ or `## Agent skills` section always wins over these defaults.
 
 ## Ask a human to run:
 
-Ask a human to run these, even when they look routine:
+Ask a human to run these, even when they look routine, because they change shared state that is hard to undo:
 
 - Anything that targets a non-local environment: deploys, production env files or
   credentials, migrations or seeds against a remote database.
@@ -53,16 +68,11 @@ The five triage roles map to identically-named labels (`needs-triage`, `needs-in
 
 Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo root. A root `CONTEXT-MAP.md` makes the repo multi-context. See `~/.agents/docs/agents/domain.md`, or the repo's `docs/agents/domain.md` if present.
 
-### Grilling
-
-- Ask at most three questions per round.
-- Format choices within a question as a list labeled `a`, `b`, and `c`.
-
 ### Skill home
 
 `~/.claude/CLAUDE.md` imports this file with `@~/.agents/AGENTS.md`. This file is the source of truth; edit here, not there. `~/.agents/skills` is the one inventory of every skill on this machine. Two kinds of entry live there, linked in opposite directions:
 
-- **Personal and copied skills.** Real directories, tracked in this repo. Each is linked into Claude Code with `ln -s ../../.agents/skills/<name> ~/.claude/skills/<name>`. Codex reads `~/.agents/skills` directly and needs no link.
+- **Personal and copied skills.** Real directories, tracked in this repo. Each is linked into Claude Code with `ln -s ../../.agents/skills/<name> ~/.claude/skills/<name>`. Codex and other agents read `~/.agents/skills` directly and need no link.
 - **Plugin skills.** Installed by Claude Code under `~/.claude/plugins/` and updated by it. The link runs the opposite way: the plugin's skill directory stays where Claude Code put it, and a symlink is created in the home with `ln -s ~/.claude/plugins/marketplaces/<marketplace>/<path-to-skill> ~/.agents/skills/<name>`, then listed in `.gitignore`. Never copy a plugin skill into the home or link it into `~/.claude/skills`, since the plugin already registers it and would overwrite edits.
 
 Any skill that creates or edits a skill, `skill-creator` included, follows these rules:
