@@ -1,0 +1,5 @@
+interface:
+  display_name: "Coordinator"
+  short_description: "Dispatch every task to its own Operative peer session"
+policy:
+  allow_implicit_invocation: false

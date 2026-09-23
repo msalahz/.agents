@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    50 installed skills
+├── skills/                    51 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 50 entries under `skills/` have four different ownership models.
+The 51 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 18 | Edit the directory in this repo |
+| Personal skills | 19 | Edit the directory in this repo |
 | Matt Pocock skills | 25 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
@@ -45,6 +45,7 @@ These are real directories tracked in this repo.
 - [`arbitrate-review`](./skills/arbitrate-review/SKILL.md) settles a review loop that ran out of rounds by deciding and applying each open finding.
 - [`archive-skill`](./skills/archive-skill/SKILL.md) moves a skill and everything it touched into `archive/<name>` so it can be restored.
 - [`author-ticket`](./skills/author-ticket/SKILL.md) implements one sub-issue in a worktree, opens the PR, and runs the review loop with a reviewer session.
+- [`coordinator`](./skills/coordinator/SKILL.md) turns the session into a coordinator that splits each task into pieces sized for one Operative peer session and has a second Operative verify each piece.
 - [`favicon-generator`](./skills/favicon-generator/SKILL.md) generates favicons, touch icons, and a web manifest from a brand logo.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`knowledge-wiki`](./skills/knowledge-wiki/SKILL.md) keeps a verbatim wiki of domain expert answers inside a repo, with setup, ingest, ask, and lint.
