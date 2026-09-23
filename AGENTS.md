@@ -76,8 +76,8 @@ Single-context by default, with one `CONTEXT.md` and `docs/adr/` at the repo roo
 
 Any skill that creates or edits a skill, `skill-creator` included, follows these rules:
 
-- Draft and edit in a scratch copy, never in the home. Put eval workspaces at `~/.agents/.scratch/<name>/`, not beside the skill.
-- Install and remove only through `install-skill` and `uninstall-skill`, which keep the home and the link in sync. Do not package a `.skill` file.
+- Create and edit a personal skill in its home, `~/.agents/skills/<name>/`, never in a scratch copy. Git on `~/.agents` is the undo: show changes with `git diff`, and revert a rejected change with git. Put eval workspaces at `~/.agents/.scratch/<name>/`, not beside the skill.
+- Install from an outside source through `install-skill` and remove through `uninstall-skill`, which keep the home and the link in sync. `write-skill` creates the home and link itself. Do not package a `.skill` file.
 - Edit a personal skill only through `update-skill`. A home that resolves outside `~/.agents/skills` is a plugin skill and is not edited here.
 - Frontmatter carries `name`, `description`, and a `metadata` block with quoted `author` and `version`. `disable-model-invocation` is allowed even though `quick_validate.py` rejects it.
 - `agents/openai.yaml` sits beside `SKILL.md` with `interface.display_name` and a 25 to 64 character `interface.short_description`. A skill carrying `disable-model-invocation: true` also sets `policy.allow_implicit_invocation: false`, which keeps Codex from loading it until the human types `$<name>`.

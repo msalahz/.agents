@@ -3,7 +3,7 @@ name: update-skill
 description: Edit an installed skill in place and bump its version. Use when the user asks to change an existing skill, or another skill needs one edited.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.7.0"
+  version: "0.8.0"
 ---
 
 # Update skill
@@ -16,7 +16,9 @@ The argument names the skill and the changes wanted. With either missing, ask fo
 
 A home at `~/.agents/skills/<name>` whose `readlink -f` resolves outside `~/.agents/skills` belongs to a plugin, and the plugin's next update would overwrite the edit. Stop and report.
 
-Done when: the home path, the file list including every sibling file `SKILL.md` links to, and the current `version` are written down.
+When `git -C ~/.agents status --porcelain skills/<name>` shows uncommitted changes, ask the human to commit or discard them first, since reverting this edit would take them too.
+
+Done when: the home path, the file list including every sibling file `SKILL.md` links to, the current `version`, and a clean `git status` for the home are written down.
 
 ## 2. Verify the facts
 
@@ -24,15 +26,15 @@ A claim the change encodes that fails verification stays out.
 
 Done when: every fact the edit states has been run and confirmed.
 
-## 3. Draft the edit
+## 3. Edit in place
 
-Draft under `~/.agents/.scratch/<name>/`, never in the home. Write `agents/openai.yaml` in the shape the "Skill home" rules give when the home has none, and re-sync it when the edit changes the display name, the short description, or `disable-model-invocation`. Fix what the change leaves behind, such as a rule now stated twice or a step that still names the removed thing, and say so when showing the draft. Run the draft through unslop-writing-for-agents before showing it as a unified diff against the installed file.
+Edit the files in the home directly. Write `agents/openai.yaml` in the shape the "Skill home" rules give when the home has none, and re-sync it when the edit changes the display name, the short description, or `disable-model-invocation`. Fix what the change leaves behind, such as a rule now stated twice or a step that still names the removed thing, and say so when showing the edit. Run the edited files through unslop-writing-for-agents, then show `git -C ~/.agents diff skills/<name>`. Revise in place until approved; when the human abandons the update, restore the home with `git -C ~/.agents restore skills/<name>` and `git -C ~/.agents clean -fd skills/<name>`.
 
 Done when: the human has approved the diff.
 
 ## 4. Test the edit
 
-Run one eval case on the changed behaviour. Skip evals or follow skill-creator's default eval flow only when the user asked for it, and a choice already made for this update stands. Evals follow skill-creator's "Running and evaluating test cases" workflow under the scratch directory, with the installed version as the baseline.
+Run one eval case on the changed behaviour. Skip evals or follow skill-creator's default eval flow only when the user asked for it, and a choice already made for this update stands. Evals follow skill-creator's "Running and evaluating test cases" workflow in `~/.agents/.scratch/<name>/`, with the committed version as the baseline, extracted there with `mkdir -p ~/.agents/.scratch/<name>/baseline && git -C ~/.agents archive HEAD skills/<name> | tar -x -C ~/.agents/.scratch/<name>/baseline`.
 
 Done when: the user has accepted the eval results or asked to skip evals.
 
@@ -40,11 +42,11 @@ Done when: the user has accepted the eval results or asked to skip evals.
 
 Bump minor when a step, the frontmatter invocation, or a report contract changes, and patch for wording.
 
-Done when: `version` in the draft differs from the recorded one and follows the rule.
+Done when: `version` in the home differs from the recorded one and follows the rule.
 
-## 6. Write and verify
+## 6. Verify
 
-Done when: the home holds the approved draft, its frontmatter `name` still equals `<name>`, `agents/openai.yaml` sits beside `SKILL.md`, every sibling file `SKILL.md` links to exists inside the home, `readlink ~/.claude/skills/<name>` still resolves to the home, and the scratch directory is gone.
+Done when: the home holds the approved edit, its frontmatter `name` still equals `<name>`, `agents/openai.yaml` sits beside `SKILL.md`, every sibling file `SKILL.md` links to exists inside the home, and `readlink ~/.claude/skills/<name>` still resolves to the home.
 
 ## 7. Reload and report
 

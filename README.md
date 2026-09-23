@@ -131,8 +131,9 @@ until they are updated or reinstalled.
 | `/simplify-skill <name>` | Cut a skill down to outcome and constraints |
 
 Use these workflows instead of moving skill directories by hand. They keep this
-home and `~/.claude/skills` in sync. Eval workspaces go to
-`.scratch/`, which git ignores.
+home and `~/.claude/skills` in sync. Skills are created and edited in place
+under `skills/`; review changes with `git diff` and revert with git. Eval
+workspaces go to `.scratch/`, which git ignores.
 
 ## House rules
 
