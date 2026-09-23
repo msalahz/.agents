@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    50 installed skills
+├── skills/                    49 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 50 entries under `skills/` have four different ownership models.
+The 49 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 20 | Edit the directory in this repo |
+| Personal skills | 19 | Edit the directory in this repo |
 | Matt Pocock skills | 25 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 4 | Update the plugin in Claude Code |
 | Copied third-party skills | 1 | Reinstall or update the local copy |
@@ -104,6 +104,7 @@ These entries are symlinks into other marketplace checkouts under
 `~/.claude/plugins/marketplaces/`. Claude Code registers them through the
 plugin, so they have no link in `~/.claude/skills`.
 
+- [`claude-api`](./skills/claude-api/SKILL.md) is Anthropic's reference for the Claude API and SDKs: model IDs, pricing, tool use, caching, and model migration.
 - [`eli5`](./skills/eli5/SKILL.md) explains a topic with a dead-simple picture.
 - [`frontend-design`](./skills/frontend-design/SKILL.md) is Anthropic's guidance for distinctive, intentional UI design. `to-html` uses it.
 - [`skill-creator`](./skills/skill-creator/SKILL.md) is Anthropic's skill design, eval, and description-optimization loop. `write-skill` and `update-skill` wrap it; the "Skill home" section of `AGENTS.md` tells it where skills live here.
