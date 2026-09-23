@@ -4,7 +4,7 @@ description: Drive a parent GitHub issue to completion by running one author ses
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.2.1"
 ---
 
 # Supervise issue
@@ -30,7 +30,7 @@ Check each item and collect the misses. Ask the user to fix them in one message,
 - `.claude/settings.local.json` allows `Bash(gh pr merge *)`. Without it the classifier refuses every merge as "Merge Without Review".
 - The user has run `/rename supervisor-<n>` so the session name stays put. Names are otherwise generated from the first prompt and change after the first turn.
 - `git check-ignore .claude/worktrees` succeeds, and `git log origin/<default>..<default>` prints nothing, so the default branch has nothing unpushed. Sub-issue branches start from origin.
-- The implement skill exists at `~/.claude/plugins/marketplaces/mattpocock/skills/engineering/implement/SKILL.md` or the cache copy under `~/.claude/plugins/cache/claude-plugins-official/mattpocock-skills/`, and `resolving-merge-conflicts` sits beside it. Both are human-invocation skills, so authors read them by path.
+- `~/.agents/skills/implement/SKILL.md` and `~/.agents/skills/resolving-merge-conflicts/SKILL.md` resolve. Both are human-invocation skills, so authors read them by path.
 - The issue sits on a GitHub project with a single-select Status field holding Backlog, Ready, In progress, In review, Done. Read the project number from the issue's `projectItems`. With no project, fall back to labels `in-progress`, `in-review`, and closing the issue.
 
 Then run ListAgents once and record the line "This session is `<name> [ref]`". That name goes to every author.

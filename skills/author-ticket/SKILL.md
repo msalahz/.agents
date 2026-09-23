@@ -4,7 +4,7 @@ description: Implement one GitHub sub-issue in its own worktree as the author se
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.2.1"
 ---
 
 # Author ticket
@@ -30,7 +30,7 @@ Done when: every file above has been read and the criteria are listed, numbered.
 
 ## 2. Implement
 
-Follow the implement skill at `~/.claude/plugins/marketplaces/mattpocock/skills/engineering/implement/SKILL.md`, or the copy under `~/.claude/plugins/cache/claude-plugins-official/mattpocock-skills/`, with two substitutions: its `/code-review` step is the loop in step 5, and `/tdd` applies only where the repo already keeps tests of that kind. Any merge or rebase conflict is resolved with the resolving-merge-conflicts skill beside it.
+Follow the implement skill at `~/.agents/skills/implement/SKILL.md` with two substitutions: its `/code-review` step is the loop in step 5, and `/tdd` applies only where the repo already keeps tests of that kind. Resolve any merge or rebase conflict with the skill at `~/.agents/skills/resolving-merge-conflicts/SKILL.md`.
 
 Limits that hold whatever the ticket says: no deploys, no `tofu apply`, no `gcloud` mutations, no DNS changes, no reading of production or staging secrets. `tofu init -backend=false`, `tofu validate`, and offline plans are fine.
 

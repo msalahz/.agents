@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    52 installed skills
+├── skills/                    50 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,14 +29,14 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 52 entries under `skills/` have four different ownership models.
+The 50 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
 | Personal skills | 20 | Edit the directory in this repo |
 | Matt Pocock skills | 25 | Update the Claude Code marketplace checkout |
-| Other plugin skills | 2 | Update the plugin in Claude Code |
-| Copied third-party skills | 5 | Reinstall or update the local copy |
+| Other plugin skills | 4 | Update the plugin in Claude Code |
+| Copied third-party skills | 1 | Reinstall or update the local copy |
 
 ### Personal skills
 
@@ -60,7 +60,6 @@ These are real directories tracked in this repo.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
 - [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.
 - [`update-skill`](./skills/update-skill/SKILL.md) edits an installed skill through `skill-creator` and bumps its version.
-- [`worktree-stash`](./skills/worktree-stash/SKILL.md) completes work in a worktree and returns it as a named stash.
 - [`write-skill`](./skills/write-skill/SKILL.md) designs a skill with `skill-creator`, installs it, and live-tests it.
 
 ### Matt Pocock skills
@@ -106,6 +105,7 @@ These entries are symlinks into other marketplace checkouts under
 plugin, so they have no link in `~/.claude/skills`.
 
 - [`eli5`](./skills/eli5/SKILL.md) explains a topic with a dead-simple picture.
+- [`frontend-design`](./skills/frontend-design/SKILL.md) is Anthropic's guidance for distinctive, intentional UI design. `to-html` uses it.
 - [`skill-creator`](./skills/skill-creator/SKILL.md) is Anthropic's skill design, eval, and description-optimization loop. `write-skill` and `update-skill` wrap it; the "Skill home" section of `AGENTS.md` tells it where skills live here.
 
 ### Copied third-party skills
@@ -115,11 +115,7 @@ until they are updated or reinstalled.
 
 | Skill | Source |
 | --- | --- |
-| [`autofix`](./skills/autofix/SKILL.md) | [`coderabbitai/skills`](https://github.com/coderabbitai/skills) |
-| [`find-skills`](./skills/find-skills/SKILL.md) | [`vercel-labs/skills`](https://github.com/vercel-labs/skills) |
-| [`frontend-design`](./skills/frontend-design/SKILL.md) | [`anthropics/skills`](https://github.com/anthropics/skills) |
 | [`unslop`](./skills/unslop/SKILL.md) | [`cursor/plugins`](https://github.com/cursor/plugins/tree/main/pstack) by poteto |
-| [`varlock`](./skills/varlock/SKILL.md) | [`dmno-dev/varlock`](https://github.com/dmno-dev/varlock) |
 
 `.skill-lock.json` is installer metadata, not the authoritative inventory. It does not list every marketplace symlink.
 

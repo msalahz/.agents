@@ -4,7 +4,7 @@ description: Review a pull request against its ticket's acceptance criteria and 
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.1"
+  version: "0.2.0"
 ---
 
 # Review PR
@@ -15,7 +15,7 @@ Read-only: no edits, no commits, no pushes, no GitHub comments or reviews, nothi
 
 ## 1. Read
 
-1. `gh issue view <n> --comments`: the acceptance criteria, numbered, and the `Spec:` path on the first line. If the ticket carries none, find the spec in this order, adapted from the mattpocock code-review skill: issue references in the commit messages, a path the launch gave, a file under `docs/`, `specs/`, or `.scratch/` matching the branch name. If nothing turns up, the spec pass reports "no spec available" and the criteria stand alone.
+1. `gh issue view <n> --comments`: the acceptance criteria, numbered, and the `Spec:` path on the first line. If the ticket carries none, find the spec in this order: issue references in the commit messages, a path the launch gave, a file under `docs/`, `specs/`, or `.scratch/` matching the branch name. If nothing turns up, the spec pass reports "no spec available" and the criteria stand alone.
 2. The spec sections the ticket names, `docs/adr/*.md`, `AGENTS.md`, and the Coding and Code review rules in `~/.agents/AGENTS.md`.
 3. `gh pr view <pr> --json title,body,files` and `gh pr diff <pr>`, plus `git log origin/<default>..HEAD --oneline` in the worktree.
 4. The sibling tickets' titles under the parent, to name scope creep precisely.
@@ -24,9 +24,9 @@ Done when: the criteria list, spec text or its absence, and the full diff are in
 
 ## 2. Spec pass
 
-Launch one subagent with the diff, the commit list, the numbered criteria, the spec text, and this brief, adapted from the mattpocock code-review skill and extended with the per-criterion check:
+Launch one subagent with the diff, the commit list, the numbered criteria, the spec text, and this brief:
 
-> Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words.
+> Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Open with the first finding.
 
 Add: for each numbered acceptance criterion, state met, partly met, not met, or human-only, with the file and line that meets it. Scope creep names the sibling ticket that owns it.
 
@@ -34,7 +34,7 @@ Done when: every criterion has a status and the subagent's report is in context.
 
 ## 3. Bug pass
 
-Launch one subagent with the diff, the changed files in full, and this brief. It hunts logic errors, unhandled failure paths, shell pitfalls under `set -euo pipefail` such as a command substitution's status escaping into a conditional or a pipe hiding an exit code, regressions to existing callers, and behaviour that contradicts the runbooks or comments the diff touches. It scores each finding with this rubric, adapted from the official code-review plugin:
+Launch one subagent with the diff, the changed files in full, and this brief. It hunts logic errors, unhandled failure paths, shell pitfalls under `set -euo pipefail` such as a command substitution's status escaping into a conditional or a pipe hiding an exit code, regressions to existing callers, and behaviour that contradicts the runbooks or comments the diff touches. It scores each finding with this rubric:
 
 > 0: Not confident at all. This is a false positive that doesn't stand up to light scrutiny, or is a pre-existing issue.
 > 25: Somewhat confident. This might be a real issue, but may also be a false positive. The agent wasn't able to verify that it's a real issue.
@@ -42,7 +42,7 @@ Launch one subagent with the diff, the changed files in full, and this brief. It
 > 75: Highly confident. The agent double checked the issue, and verified that it is very likely it is a real issue that will be hit in practice. The existing approach in the PR is insufficient.
 > 100: Absolutely certain. The agent double checked the issue, and confirmed that it is definitely a real issue, that will happen frequently in practice. The evidence directly confirms this.
 
-And it drops these, from the same source:
+And it drops these:
 
 > Pre-existing issues. Something that looks like a bug but is not actually a bug. Pedantic nitpicks that a senior engineer wouldn't call out. Issues that a linter, typechecker, or compiler would catch. General code quality issues (lack of test coverage, general security issues, poor documentation) unless explicitly required in CLAUDE.md or AGENTS.md. Issues called out in those files but explicitly silenced in the code. Changes in functionality that are likely intentional or directly related to the broader change. Real issues on lines the PR did not modify.
 
