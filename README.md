@@ -56,7 +56,6 @@ These are real directories tracked in this repo.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.
 - [`spin-peer-session`](./skills/spin-peer-session/SKILL.md) launches an independent background Claude session with its own model, effort, and permission mode.
 - [`supervise-issue`](./skills/supervise-issue/SKILL.md) drives a parent issue to completion through author and reviewer sessions, merging each approved PR.
-- [`to-html`](./skills/to-html/SKILL.md) renders a report as one self-contained HTML file.
 - [`uninstall-skill`](./skills/uninstall-skill/SKILL.md) removes a skill and its Claude Code link.
 - [`unslop-writing-for-agents`](./skills/unslop-writing-for-agents/SKILL.md) applies the agent-writing and `unslop` rules together.
 - [`update-skill`](./skills/update-skill/SKILL.md) edits an installed skill through `skill-creator` and bumps its version.
@@ -106,7 +105,7 @@ plugin, so they have no link in `~/.claude/skills`.
 
 - [`claude-api`](./skills/claude-api/SKILL.md) is Anthropic's reference for the Claude API and SDKs: model IDs, pricing, tool use, caching, and model migration.
 - [`eli5`](./skills/eli5/SKILL.md) explains a topic with a dead-simple picture.
-- [`frontend-design`](./skills/frontend-design/SKILL.md) is Anthropic's guidance for distinctive, intentional UI design. `to-html` uses it.
+- [`frontend-design`](./skills/frontend-design/SKILL.md) is Anthropic's guidance for distinctive, intentional UI design.
 - [`skill-creator`](./skills/skill-creator/SKILL.md) is Anthropic's skill design, eval, and description-optimization loop. `write-skill` and `update-skill` wrap it; the "Skill home" section of `AGENTS.md` tells it where skills live here.
 
 ### Copied third-party skills
