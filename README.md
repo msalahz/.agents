@@ -19,7 +19,7 @@ marketplace checkouts.
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
-├── skills/                    51 installed skills
+├── skills/                    52 installed skills
 ├── .skill-lock.json           metadata written by `npx skills`
 └── README.md
 ```
@@ -29,11 +29,11 @@ A repo can override the defaults with its own `docs/agents/*.md`, `CONTEXT.md`,
 
 ## Skill inventory
 
-The 51 entries under `skills/` have four different ownership models.
+The 52 entries under `skills/` have four different ownership models.
 
 | Kind | Count | Update path |
 | --- | ---: | --- |
-| Personal skills | 19 | Edit the directory in this repo |
+| Personal skills | 20 | Edit the directory in this repo |
 | Matt Pocock skills | 25 | Update the Claude Code marketplace checkout |
 | Other plugin skills | 2 | Update the plugin in Claude Code |
 | Copied third-party skills | 5 | Reinstall or update the local copy |
@@ -50,6 +50,7 @@ These are real directories tracked in this repo.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`knowledge-wiki`](./skills/knowledge-wiki/SKILL.md) keeps a verbatim wiki of domain expert answers inside a repo, with setup, ingest, ask, and lint.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
+- [`review-loop`](./skills/review-loop/SKILL.md) has a peer session review work while this session fixes the findings, until both agree.
 - [`review-pr`](./skills/review-pr/SKILL.md) reviews a PR against its ticket's acceptance criteria, hunts bugs, and sends the author a verdict.
 - [`simplify-skill`](./skills/simplify-skill/SKILL.md) cuts a skill down to its outcome and the constraints the agent cannot discover.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.

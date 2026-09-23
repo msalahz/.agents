@@ -1,5 +1,0 @@
-interface:
-  display_name: "Import source"
-  short_description: "Write one source word for word under docs/"
-policy:
-  allow_implicit_invocation: false
