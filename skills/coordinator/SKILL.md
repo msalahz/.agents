@@ -4,7 +4,7 @@ description: Make this session a coordinator that dispatches every task to its o
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Coordinator
@@ -23,12 +23,12 @@ Done when: every piece has a working Operative, and the launch report gives each
 
 ## 2. Verify
 
-When a working Operative reports done, launch a different, verifying Operative with the piece, the working Operative's done report, and a finish line of pass or fail with reasons. Send a fail back to the working Operative as its next message, and verify again when it next reports done.
+When a working Operative reports done, check its report against the piece's finish line. For a piece whose failure would be costly or hard to spot, also launch a different, verifying Operative with the piece, the working Operative's done report, and a finish line of pass or fail with reasons. Send a fail back to the working Operative as its next message, and verify again when it next reports done.
 
-Done when: a verifying Operative reports pass.
+Done when: the done report meets the piece's finish line, and any verifying Operative launched for it reports pass.
 
 ## 3. Close out
 
-Relay the verified result to the user, then run `claude stop <id>` on both Operatives.
+Relay the verified result to the user, then run `claude stop <id>` on each of its Operatives.
 
 Done when: the user has the verified result and no Operative for the piece is still running.

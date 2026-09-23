@@ -4,7 +4,7 @@ description: Implement one GitHub sub-issue in its own worktree as the author se
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.1"
+  version: "0.2.2"
 ---
 
 # Author ticket
@@ -57,7 +57,7 @@ Done when: the PR exists and the supervisor has the opened line.
 Launch the reviewer from the worktree:
 
 ```
-claude --bg --name reviewer-<n> --model opus --effort xhigh --permission-mode auto "/review-pr <pr> <n> author-<n>"
+claude --bg --name reviewer-<n> --model opus --effort high --permission-mode auto "/review-pr <pr> <n> author-<n>"
 ```
 
 Wait for its message. It ends with `VERDICT: APPROVED` or `VERDICT: CHANGES REQUESTED` and lists findings with a risk level and a recommendation.

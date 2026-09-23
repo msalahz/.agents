@@ -1,7 +1,9 @@
 ---
 name: unslop
 description: Cut AI tells from artifacts you write: docs, specs, commit messages, PR bodies. Not for chat replies unless asked.
-version: 1.1.0
+metadata:
+  author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
+  version: "1.2.0"
 ---
 
 # Unslop
@@ -13,7 +15,6 @@ Edit text to remove AI patterns and add human voice.
 1. Scan for the patterns below.
 2. Rewrite. Preserve meaning, match intended tone.
 3. Add soul (see next section).
-4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
 
 ## Adding soul
 

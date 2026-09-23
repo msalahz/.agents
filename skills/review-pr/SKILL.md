@@ -4,7 +4,7 @@ description: Review a pull request against its ticket's acceptance criteria and 
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Review PR
@@ -42,7 +42,7 @@ Launch one subagent with the diff, the changed files in full, and this brief. It
 > 75: Highly confident. The agent double checked the issue, and verified that it is very likely it is a real issue that will be hit in practice. The existing approach in the PR is insufficient.
 > 100: Absolutely certain. The agent double checked the issue, and confirmed that it is definitely a real issue, that will happen frequently in practice. The evidence directly confirms this.
 
-And it drops these:
+It reports every issue it finds, including uncertain and low-severity ones, because its job is coverage and this session does the filtering. This session then drops these:
 
 > Pre-existing issues. Something that looks like a bug but is not actually a bug. Pedantic nitpicks that a senior engineer wouldn't call out. Issues that a linter, typechecker, or compiler would catch. General code quality issues (lack of test coverage, general security issues, poor documentation) unless explicitly required in CLAUDE.md or AGENTS.md. Issues called out in those files but explicitly silenced in the code. Changes in functionality that are likely intentional or directly related to the broader change. Real issues on lines the PR did not modify.
 
