@@ -4,7 +4,7 @@ description: Implement one GitHub sub-issue in its own worktree as the author se
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.2"
+  version: "0.3.0"
 ---
 
 # Author ticket
@@ -13,9 +13,11 @@ Arguments: `<n> <worktree> <supervisor-name>`. This session runs under the displ
 
 Every command runs inside the worktree; `pnpm install` comes first when `node_modules` is missing.
 
+When the launch prompt has a line `Phase <phase>: <steps>. Run only these.`, run only those steps. When they are done, write the handoff file and message the supervisor as the prompt's handoff block says, then stop. With no phase line, run every step.
+
 ## 1. Read
 
-In this order, before changing anything:
+When the launch prompt names a handoff file, read it before anything else and skip re-reading what it settles. Then, in this order, before changing anything:
 
 1. `gh issue view <n> --comments`: scope, acceptance criteria, `## Blocked by`, the `Spec:` path on the first line, the parent number.
 2. The spec sections the ticket names, and any research notes beside the spec.
@@ -42,15 +44,19 @@ Run the repo's validate script, its build, and for infrastructure changes `tofu 
 
 Done when: each gate's real exit code has been read.
 
-## 4. Commit and open the PR
+## 4. Commit, check in the browser, and open the PR
 
-Small logical commits with conventional-commit subjects. Each message ends with the trailer this session's own attribution guidance names; do not copy a model name from anywhere else. Push with `git push -u origin <worktree>`.
+Small logical commits with conventional-commit subjects. Each message ends with the trailer this session's own attribution guidance names; do not copy a model name from anywhere else.
+
+Before the push, open a UI change in Chrome on the dev server, following the repo's browser-testing instructions. A check that needs impersonating another user goes to the human; list it with the human-only criteria.
+
+Push with `git push -u origin <worktree>`.
 
 Open the PR against the default branch with `gh pr create`, title `<type>: <summary> (#<n>)`. Body: what changed; each acceptance criterion and how the diff meets it; criteria left to a human and why; follow-ups noticed and left alone; `Closes #<n>`; then the pull-request attribution line the session's guidance names. Plain and specific.
 
 Report to the supervisor, first line `PR #<pr> opened for #<n>`, then the URL and any human-only criteria.
 
-Done when: the PR exists and the supervisor has the opened line.
+Done when: every browser check has run or gone to the human, the PR exists, and the supervisor has the opened line.
 
 ## 5. Review loop
 
@@ -59,6 +65,8 @@ Launch the reviewer from the worktree:
 ```
 claude --bg --name reviewer-<n> --model opus --effort high --permission-mode auto "/review-pr <pr> <n> author-<n>"
 ```
+
+When the launch prompt carries a reviewer copy of the handoff block, append it verbatim to the reviewer prompt on its own line after `/review-pr <pr> <n> author-<n>`. It gives the reviewer a 140k-token budget and has it write `handoff-<n>-reviewer.md` when its context nears 110k.
 
 Wait for its message. It ends with `VERDICT: APPROVED` or `VERDICT: CHANGES REQUESTED` and lists findings with a risk level and a recommendation.
 

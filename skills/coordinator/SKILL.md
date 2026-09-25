@@ -4,7 +4,7 @@ description: Make this session a coordinator that dispatches every task to its o
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.6.0"
+  version: "0.6.1"
 ---
 
 # Coordinator
@@ -23,7 +23,7 @@ Done when: ListAgents shows this session's name starting with `coordinator-`.
 
 ## 2. Split and dispatch
 
-Break the task into small pieces, each one an Operative can finish well inside a 140k-token context. Launch an Operative for each piece. The prompt for a piece that changes files tells the Operative to run the `review-loop` skill before reporting done, with the piece's finish line and any bugs the change introduces as the review focus. Its done report carries review-loop's report and the exit code of the repo's validation command.
+Break the task into small pieces, each one an Operative can finish well inside a 140k-token context. Launch an Operative for each piece. Every prompt tells the Operative that when its context nears 110k tokens, it writes a handoff file with what is done, what changed, what it verified, and the next steps, sends this session the file path, and stops. The prompt for a piece that changes files tells the Operative to run the `review-loop` skill before reporting done, with the piece's finish line and any bugs the change introduces as the review focus. Its done report carries review-loop's report and the exit code of the repo's validation command.
 
 Done when: every piece has an Operative, and the launch report gives each one's model, effort, the reason for that choice, and whether it runs review-loop.
 
