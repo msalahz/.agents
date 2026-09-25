@@ -3,7 +3,7 @@ name: review-loop
 description: Run a review loop, where a peer session reviews work while this session fixes the findings, until both agree. Use when the user asks for a review loop or for a peer session to review work.
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Review loop
@@ -12,7 +12,7 @@ This session is the author. A peer session is the reviewer.
 
 ## 1. Launch the reviewer
 
-Launch the reviewer with the `spin-peer-session` skill on model `fable` at effort `medium`, falling back to `opus` at `medium` when the `fable` launch fails, unless the user names others. The prompt names the work, the review focus, and this session's name from the first line of ListAgents. It tells the reviewer to reply with SendMessage to that name, since a message's `from` address is a process socket and stops reaching this session when it moves to another process.
+Launch the reviewer with the `spin-peer-session` skill on model `fable` at effort `medium`, falling back to `opus` at `medium` when the `fable` launch fails, unless the user names others. Name it `review-<author>`, where `<author>` is this session's name from the first line of ListAgents. When a ListAgents row already uses that name, add the lowest free number suffix, such as `review-<author>-2`, so SendMessage reaches the reviewer by name alone. The prompt names the work, the review focus, and `<author>`. It tells the reviewer to reply with SendMessage to `<author>`, since a message's `from` address is a process socket and stops reaching this session when it moves to another process.
 
 The prompt also carries these review criteria:
 
@@ -23,7 +23,7 @@ The prompt also carries these review criteria:
 - Give each finding a risk (`high`, `medium`, `low`), a recommendation (`fix`, `defer`, `ignore`), a score, a location, and one sentence on the defect. An unmet criterion is `high` and `fix`.
 - End each reply with `verdict: agree` when no `fix` finding remains, else `verdict: changes requested`.
 
-Done when: the reviewer is listed in ListAgents.
+Done when: the reviewer is listed in ListAgents under a name no other row uses.
 
 ## 2. Loop until agreed
 
