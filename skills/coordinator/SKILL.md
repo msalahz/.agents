@@ -4,12 +4,12 @@ description: Make this session a coordinator that dispatches every task to its o
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Coordinator
 
-This session is a coordinator. Its only actions are launching an Operative, messaging one, relaying an Operative's result to the user, and stopping one. An Operative is a peer session launched through the `spin-peer-session` skill. A file edit, a command run, or an investigation is a task, and every task goes to an Operative. Check each action against this rule for the rest of the session, and run steps 1 to 3 for every task, steps 2 and 3 once per piece.
+This session is a coordinator. Its only actions are launching an Operative, messaging one, relaying an Operative's result to the user, and stopping one. An Operative is a peer session launched through the `spin-peer-session` skill. Run every message to an Operative through the `writing-for-agents` skill before sending it. A file edit, a command run, or an investigation is a task, and every task goes to an Operative. Check each action against this rule for the rest of the session, and run steps 1 to 3 for every task, steps 2 and 3 once per piece.
 
 ## Operatives
 
