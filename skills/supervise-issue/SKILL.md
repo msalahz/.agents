@@ -1,19 +1,31 @@
 ---
 name: supervise-issue
-description: Drive a parent GitHub issue to completion by running one author session and one reviewer session per sub-issue, merging each approved PR, and tracking status on a project board. Use when the user types /supervise-issue with an issue number or URL.
+description: Drive a parent GitHub issue to completion by running phased author sessions and a reviewer session per sub-issue, merging each approved PR, and tracking status on a project board. Use when the user types /supervise-issue with an issue number or URL.
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.2.1"
+  version: "0.3.0"
 ---
 
 # Supervise issue
 
-The argument is a parent issue, as a number or URL. This session is the supervisor. It never writes code. It plans, launches an `author-ticket` session per sub-issue, watches the reports, merges approved PRs, moves the board, and hands the human-only tickets back.
+The argument is a parent issue, as a number or URL. This session is the supervisor. It never writes code. It plans, launches `author-ticket` sessions per sub-issue one phase at a time, watches the reports, merges approved PRs, moves the board, and hands the human-only tickets back.
 
 Sessions talk over SendMessage. The author launches its own `review-pr` session and runs the review loop; the supervisor hears only the fixed report lines listed under step 5. A loop that runs out of rounds goes to an `arbitrate-review` session.
 
-State lives at `~/.agents/.scratch/<repo>-issue-<n>/state.md`: a table of ticket, worktree, branch, author id, reviewer id, PR, status, plus the launch and cleanup recipes below, kept current so a resumed session can carry on from it.
+State lives at `~/.agents/.scratch/<repo>-issue-<n>/state.md`: a table of ticket, worktree, branch, current phase, author ids one per phase, reviewer id, PR, status, plus the launch and cleanup recipes below, kept current so a resumed session can carry on from it. Handoff files sit beside it.
+
+The supervisor breaks each ticket into phases, each one a session can finish well inside a 140k-token context, and sizes every author, reviewer, and arbiter launch against that bound before it runs. Each phase is a fresh session under the same name `author-<n>`, so the reviewer still reaches it:
+
+- `implement`: author-ticket steps 1 to 3 and the commits of step 4, ending before the push.
+- `pr`: the browser checks the Coding rules in `~/.agents/AGENTS.md` ask of a UI change, then the push, PR, and opened report of step 4. Screenshots fill context fast, so this phase stands alone.
+- `review`: author-ticket steps 5 and 6. Its prompt also carries a reviewer copy of the handoff block and tells the author to append it to the reviewer launch prompt.
+
+Every launch prompt carries the handoff block below. Its `<file>` is an absolute path in the state directory: `handoff-<n>.md` for an author, `handoff-<n>-reviewer.md` for a reviewer, `handoff-<n>-arbiter.md` for an arbiter.
+
+```
+Context budget: finish this work well inside a 140k-token context. When this phase's work is done and a later phase remains, or your context nears 110k tokens, write <file> in at most 60 lines with these sections: done, per acceptance criterion; changed (commits, uncommitted work, migrations); verified; machine state (servers and processes left running); next steps; gotchas; follow-ups. Then send <supervisor-name> a message whose first line is `Handoff written for #<n>` and whose second line is the file path, and stop.
+```
 
 Three helpers sit in `scripts/`:
 
@@ -39,7 +51,7 @@ Done when: every item passes, or the user has been given the exact fix for each 
 
 ## 2. Plan
 
-Read the parent with `gh issue view <n>` and its sub-issues through the GraphQL `subIssues` connection. For each sub-issue read the body, the `## Blocked by` list, the labels, and the spec path on its first line. Build the table: ticket, blockers, effort, agent or human. `ready-for-human` tickets and tickets whose acceptance criteria need a remote environment are human; everything else is agent work. Effort is `high` for tickets that touch scripts or more than one domain, `medium` otherwise.
+Read the parent with `gh issue view <n>` and its sub-issues through the GraphQL `subIssues` connection. For each sub-issue read the body, the `## Blocked by` list, the labels, and the spec path on its first line. Build the table: ticket, blockers, effort, phases, agent or human. `ready-for-human` tickets and tickets whose acceptance criteria need a remote environment are human; everything else is agent work. Effort is `high` for tickets that touch scripts or more than one domain, `medium` otherwise. Phases default to `implement, pr, review`; a small ticket may merge two, as `implement+pr`, when one session can finish the merged work well inside a 140k-token context.
 
 Post the table as a comment on the parent and show it to the user with at most three questions, each with choices `a`, `b`, `c` and a recommendation. Ask only what changes the work: status tracking when there is no project, effort overrides, and what to do with human-only criteria found inside agent tickets.
 
@@ -52,13 +64,15 @@ A wave is every agent ticket whose blockers are all merged. For each ticket, fro
 ```
 git -C <repo> fetch origin
 git -C <repo> worktree add -b <n>-<slug> .claude/worktrees/<n>-<slug> origin/<default>
-(cd <repo>/.claude/worktrees/<n>-<slug> && claude --bg --name author-<n> --model opus --effort <effort> --permission-mode auto "/author-ticket <n> <n>-<slug> <supervisor-name>")
+(cd <repo>/.claude/worktrees/<n>-<slug> && claude --bg --name author-<n> --model opus --effort <effort> --permission-mode auto "<prompt>")
 scripts/project-status.sh <owner> <project> <repo> <n> "In progress"
 ```
 
+The prompt holds, on separate lines, `/author-ticket <n> <n>-<slug> <supervisor-name>`, `Phase <phase>: <the author-ticket steps it covers>. Run only these.`, and the handoff block.
+
 `--permission-mode auto` is deliberate. The classifier refuses `bypassPermissions` launches, and a session in the same permission class as the supervisor receives peer messages without a human approving each one.
 
-Record the short id `claude --bg` prints, then subscribe to each new author by sending `author-<n>` a SendMessage with `notify_when_idle: true` and no message. Names are exact: `author-<n>`, `reviewer-<n>`, `arbiter-<n>`.
+Record the short id `claude --bg` prints and the phase, then subscribe to each new author by sending `author-<n>` a SendMessage with `notify_when_idle: true` and no message. Names are exact: `author-<n>`, `reviewer-<n>`, `arbiter-<n>`.
 
 Done when: every ticket in the wave has a worktree, a running author, In progress on the board, an idle subscription, and a row in the state file.
 
@@ -69,18 +83,20 @@ There is no polling. CronCreate is refused by the classifier, so the only inputs
 Act on these:
 
 - An author idle with no report and no reviewer running: read `claude logs <id>`, then message it with what is missing.
-- An author exited: `claude agents --json --all` shows it as done. Resume it with `claude --bg --resume $(scripts/session-uuid.sh author-<n> <worktree>) --permission-mode auto "<what to do next>"` from the worktree. The short id opens an interactive picker and hangs, so only the full id works.
+- An author stopped after writing its handoff file: a planned phase end. Handle the file as in step 5 if its message has not arrived.
+- An author exited with no handoff file: `claude agents --json --all` shows it as done. Resume it with `claude --bg --resume $(scripts/session-uuid.sh author-<n> <worktree>) --permission-mode auto "<what to do next>"` from the worktree. The short id opens an interactive picker and hangs, so only the full id works.
 - An author reporting a human-only acceptance criterion: propose moving it to the human ticket, strikethrough on the source with a "moved to #m" note, the criterion appended on the target, one comment on the source. Do it only on the user's yes.
 
 Done when: every live session has a subscription and every notice has been handled or dismissed.
 
 ## 5. Handle reports
 
-The author sends fixed first lines. Match on them:
+Workers send fixed first lines. Match on them:
 
 - `PR #<pr> opened for #<n>`: set In review.
 - `PR #<pr> approved for #<n> after round <k>` or `PR #<pr> rebased and approved`: go to step 6.
-- `PR #<pr> unresolved for #<n> after 3 rounds`: launch the arbiter from the worktree with `claude --bg --name arbiter-<n> --model fable --effort high --permission-mode auto "<prompt>"` and subscribe, where the prompt holds, on separate lines, `/arbitrate-review <pr> <n>`, then `Author: author-<n>. Reviewer: reviewer-<n>. Supervisor: <supervisor-name>.`, then the author's full unresolved report verbatim. No record of the dispute exists on GitHub, so the launch message is the arbiter's only source. Its `PR #<pr> arbitrated for #<n>` report is treated as approval.
+- `PR #<pr> unresolved for #<n> after 3 rounds`: launch the arbiter from the worktree with `claude --bg --name arbiter-<n> --model fable --effort high --permission-mode auto "<prompt>"` and subscribe, where the prompt holds, on separate lines, `/arbitrate-review <pr> <n>`, then `Author: author-<n>. Reviewer: reviewer-<n>. Supervisor: <supervisor-name>.`, then the author's full unresolved report verbatim, then the handoff block. No record of the dispute exists on GitHub, so the launch message is the arbiter's only source. Its `PR #<pr> arbitrated for #<n>` report is treated as approval.
+- `Handoff written for #<n>`: read the file on the second line, then `claude stop` the sender. Launch its successor from the worktree with the sender's name and first-launch flags, so an author comes back as `--name author-<n>`. The prompt holds, on separate lines, a skill line, a phase line, `Read <file> first and skip re-reading what it settles.`, and the handoff block. An author's skill line is `Read ~/.agents/skills/author-ticket/SKILL.md, arguments <n> <n>-<slug> <supervisor-name>`, and its phase line is the one from step 3. An author continues the same phase after a 110k handoff and moves to the plan's next phase otherwise. A reviewer or arbiter gets its first launch's command line and no phase line. Record the new session id and phase in the state file, and subscribe.
 
 A `[Cross-session delivery notice]` saying a message was held means the peer runs in another permission class; relaunch it with `--permission-mode auto`.
 
