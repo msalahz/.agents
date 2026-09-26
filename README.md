@@ -103,7 +103,6 @@ These entries are symlinks into other marketplace checkouts under
 `~/.claude/plugins/marketplaces/`. Claude Code registers them through the
 plugin, so they have no link in `~/.claude/skills`.
 
-- [`claude-api`](./skills/claude-api/SKILL.md) is Anthropic's reference for the Claude API and SDKs: model IDs, pricing, tool use, caching, and model migration.
 - [`eli5`](./skills/eli5/SKILL.md) explains a topic with a dead-simple picture.
 - [`frontend-design`](./skills/frontend-design/SKILL.md) is Anthropic's guidance for distinctive, intentional UI design.
 - [`skill-creator`](./skills/skill-creator/SKILL.md) is Anthropic's skill design, eval, and description-optimization loop. `write-skill` and `update-skill` wrap it; the "Skill home" section of `AGENTS.md` tells it where skills live here.
