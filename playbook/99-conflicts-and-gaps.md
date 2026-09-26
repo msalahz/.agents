@@ -1,0 +1,32 @@
+# Conflicts and gaps
+Pairs of bullets in files 01 to 10 that give different rules for the same situation, and the rules that exist only inside a skill.
+
+## Conflicts
+
+- **Orchestrator role limits** vs **Supervisor writes no code** (file 02). delegation.md limits an orchestrator to planning, launching, messaging, verifying, and cleaning up, while the supervisor also merges approved PRs, moves the project board, and hands human-only tickets back. _Sources: docs/agents/delegation.md, README.md, skills/supervise-issue/SKILL.md_
+- **Global memory with repo override** vs **Skill-owned formats** (file 06). The global rule says a repo's `docs/agents/*.md` always wins, while knowledge-wiki keeps page format, citations, log, and lint checks as its own whatever `docs/agents/knowledge-wiki.md` says. _Sources: AGENTS.md, skills/knowledge-wiki/SKILL.md_
+- **Docs describe current state** vs **Supersession handling** (file 06). The global rule leaves past changes to git, while the wiki keeps superseded blocks in place with a note and records supersessions in the log. _Sources: AGENTS.md, skills/knowledge-wiki/SKILL.md_
+- **In-repo worktree naming** vs **Ticket worktree shares the branch name** (file 07). AGENTS.md requires in-repo worktrees to be named `worktree-<name>` so `pnpm validate` skips them, while the ticket flow puts worktrees at `.claude/worktrees/<worktree>` with no prefix and relies on `.claude/worktrees` being git-ignored. _Sources: AGENTS.md, skills/author-ticket/SKILL.md, skills/supervise-issue/SKILL.md_
+- **Auto mode for ticket peers** vs **bypassPermissions only on request** (file 07). supervise-issue refuses `bypassPermissions`, while spin-peer-session allows it when the user asks. _Sources: skills/supervise-issue/SKILL.md, skills/spin-peer-session/SKILL.md_
+- **Reviewer model with fallback** vs **Author launches its own reviewer** (file 03). The review-loop reviewer runs on fable at medium effort with opus at medium as fallback, and the ticket reviewer runs on opus at high. _Sources: skills/review-loop/SKILL.md, skills/author-ticket/SKILL.md_
+- **Self-arbitrate at the cap** vs **Exhausted loops go to an arbiter** (file 03). At the round cap, review-loop has the author arbitrate itself, while the ticket flow hands the loop to a separate arbitrate-review session on Fable. _Sources: skills/review-loop/SKILL.md, docs/agents/code-review.md, skills/supervise-issue/SKILL.md, README.md_
+- **Stay read-only** vs **Restore the working tree** (file 03). review-pr lets the reviewer run only validate and git reads, while code-review.md lets it run whatever checks the verdict needs and then restore the tree. _Sources: skills/review-pr/SKILL.md, docs/agents/code-review.md_
+- **Stay read-only** vs **Reproduce high-confidence findings** (file 03). review-pr allows only validate and git reads, while code-review.md allows any read-only command to reproduce findings scored 75 or more. _Sources: skills/review-pr/SKILL.md, docs/agents/code-review.md_
+- **Archive instead of delete** vs **Remove link before home** (file 10). archive-skill retires a skill by moving it into `~/.agents/archive/<name>/` so it can be restored, while uninstall-skill, the removal path AGENTS.md names, deletes the link and then the home. _Sources: skills/archive-skill/SKILL.md, skills/uninstall-skill/SKILL.md, AGENTS.md_
+- **Numbered steps with Done when** vs **Process list and catalogue** (file 09). AGENTS.md requires `## N. Title` steps ending in `Done when:`, and unslop uses a Process list and a rule catalogue instead. _Sources: AGENTS.md, skills/archive-skill/SKILL.md, skills/reply/SKILL.md, skills/unslop/SKILL.md_
+- **Label unverified claims** vs **Cutoff disclaimers** (file 01). AGENTS.md says to say when you do not know, while unslop says to find sources or delete "details are limited" disclaimers. _Sources: AGENTS.md, skills/unslop/SKILL.md_
+
+## Skill-only rules
+
+Each line lists what that file's "Where it lives" paragraph says appears only inside a skill, not in AGENTS.md or docs/agents.
+
+- **01 Writing and responses.** The unslop catalogue, the combined review pass, reply's no-edit mode, supervise-issue's question list and command reasons, author-ticket's PR body rule, and knowledge-wiki's recommended option.
+- **02 Delegation and sessions.** The supervisor, author, reviewer, and arbiter flows, phases, idle handling, work logs, Operatives, launch recipes, one-line launch reports, and cleanup, in supervise-issue, author-ticket, review-pr, arbitrate-review, review-loop, coordinator, spin-bg-agent, spin-peer-session, and supervise-issue's `session-uuid.sh`.
+- **03 Review process.** Review mechanics in review-pr, the peer loop in review-loop, reviewer launch and round counting in author-ticket, arbiter steps in arbitrate-review, arbiter launch and approval in supervise-issue, and loop closure in coordinator.
+- **04 Review checklists.** None. Every rule lives in the stack files under `docs/agents/code-review/`.
+- **05 Tickets and planning.** Reading and scoping a ticket in author-ticket, and the plan table, board handling, human-or-agent split, and hand-back in supervise-issue.
+- **06 Domain docs and research.** Everything about the knowledge wiki except finding the repo root, in knowledge-wiki's `SKILL.md`, `CONTEXT.md`, and `FORMATS.md`, and the ticket-time reading of ADRs and runbooks in author-ticket.
+- **07 Git, safety, and tooling.** The merge flow, rebase protocol, commit and push rules, permission modes, and gh handling, in author-ticket, supervise-issue, arbitrate-review, spin-peer-session, knowledge-wiki, and the supervise-issue scripts.
+- **08 Engineering practice.** The gate set, exit-code reading, CI as arbiter, PR check buckets, and criteria completion in author-ticket, arbitrate-review, review-pr, and supervise-issue, and every favicon rule in favicon-generator.
+- **09 Skill structure.** Caching and constraint rules in write-skill and simplify-skill, the sync rule in update-skill, and the body layouts and skill shapes in arbitrate-review, coordinator, reply, archive-skill, install-skill, unslop, unslop-writing-for-agents, knowledge-wiki, and favicon-generator.
+- **10 Skill lifecycle.** The install review, the removal search and plan, archiving, versioning, simplification, agent-definition links, eval baselines, verification checks, and report contents, in install-skill, uninstall-skill, update-skill, write-skill, archive-skill, simplify-skill, spin-bg-agent, and the knowledge-wiki eval fixtures.

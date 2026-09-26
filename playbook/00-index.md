@@ -1,0 +1,699 @@
+# Index
+
+- A new link needs the next turn: 10-skill-lifecycle.md
+- A question that names the change is a request: 01-writing-and-responses.md
+- Abstract metaphor nouns: 01-writing-and-responses.md
+- Accepted source kinds: 10-skill-lifecycle.md
+- Acknowledge complexity: 01-writing-and-responses.md
+- Active voice: 01-writing-and-responses.md
+- Additions as follow-ups: 02-delegation-and-sessions.md
+- Address by name: 02-delegation-and-sessions.md
+- Agent type by effort: 02-delegation-and-sessions.md
+- Aggregate in DB: 04-review-checklists.md
+- Agree structure first: 06-domain-docs-research.md
+- AI vocabulary: 01-writing-and-responses.md
+- All checks pass: 08-engineering-practice.md
+- Allow-list identifiers: 04-review-checklists.md
+- Allow-listed redirects: 04-review-checklists.md
+- Always validate server functions: 04-review-checklists.md
+- Annotated layout tree: 06-domain-docs-research.md
+- Answer by the Answering rules: 03-review-process.md
+- Answer directly: 02-delegation-and-sessions.md
+- Answer without changing anything: 01-writing-and-responses.md
+- Apply through update-skill: 10-skill-lifecycle.md
+- Approval stands: 10-skill-lifecycle.md
+- Arbiter is read-only outside the worktree: 03-review-process.md
+- Arbiter launch: 03-review-process.md
+- Arbiter never force-pushes: 07-git-safety-tooling.md
+- Arbitration counts as approval: 03-review-process.md
+- Arbitration line: 02-delegation-and-sessions.md
+- Archive argument is the name: 10-skill-lifecycle.md
+- Archive instead of delete: 10-skill-lifecycle.md
+- Archive is self-sufficient: 10-skill-lifecycle.md
+- Archive plan before moving: 10-skill-lifecycle.md
+- Arguments line up front: 09-skill-structure.md
+- Arguments substitution: 09-skill-structure.md
+- Ask and keep working: 02-delegation-and-sessions.md
+- Ask before clobbering: 10-skill-lifecycle.md
+- Ask for a missing argument first: 10-skill-lifecycle.md
+- Ask for manifest fields: 08-engineering-practice.md
+- Ask for missing input: 09-skill-structure.md
+- Ask for reasons: 02-delegation-and-sessions.md
+- Ask needs a wiki: 06-domain-docs-research.md
+- Ask only what changes the work: 01-writing-and-responses.md
+- Ask the parties when unclear: 03-review-process.md
+- Ask via index: 06-domain-docs-research.md
+- Ask when several SKILL.md: 10-skill-lifecycle.md
+- Ask with a recommended option: 01-writing-and-responses.md
+- Author and initial version: 10-skill-lifecycle.md
+- Author and reviewer roles: 03-review-process.md
+- Author flow: 02-delegation-and-sessions.md
+- Author force-pushes only for a requested rebase: 07-git-safety-tooling.md
+- Author launches its own reviewer: 03-review-process.md
+- Author never merges: 07-git-safety-tooling.md
+- Author prompt lines: 02-delegation-and-sessions.md
+- Author rebase on request: 07-git-safety-tooling.md
+- Auto mode for ticket peers: 07-git-safety-tooling.md
+- Automate human-run scripts: 07-git-safety-tooling.md
+- Avoid barrels: 04-review-checklists.md
+- Await-spanning read-modify-write: 04-review-checklists.md
+- Bare gh pr checks: 07-git-safety-tooling.md
+- Bare squash merge: 07-git-safety-tooling.md
+- Batch preflight misses: 07-git-safety-tooling.md
+- Batch updates: 04-review-checklists.md
+- Be specific: 01-writing-and-responses.md
+- Blocked-by fallback line: 05-tickets-planning.md
+- Board status columns: 05-tickets-planning.md
+- Bold defined terms: 09-skill-structure.md
+- Boldface restraint: 01-writing-and-responses.md
+- Bound caches: 04-review-checklists.md
+- Bound parameters in sql: 04-review-checklists.md
+- Bounded client state: 04-review-checklists.md
+- Bounded gh retry: 07-git-safety-tooling.md
+- Brief: 02-delegation-and-sessions.md
+- Bug pass targets: 03-review-process.md
+- bypassPermissions only on request: 07-git-safety-tooling.md
+- Cache only what one lookup cannot answer: 09-skill-structure.md
+- Caller decides approval: 01-writing-and-responses.md
+- Chatbot phrases: 01-writing-and-responses.md
+- Check affected count: 04-review-checklists.md
+- Check UI in Chrome: 08-engineering-practice.md
+- CI is the arbiter: 08-engineering-practice.md
+- Citation: 06-domain-docs-research.md
+- Cite every block: 06-domain-docs-research.md
+- Claim as first write: 05-tickets-planning.md
+- Clean up handlers and timers: 04-review-checklists.md
+- Clean up leftovers: 10-skill-lifecycle.md
+- Close on the user's word: 02-delegation-and-sessions.md
+- Collect every finding: 01-writing-and-responses.md
+- Collect launch options with defaults: 02-delegation-and-sessions.md
+- Colon limits: 01-writing-and-responses.md
+- Color as hex: 08-engineering-practice.md
+- Column refs via table object: 04-review-checklists.md
+- Combined review pass: 01-writing-and-responses.md
+- Committed version as baseline: 10-skill-lifecycle.md
+- Complete plan before removal: 10-skill-lifecycle.md
+- Compose other skills: 10-skill-lifecycle.md
+- Composition over layout booleans: 04-review-checklists.md
+- Composition skill: 09-skill-structure.md
+- Concurrency limit: 04-review-checklists.md
+- Confidence rubric: 03-review-process.md
+- Config lives in the repo: 08-engineering-practice.md
+- Config-driven generator: 08-engineering-practice.md
+- Config-relative paths: 08-engineering-practice.md
+- Confirm cleanup: 02-delegation-and-sessions.md
+- Confirm issue closed: 05-tickets-planning.md
+- Confirm registration: 02-delegation-and-sessions.md
+- Conflict round is free: 03-review-process.md
+- Conflict-safe inserts: 04-review-checklists.md
+- Connector note: 06-domain-docs-research.md
+- Connector note placement: 06-domain-docs-research.md
+- Consistent search defaults: 04-review-checklists.md
+- Context-bound log entry: 02-delegation-and-sessions.md
+- Context-limit handoff: 02-delegation-and-sessions.md
+- Context-sized pieces: 02-delegation-and-sessions.md
+- Controlled input stability: 04-review-checklists.md
+- Coordinator delegates every task: 02-delegation-and-sessions.md
+- Coordinator launch report: 02-delegation-and-sessions.md
+- Copied skills with source: 10-skill-lifecycle.md
+- Copy doubtful text as is: 06-domain-docs-research.md
+- Copy without cruft: 10-skill-lifecycle.md
+- count() not length: 04-review-checklists.md
+- Criteria met or marked: 08-engineering-practice.md
+- Criterion status: 03-review-process.md
+- CTE over inline subquery: 04-review-checklists.md
+- Customise the label column: 05-tickets-planning.md
+- Cut adverbs: 01-writing-and-responses.md
+- Cutoff disclaimers: 01-writing-and-responses.md
+- Data library for async state: 04-review-checklists.md
+- Date pitfalls: 04-review-checklists.md
+- Debounce search: 04-review-checklists.md
+- Decide by the Arbitrating rules: 03-review-process.md
+- Default model and effort: 02-delegation-and-sessions.md
+- Default to auto permission mode: 07-git-safety-tooling.md
+- Deferred items name an owner: 03-review-process.md
+- Definition then rules: 01-writing-and-responses.md
+- Delete home on abandon: 10-skill-lifecycle.md
+- Delete whole files only if owned: 10-skill-lifecycle.md
+- Depth via effort level: 02-delegation-and-sessions.md
+- Depth-bounded recursion: 04-review-checklists.md
+- Derive during render: 04-review-checklists.md
+- Descriptions state what and when: 09-skill-structure.md
+- Diff with reasons: 10-skill-lifecycle.md
+- Disable while pending: 04-review-checklists.md
+- Disagreements side by side: 06-domain-docs-research.md
+- Discriminated unions: 04-review-checklists.md
+- Do not mutate inputs: 04-review-checklists.md
+- Do not swallow redirect: 04-review-checklists.md
+- Docs describe current state: 06-domain-docs-research.md
+- Domain errors for unique violations: 04-review-checklists.md
+- Domain expert: 06-domain-docs-research.md
+- Done means green: 08-engineering-practice.md
+- Done when replaces how: 09-skill-structure.md
+- Drafts outside the home: 10-skill-lifecycle.md
+- Drop noise: 03-review-process.md
+- Early returns: 04-review-checklists.md
+- Edit only through update-skill: 10-skill-lifecycle.md
+- Edit specs in place: 05-tickets-planning.md
+- Edit the way write-skill built it: 10-skill-lifecycle.md
+- Effect cleanup: 04-review-checklists.md
+- Effects only for external sync: 04-review-checklists.md
+- Empty array traps: 04-review-checklists.md
+- Empty list guards: 04-review-checklists.md
+- Empty list safety: 04-review-checklists.md
+- End with pnpm validate: 08-engineering-practice.md
+- Escalate high risk: 10-skill-lifecycle.md
+- Escape user strings: 04-review-checklists.md
+- Eval choice needs the user: 10-skill-lifecycle.md
+- Eval workspace in scratch: 10-skill-lifecycle.md
+- Exact role names: 02-delegation-and-sessions.md
+- Exact status names: 05-tickets-planning.md
+- Excessive hedging: 01-writing-and-responses.md
+- Exhausted loops go to an arbiter: 03-review-process.md
+- Exhaustive switch: 04-review-checklists.md
+- Existence-check races: 04-review-checklists.md
+- Expand, migrate, contract: 02-delegation-and-sessions.md
+- Explicit failures: 10-skill-lifecycle.md
+- Extend before adding: 08-engineering-practice.md
+- External PR filter: 05-tickets-planning.md
+- Fail with known options: 07-git-safety-tooling.md
+- Fallback to raw: 06-domain-docs-research.md
+- False ranges: 01-writing-and-responses.md
+- Favicon report: 08-engineering-practice.md
+- Few render branches: 04-review-checklists.md
+- File-changing pieces run review-loop: 02-delegation-and-sessions.md
+- Filler phrases: 01-writing-and-responses.md
+- Filter server-side: 04-review-checklists.md
+- Final report categories: 03-review-process.md
+- Final review lines: 02-delegation-and-sessions.md
+- Find repo root: 07-git-safety-tooling.md
+- Find unprocessed files from the log: 06-domain-docs-research.md
+- Finding format: 03-review-process.md
+- Finite number checks: 04-review-checklists.md
+- First-line dispatch: 02-delegation-and-sessions.md
+- Fix all and diff: 01-writing-and-responses.md
+- Fix through the config: 08-engineering-practice.md
+- Fixed first line: 02-delegation-and-sessions.md
+- Fixed Ingested shape: 06-domain-docs-research.md
+- Flag ADR conflicts: 06-domain-docs-research.md
+- Flag then comply: 01-writing-and-responses.md
+- Format rules live in AGENTS.md: 09-skill-structure.md
+- Formats file of templates: 09-skill-structure.md
+- Formulaic challenges: 01-writing-and-responses.md
+- Framing text in fixtures: 10-skill-lifecycle.md
+- Frontmatter fields: 09-skill-structure.md
+- Full list each round: 03-review-process.md
+- Gaps as the next message: 02-delegation-and-sessions.md
+- Gate set: 08-engineering-practice.md
+- Generic conclusions: 01-writing-and-responses.md
+- gh command set: 05-tickets-planning.md
+- Git is the undo: 10-skill-lifecycle.md
+- git mv for tracked paths: 10-skill-lifecycle.md
+- Global default header: 06-domain-docs-research.md
+- Global memory with repo override: 06-domain-docs-research.md
+- Glossary read every time: 06-domain-docs-research.md
+- Glossary with Avoid lists: 06-domain-docs-research.md
+- Hand back human tickets: 05-tickets-planning.md
+- Handle not-found: 04-review-checklists.md
+- Handled rejections: 04-review-checklists.md
+- Handoff at phase end too: 02-delegation-and-sessions.md
+- Handoff block in every prompt: 02-delegation-and-sessions.md
+- Handoff file naming: 02-delegation-and-sessions.md
+- Handoff message lines: 02-delegation-and-sessions.md
+- Handoffs beside state: 02-delegation-and-sessions.md
+- Have opinions: 01-writing-and-responses.md
+- Heredoc bodies: 05-tickets-planning.md
+- Home rules bind every skill editor: 10-skill-lifecycle.md
+- Hook naming and cohesion: 04-review-checklists.md
+- House rules summary: 01-writing-and-responses.md
+- Human or agent: 05-tickets-planning.md
+- Human report lists blockers only: 03-review-process.md
+- Human runs non-local actions: 07-git-safety-tooling.md
+- Human runs the Drizzle CLI: 07-git-safety-tooling.md
+- Human-run list in subagent reports: 07-git-safety-tooling.md
+- Id type mismatch: 04-review-checklists.md
+- Idempotent POST: 04-review-checklists.md
+- Idempotent side effects: 04-review-checklists.md
+- Ignore repeat idle notices: 02-delegation-and-sessions.md
+- Image hints: 04-review-checklists.md
+- Impersonation checks go to the human: 07-git-safety-tooling.md
+- Imported sources are read-only: 06-domain-docs-research.md
+- In-repo worktree naming: 07-git-safety-tooling.md
+- Incremental re-review: 03-review-process.md
+- Index check can stay pending: 10-skill-lifecycle.md
+- Index filtered columns: 04-review-checklists.md
+- Index template: 06-domain-docs-research.md
+- Ingest: 06-domain-docs-research.md
+- Inline-header lists: 01-writing-and-responses.md
+- Install checks: 10-skill-lifecycle.md
+- Install dependencies first: 07-git-safety-tooling.md
+- Install once with pnpm: 08-engineering-practice.md
+- Install report: 10-skill-lifecycle.md
+- Invalidation races: 04-review-checklists.md
+- Inventory by ownership: 10-skill-lifecycle.md
+- Isolate screenshot-heavy work: 02-delegation-and-sessions.md
+- Judge the claim, not the claimant: 03-review-process.md
+- Just say "is": 01-writing-and-responses.md
+- Keep heading text: 06-domain-docs-research.md
+- Keep looking when absent: 10-skill-lifecycle.md
+- Keep openai.yaml in sync: 09-skill-structure.md
+- Keyset pagination: 04-review-checklists.md
+- Label unverified claims: 01-writing-and-responses.md
+- Launch in a subshell: 07-git-safety-tooling.md
+- Launch message as sole source: 02-delegation-and-sessions.md
+- Lazy doc creation: 06-domain-docs-research.md
+- Leave other code alone: 08-engineering-practice.md
+- Leave the app head alone: 08-engineering-practice.md
+- Let some mess in: 01-writing-and-responses.md
+- Lettered options with a recommendation: 01-writing-and-responses.md
+- Limit findMany: 04-review-checklists.md
+- Limit prop drilling: 04-review-checklists.md
+- Link before README: 10-skill-lifecycle.md
+- Lint coverage: 06-domain-docs-research.md
+- Lint headers: 06-domain-docs-research.md
+- Lint links: 06-domain-docs-research.md
+- Lint log completeness: 06-domain-docs-research.md
+- Lint orphans: 06-domain-docs-research.md
+- Lint report shape: 06-domain-docs-research.md
+- Lint supersession notes: 06-domain-docs-research.md
+- Lint verbatim check: 06-domain-docs-research.md
+- List both positions with evidence: 03-review-process.md
+- List when no argument: 10-skill-lifecycle.md
+- Load matching stack files: 03-review-process.md
+- Load TanStack intent skills: 07-git-safety-tooling.md
+- Loading, empty, error branches: 04-review-checklists.md
+- Lockfile is not the inventory: 10-skill-lifecycle.md
+- Log entry last: 06-domain-docs-research.md
+- Log template: 06-domain-docs-research.md
+- Loop end condition: 03-review-process.md
+- Manage skills through the skills: 10-skill-lifecycle.md
+- Managed subagent: 02-delegation-and-sessions.md
+- Map for user keys: 04-review-checklists.md
+- Map/Set lookups: 04-review-checklists.md
+- Mark outside-wiki content: 06-domain-docs-research.md
+- Match prior art: 08-engineering-practice.md
+- Measured memoisation: 04-review-checklists.md
+- Memo-safe props: 04-review-checklists.md
+- Merge gate: 07-git-safety-tooling.md
+- Merge sequence: 07-git-safety-tooling.md
+- Merge small phases: 02-delegation-and-sessions.md
+- Migrations with schema change: 04-review-checklists.md
+- Minimal skill: 09-skill-structure.md
+- Mirror invocation policy for Codex: 09-skill-structure.md
+- Missing term is a signal: 06-domain-docs-research.md
+- Move human criteria only on yes: 05-tickets-planning.md
+- Mutations module: 04-review-checklists.md
+- Mutations on user action: 04-review-checklists.md
+- Name collision on create: 10-skill-lifecycle.md
+- Name is identity: 10-skill-lifecycle.md
+- Name match is not ownership: 10-skill-lifecycle.md
+- Name patterns to avoid in design briefs: 02-delegation-and-sessions.md
+- Name repeated literals: 04-review-checklists.md
+- Name the checkout with git -C: 07-git-safety-tooling.md
+- Name the skills: 02-delegation-and-sessions.md
+- Name-dropping: 01-writing-and-responses.md
+- Named booleans: 04-review-checklists.md
+- Names over comments: 08-engineering-practice.md
+- Narrow approval: 01-writing-and-responses.md
+- Narrow selects: 04-review-checklists.md
+- Native blocking dependencies: 05-tickets-planning.md
+- Native methods first: 04-review-checklists.md
+- Native sub-issues: 05-tickets-planning.md
+- Never copy plugin skills: 10-skill-lifecycle.md
+- Never touch a remote environment: 07-git-safety-tooling.md
+- Newest session by name and cwd: 02-delegation-and-sessions.md
+- No .skill packages: 10-skill-lifecycle.md
+- No app-side counters: 04-review-checklists.md
+- No boolean params: 04-review-checklists.md
+- No check-then-insert race: 04-review-checklists.md
+- No decorative emojis: 01-writing-and-responses.md
+- No duplicate auth checks: 04-review-checklists.md
+- No em dashes: 01-writing-and-responses.md
+- No extra blockquote: 06-domain-docs-research.md
+- No import-time mutable state: 04-review-checklists.md
+- No internal error leak: 04-review-checklists.md
+- No mutations from effects or loaders: 04-review-checklists.md
+- No N+1: 04-review-checklists.md
+- No nested ternaries: 04-review-checklists.md
+- No parent means decide: 02-delegation-and-sessions.md
+- No per-iteration copies: 04-review-checklists.md
+- No polling: 02-delegation-and-sessions.md
+- No raw echo in errors: 04-review-checklists.md
+- No server secrets in client: 04-review-checklists.md
+- No shared server module state: 04-review-checklists.md
+- No string concatenation in loops: 04-review-checklists.md
+- No sycophancy: 01-writing-and-responses.md
+- No undefined misses: 04-review-checklists.md
+- No unused prefetch: 04-review-checklists.md
+- No whole-collection loads: 04-review-checklists.md
+- No-remote ticket fields: 05-tickets-planning.md
+- No-remote tickets: 05-tickets-planning.md
+- No-remote wayfinding: 05-tickets-planning.md
+- noopener: 04-review-checklists.md
+- Not just X but Y: 01-writing-and-responses.md
+- Nudge a stalled author: 02-delegation-and-sessions.md
+- Null semantics: 04-review-checklists.md
+- Number the criteria: 05-tickets-planning.md
+- Numbered ADR filenames: 06-domain-docs-research.md
+- Numbered catalogue with fixes: 01-writing-and-responses.md
+- Numbered criteria and spec path: 03-review-process.md
+- Numbered steps with Done when: 09-skill-structure.md
+- Offer to file answers: 06-domain-docs-research.md
+- Offline infra commands are fine: 07-git-safety-tooling.md
+- Omit the agent ID: 02-delegation-and-sessions.md
+- One async style: 04-review-checklists.md
+- One command per merge step: 07-git-safety-tooling.md
+- One commit per finding: 07-git-safety-tooling.md
+- One eval on a new skill: 10-skill-lifecycle.md
+- One eval on an update: 10-skill-lifecycle.md
+- One feature per directory: 05-tickets-planning.md
+- One file at a time: 06-domain-docs-research.md
+- One idea per sentence: 01-writing-and-responses.md
+- One scratch root, always cleaned: 10-skill-lifecycle.md
+- One shared dev server: 08-engineering-practice.md
+- One skill inventory: 10-skill-lifecycle.md
+- One worktree and session pair per sub-issue: 02-delegation-and-sessions.md
+- One-line rulings: 03-review-process.md
+- One-line skill entries: 10-skill-lifecycle.md
+- openai.yaml sidecar: 09-skill-structure.md
+- Operation: 06-domain-docs-research.md
+- Operation dispatch: 09-skill-structure.md
+- Operative: 02-delegation-and-sessions.md
+- Operative done report: 02-delegation-and-sessions.md
+- Operative work log path: 02-delegation-and-sessions.md
+- Optimistic rollback: 04-review-checklists.md
+- Optimistic safety: 04-review-checklists.md
+- Orchestrator role limits: 02-delegation-and-sessions.md
+- Order-dependent effects: 04-review-checklists.md
+- Out-of-scope defects become follow-ups: 03-review-process.md
+- Outcome is a listed install: 10-skill-lifecycle.md
+- Outcome plus undiscoverable constraints: 09-skill-structure.md
+- Output file checklist: 08-engineering-practice.md
+- Overridable defaults: 08-engineering-practice.md
+- Own attribution trailer: 07-git-safety-tooling.md
+- Page names: 06-domain-docs-research.md
+- Paginate server functions: 04-review-checklists.md
+- Parallel independent awaits: 04-review-checklists.md
+- Parent issue: 05-tickets-planning.md
+- Parent section in tickets: 05-tickets-planning.md
+- Partial states still count: 10-skill-lifecycle.md
+- Pass only named options: 02-delegation-and-sessions.md
+- Pass the reviewer handoff verbatim: 02-delegation-and-sessions.md
+- Pass visuals as files: 02-delegation-and-sessions.md
+- Path containment: 04-review-checklists.md
+- Peer launch command: 02-delegation-and-sessions.md
+- Peer session: 02-delegation-and-sessions.md
+- Peer session one-line report: 02-delegation-and-sessions.md
+- Pending and error components: 04-review-checklists.md
+- Per-repo skill config with global fallback: 10-skill-lifecycle.md
+- Persistent task list: 02-delegation-and-sessions.md
+- Personal skill link: 10-skill-lifecycle.md
+- pgEnum-derived unions: 04-review-checklists.md
+- Phase line: 02-delegation-and-sessions.md
+- Phase tickets by bound: 02-delegation-and-sessions.md
+- Pin dependencies: 08-engineering-practice.md
+- Plain and specific PR body: 01-writing-and-responses.md
+- Plain word: 01-writing-and-responses.md
+- Plan table with confirmation: 05-tickets-planning.md
+- Plugin skill link: 10-skill-lifecycle.md
+- Pointer to a lazy-loaded doc: 01-writing-and-responses.md
+- Polish before showing: 10-skill-lifecycle.md
+- Polish every brief: 02-delegation-and-sessions.md
+- Portability test: 01-writing-and-responses.md
+- Possibly-undefined values: 04-review-checklists.md
+- PR body contents: 07-git-safety-tooling.md
+- PR metadata, diff, and log: 03-review-process.md
+- PR title shape: 07-git-safety-tooling.md
+- PR-as-request flag: 05-tickets-planning.md
+- PR-opened line: 02-delegation-and-sessions.md
+- Prefer superseding block: 06-domain-docs-research.md
+- Preflight before a run: 07-git-safety-tooling.md
+- Preserve concurrent edits: 10-skill-lifecycle.md
+- Prevent double submit: 04-review-checklists.md
+- Proceed silently when absent: 06-domain-docs-research.md
+- Process list and catalogue: 09-skill-structure.md
+- Promotional language: 01-writing-and-responses.md
+- Propose AGENTS.md pointer: 06-domain-docs-research.md
+- Prose-and-table fixture: 10-skill-lifecycle.md
+- Prove triggering by eval: 10-skill-lifecycle.md
+- Puffery: 01-writing-and-responses.md
+- Push with upstream: 07-git-safety-tooling.md
+- Queries in data layer: 04-review-checklists.md
+- Query key factory: 04-review-checklists.md
+- Query, then mutate the project board: 07-git-safety-tooling.md
+- Question budget: 01-writing-and-responses.md
+- Questions are not change requests: 01-writing-and-responses.md
+- Race-safe effects: 04-review-checklists.md
+- Range-diff for conflict rounds: 03-review-process.md
+- Raw shape-agnostic: 06-domain-docs-research.md
+- Raw source: 06-domain-docs-research.md
+- Re-confirm additions: 10-skill-lifecycle.md
+- Re-review round message: 03-review-process.md
+- React 19 form primitives: 04-review-checklists.md
+- Read ADRs, AGENTS.md, and runbooks for a ticket: 06-domain-docs-research.md
+- Read domain docs first: 06-domain-docs-research.md
+- Read relevant ADRs: 06-domain-docs-research.md
+- Read sub-issues via GraphQL: 05-tickets-planning.md
+- Read the briefs doc first: 02-delegation-and-sessions.md
+- Read the code-review doc first: 03-review-process.md
+- Read the delegation doc first: 02-delegation-and-sessions.md
+- Read the global coding rules: 08-engineering-practice.md
+- Read the handoff first: 02-delegation-and-sessions.md
+- Read ticket, then spec: 05-tickets-planning.md
+- Reading list: 03-review-process.md
+- README diff approval: 10-skill-lifecycle.md
+- README entry shape: 10-skill-lifecycle.md
+- README shape: 06-domain-docs-research.md
+- readonly by default: 04-review-checklists.md
+- Real exit codes: 08-engineering-practice.md
+- Realistic raw-source fixture: 10-skill-lifecycle.md
+- Reason beside each command rule: 01-writing-and-responses.md
+- Rebase request message: 07-git-safety-tooling.md
+- Recommended defaults in prompts: 07-git-safety-tooling.md
+- Record search scope: 10-skill-lifecycle.md
+- Record skipped passages: 06-domain-docs-research.md
+- Record starting state: 10-skill-lifecycle.md
+- Record the validate exit code: 08-engineering-practice.md
+- Record your own name for workers: 02-delegation-and-sessions.md
+- ref as prop: 04-review-checklists.md
+- Refuse plugin skills: 10-skill-lifecycle.md
+- Relational vs builder: 04-review-checklists.md
+- Relaunch held-message peers: 02-delegation-and-sessions.md
+- Relay or decide subagent questions: 02-delegation-and-sessions.md
+- Relay then remove: 02-delegation-and-sessions.md
+- Reload the index: 10-skill-lifecycle.md
+- Remote criteria go human-only: 07-git-safety-tooling.md
+- Removal checks: 10-skill-lifecycle.md
+- Remove link before home: 10-skill-lifecycle.md
+- Remove the worktree before merging: 07-git-safety-tooling.md
+- Rename before launch: 02-delegation-and-sessions.md
+- Rename rewrites name: 10-skill-lifecycle.md
+- Rename via uninstall then install: 10-skill-lifecycle.md
+- Repo doc configures the skill: 06-domain-docs-research.md
+- Repo doc stub: 06-domain-docs-research.md
+- Repo knowledge doc: 06-domain-docs-research.md
+- Report broken dependents: 10-skill-lifecycle.md
+- Report out-of-scope finds: 08-engineering-practice.md
+- Report rm refusal verbatim: 02-delegation-and-sessions.md
+- Report tail headings: 02-delegation-and-sessions.md
+- Reproduce high-confidence findings: 03-review-process.md
+- Reproduce read-only: 03-review-process.md
+- Reproduce the top finding: 03-review-process.md
+- Require a clean tree first: 10-skill-lifecycle.md
+- Required skills resolve by path: 02-delegation-and-sessions.md
+- Resolve bare numbers: 05-tickets-planning.md
+- Resolve conflicts with the skill: 07-git-safety-tooling.md
+- Resolve sequence: 05-tickets-planning.md
+- Respect deleted files: 07-git-safety-tooling.md
+- Restate or cut: 01-writing-and-responses.md
+- Restore the working tree: 03-review-process.md
+- Resumable state file: 02-delegation-and-sessions.md
+- Resume by full id: 02-delegation-and-sessions.md
+- Resume half-done ingests: 06-domain-docs-research.md
+- Retry gh calls: 07-git-safety-tooling.md
+- Reuse middleware: 04-review-checklists.md
+- Reuse the implement skill: 08-engineering-practice.md
+- Review against writing-for-agents: 10-skill-lifecycle.md
+- Review evidence without approval: 03-review-process.md
+- Review flags: 10-skill-lifecycle.md
+- Review message shape: 03-review-process.md
+- Review record in the PR body: 03-review-process.md
+- Review-loop closure: 03-review-process.md
+- Review-loop reviewer name: 02-delegation-and-sessions.md
+- Reviewer model: 02-delegation-and-sessions.md
+- Reviewer model with fallback: 03-review-process.md
+- Reviewer prompt contents: 03-review-process.md
+- Reviewer session: 02-delegation-and-sessions.md
+- Revise until approved: 10-skill-lifecycle.md
+- Risk and recommendation per finding: 10-skill-lifecycle.md
+- Role meanings: 05-tickets-planning.md
+- Route data flow: 04-review-checklists.md
+- Rule of three: 01-writing-and-responses.md
+- Rules grouped by domain: 01-writing-and-responses.md
+- Run everything in the worktree: 07-git-safety-tooling.md
+- Run once on a real case: 10-skill-lifecycle.md
+- Safe URLs: 04-review-checklists.md
+- Same name across phases: 02-delegation-and-sessions.md
+- Same phase or next phase: 02-delegation-and-sessions.md
+- Sample from a screenshot: 08-engineering-practice.md
+- Sanitise HTML: 04-review-checklists.md
+- satisfies: 04-review-checklists.md
+- Say what it does: 01-writing-and-responses.md
+- Scaffolding allowed: 06-domain-docs-research.md
+- Scan, rewrite, add soul: 01-writing-and-responses.md
+- Schema-derived types: 04-review-checklists.md
+- Scope creep grade: 03-review-process.md
+- Scope equals acceptance criteria: 05-tickets-planning.md
+- Scope rules by task kind: 01-writing-and-responses.md
+- Score-to-risk mapping: 03-review-process.md
+- Search for side effects: 10-skill-lifecycle.md
+- Sections per lifecycle stage: 01-writing-and-responses.md
+- Sections per role: 01-writing-and-responses.md
+- Self-arbitrate at the cap: 03-review-process.md
+- Self-check each action: 02-delegation-and-sessions.md
+- Self-contained script package: 09-skill-structure.md
+- Self-describing names: 04-review-checklists.md
+- Self-reopen in analysis: 01-writing-and-responses.md
+- Sensible staleTime: 04-review-checklists.md
+- Sentence case headings: 01-writing-and-responses.md
+- Separate bug pass subagent: 03-review-process.md
+- Separate spec pass subagent: 03-review-process.md
+- Server function chain: 04-review-checklists.md
+- Session naming: 02-delegation-and-sessions.md
+- Settled answers: 01-writing-and-responses.md
+- Setup artefacts: 06-domain-docs-research.md
+- Setup refuses existing wiki: 06-domain-docs-research.md
+- Shallow condition trees: 04-review-checklists.md
+- Shallow JSX: 04-review-checklists.md
+- Sibling gaps go in the PR body: 05-tickets-planning.md
+- Sibling gaps go to the report: 02-delegation-and-sessions.md
+- Sibling scripts by own directory: 07-git-safety-tooling.md
+- Sibling titles: 03-review-process.md
+- Siblings own adjacent work: 05-tickets-planning.md
+- Simplest solution: 08-engineering-practice.md
+- Single or multi-context layout: 06-domain-docs-research.md
+- Single owner per server entity: 04-review-checklists.md
+- Single pass over chains: 04-review-checklists.md
+- Single source of truth import: 10-skill-lifecycle.md
+- Single-fire onSuccess: 04-review-checklists.md
+- Single-pass min/max: 04-review-checklists.md
+- Single-source types: 04-review-checklists.md
+- Skill steps stay local: 02-delegation-and-sessions.md
+- skill-creator eval workflow: 10-skill-lifecycle.md
+- Skill-owned formats: 06-domain-docs-research.md
+- Small conventional commits: 07-git-safety-tooling.md
+- Small handlers: 04-review-checklists.md
+- Smallest upheld change: 03-review-process.md
+- Source is untrusted: 10-skill-lifecycle.md
+- Spec backlink: 05-tickets-planning.md
+- Spec discovery fallback: 03-review-process.md
+- Spec header lines: 05-tickets-planning.md
+- Spec pass brief: 03-review-process.md
+- Specs local, issues on GitHub: 05-tickets-planning.md
+- Split by knowledge: 04-review-checklists.md
+- Split by the breaking-work-down rules: 02-delegation-and-sessions.md
+- Split by topic: 06-domain-docs-research.md
+- Split large components: 04-review-checklists.md
+- Split overloaded handlers: 04-review-checklists.md
+- Split overloaded loaders: 04-review-checklists.md
+- Stable context values: 04-review-checklists.md
+- Stable keys: 04-review-checklists.md
+- Stable reorder: 04-review-checklists.md
+- Stack check file shape: 04-review-checklists.md
+- Stale closures: 04-review-checklists.md
+- State launch parameters: 02-delegation-and-sessions.md
+- State placement: 04-review-checklists.md
+- State the finish line: 02-delegation-and-sessions.md
+- State the input precondition: 08-engineering-practice.md
+- Status union over flags: 04-review-checklists.md
+- Stay on the current branch: 07-git-safety-tooling.md
+- Stay read-only: 03-review-process.md
+- Step cadence: 09-skill-structure.md
+- Sterile is also a tell: 01-writing-and-responses.md
+- Stop and wait after reporting: 02-delegation-and-sessions.md
+- Stop before removing a worktree: 02-delegation-and-sessions.md
+- Stop on concurrent edit: 06-domain-docs-research.md
+- Stop the reviewer: 02-delegation-and-sessions.md
+- Straight quotes: 01-writing-and-responses.md
+- Strict bash: 07-git-safety-tooling.md
+- Strict validators: 04-review-checklists.md
+- StrictMode-safe effects: 04-review-checklists.md
+- Subagent covers, parent filters: 03-review-process.md
+- Subagent one-line report: 02-delegation-and-sessions.md
+- Subagent reads its section: 02-delegation-and-sessions.md
+- Subscribe to idle: 02-delegation-and-sessions.md
+- Successor launch: 02-delegation-and-sessions.md
+- Superficial -ing phrases: 01-writing-and-responses.md
+- Supersession: 06-domain-docs-research.md
+- Supersession fixture: 10-skill-lifecycle.md
+- Supersession handling: 06-domain-docs-research.md
+- Supersession marker: 06-domain-docs-research.md
+- Supervised issue hierarchy: 02-delegation-and-sessions.md
+- Supervisor hears only fixed lines: 02-delegation-and-sessions.md
+- Supervisor writes no code: 02-delegation-and-sessions.md
+- Supporting files by link: 09-skill-structure.md
+- Symlinked agent definitions: 10-skill-lifecycle.md
+- Symlinked home is a plugin: 10-skill-lifecycle.md
+- Sync the default branch after merging: 07-git-safety-tooling.md
+- Synonym cycling: 01-writing-and-responses.md
+- Terse check lists: 04-review-checklists.md
+- Thin server functions: 04-review-checklists.md
+- Things to keep: 10-skill-lifecycle.md
+- Three default phases: 02-delegation-and-sessions.md
+- Three-round cap: 03-review-process.md
+- Ticket worktree shares the branch name: 07-git-safety-tooling.md
+- Tickets header: 05-tickets-planning.md
+- Timezone mode: 04-review-checklists.md
+- Topical page: 06-domain-docs-research.md
+- Topical page template: 06-domain-docs-research.md
+- Transactional read-modify-write: 04-review-checklists.md
+- Transactional server writes: 04-review-checklists.md
+- Transactions for multi-writes: 04-review-checklists.md
+- Triage roles as labels: 05-tickets-planning.md
+- Two-pass review: 03-review-process.md
+- Uninstall report: 10-skill-lifecycle.md
+- unknown at boundaries: 04-review-checklists.md
+- Unlink without deleting targets: 10-skill-lifecycle.md
+- Unmet criterion is high: 03-review-process.md
+- Unnamed edits exist: 10-skill-lifecycle.md
+- Unresolved report lists both positions: 02-delegation-and-sessions.md
+- Unslop artifacts, not chat: 01-writing-and-responses.md
+- Update checks: 10-skill-lifecycle.md
+- Update report: 10-skill-lifecycle.md
+- Use "I" when it fits: 01-writing-and-responses.md
+- Use glossary vocabulary: 06-domain-docs-research.md
+- Use notFound(): 04-review-checklists.md
+- Use returning(): 04-review-checklists.md
+- Use select: 04-review-checklists.md
+- Use skill-creator partially: 10-skill-lifecycle.md
+- User formats verbatim: 10-skill-lifecycle.md
+- Vague attributions: 01-writing-and-responses.md
+- Validate parsed JSON: 04-review-checklists.md
+- Validate request values: 04-review-checklists.md
+- Validate the name: 10-skill-lifecycle.md
+- Validated route params: 04-review-checklists.md
+- Validation fallback: 08-engineering-practice.md
+- Vary rhythm: 01-writing-and-responses.md
+- Verbatim block: 06-domain-docs-research.md
+- Verbatim extraction: 06-domain-docs-research.md
+- Verdict line: 03-review-process.md
+- Verify every fact: 10-skill-lifecycle.md
+- Verify reports: 02-delegation-and-sessions.md
+- Version bump rule: 10-skill-lifecycle.md
+- Vertical slices: 05-tickets-planning.md
+- Virtualise long lists: 04-review-checklists.md
+- Visual check: 08-engineering-practice.md
+- Warn open PRs after a merge: 07-git-safety-tooling.md
+- Wave launch recipe: 02-delegation-and-sessions.md
+- Waves: 02-delegation-and-sessions.md
+- Wayfinder child ticket: 05-tickets-planning.md
+- Wayfinding map: 05-tickets-planning.md
+- What counts as a constraint: 09-skill-structure.md
+- Wiki as verbatim navigation layer: 06-domain-docs-research.md
+- Wiki log: 06-domain-docs-research.md
+- Work in the home: 10-skill-lifecycle.md
+- Work log entry: 02-delegation-and-sessions.md
+- Work the frontier: 05-tickets-planning.md
+- Worktree only on demand: 07-git-safety-tooling.md
+- Write checks: 10-skill-lifecycle.md
+- Write report: 10-skill-lifecycle.md
