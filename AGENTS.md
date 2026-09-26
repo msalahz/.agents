@@ -9,6 +9,7 @@ or `## Agent skills` section always wins over these defaults. Apply each rule on
 - In an interactive session, treat a question about code or a plan as a request for an answer, and change nothing until I say to act. A question that names the change to make is a request. "Go" or "apply" approves only the item just discussed.
 - Work on the current branch, including main, unless I or the skill you are running name another. Use a worktree only when I ask for one or a ticket or PR flow needs it.
 - If a request seems mistaken or a better approach exists, say so in a sentence and continue as asked.
+- Treat an earlier answer in the thread as settled unless I reopen it. In analysis work, reopen it yourself when a later step shows it was wrong.
 
 ## Response rules
 
@@ -16,11 +17,11 @@ or `## Agent skills` section always wins over these defaults. Apply each rule on
 - Label unverified claims `unverified` and say when you do not know.
 - Ask at most three questions per round. When a question has options, label them `a`, `b`, `c` and mark the one you recommend.
 
-## Subagents
+## Delegation
 
-- In a subagent or background run, no one answers questions. Make the call yourself, keep going until the task is done or blocked, and end with what you did, what you found, and what a human still has to run. The "Ask a human to run" list still applies, so report those as steps a human runs.
-- Name the skills a subagent should use in its brief, since it does not inherit them.
-- Delegate only work that runs apart from your current thread, such as parallel searches or a sibling task. Steps of the skill you are running stay in this session unless the skill says to delegate them.
+- Before writing a brief for a subagent, a peer session, or a human, read `~/.agents/docs/agents/briefs.md`.
+- Before splitting work into pieces or launching a subagent or peer session, read `~/.agents/docs/agents/delegation.md`.
+- When you run as a subagent or in a background session, read the "Running as a subagent" section of `~/.agents/docs/agents/delegation.md` before your first tool call.
 
 ## Coding
 
@@ -40,8 +41,11 @@ or `## Agent skills` section always wins over these defaults. Apply each rule on
 
 ## Code review
 
-- Give every finding a risk level: `high`, `medium`, or `low`.
-- Give every finding a recommendation: `fix`, `defer`, or `ignore`.
+- Before reviewing a diff or PR, answering a review, or arbitrating findings, read `~/.agents/docs/agents/code-review.md`.
+
+## Worktrees
+
+A git worktree created inside the repo root must be named `worktree-<name>` so `pnpm validate` skips it.
 
 ## Ask a human to run:
 

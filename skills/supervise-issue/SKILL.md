@@ -4,7 +4,7 @@ description: Drive a parent GitHub issue to completion by running phased author 
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Supervise issue
@@ -15,7 +15,7 @@ Sessions talk over SendMessage. The author launches its own `review-pr` session 
 
 State lives at `~/.agents/.scratch/<repo>-issue-<n>/state.md`: a table of ticket, worktree, branch, current phase, author ids one per phase, reviewer id, PR, status, plus the launch and cleanup recipes below, kept current so a resumed session can carry on from it. Handoff files sit beside it.
 
-The supervisor breaks each ticket into phases, each one a session can finish well inside a 140k-token context, and sizes every author, reviewer, and arbiter launch against that bound before it runs. Each phase is a fresh session under the same name `author-<n>`, so the reviewer still reaches it:
+The supervisor breaks each ticket into phases by the Breaking-work-down rules in `~/.agents/docs/agents/delegation.md`, and sizes every author, reviewer, and arbiter launch against that bound before it runs. Each phase is a fresh session under the same name `author-<n>`, so the reviewer still reaches it:
 
 - `implement`: author-ticket steps 1 to 3 and the commits of step 4, ending before the push.
 - `pr`: the browser checks the Coding rules in `~/.agents/AGENTS.md` ask of a UI change, then the push, PR, and opened report of step 4. Screenshots fill context fast, so this phase stands alone.
@@ -24,7 +24,7 @@ The supervisor breaks each ticket into phases, each one a session can finish wel
 Every launch prompt carries the handoff block below. Its `<file>` is an absolute path in the state directory: `handoff-<n>.md` for an author, `handoff-<n>-reviewer.md` for a reviewer, `handoff-<n>-arbiter.md` for an arbiter.
 
 ```
-Context budget: finish this work well inside a 140k-token context. When this phase's work is done and a later phase remains, or your context nears 110k tokens, write <file> in at most 60 lines with these sections: done, per acceptance criterion; changed (commits, uncommitted work, migrations); verified; machine state (servers and processes left running); next steps; gotchas; follow-ups. Then send <supervisor-name> a message whose first line is `Handoff written for #<n>` and whose second line is the file path, and stop.
+Handoff file: <file>. Write it as the Running-as-a-subagent rules in ~/.agents/docs/agents/delegation.md say, and also when this phase's work is done and a later phase remains. Then send <supervisor-name> a message whose first line is `Handoff written for #<n>` and whose second line is the file path, and stop.
 ```
 
 Three helpers sit in `scripts/`:
@@ -51,7 +51,7 @@ Done when: every item passes, or the user has been given the exact fix for each 
 
 ## 2. Plan
 
-Read the parent with `gh issue view <n>` and its sub-issues through the GraphQL `subIssues` connection. For each sub-issue read the body, the `## Blocked by` list, the labels, and the spec path on its first line. Build the table: ticket, blockers, effort, phases, agent or human. `ready-for-human` tickets and tickets whose acceptance criteria need a remote environment are human; everything else is agent work. Effort is `high` for tickets that touch scripts or more than one domain, `medium` otherwise. Phases default to `implement, pr, review`; a small ticket may merge two, as `implement+pr`, when one session can finish the merged work well inside a 140k-token context.
+Read the parent with `gh issue view <n>` and its sub-issues through the GraphQL `subIssues` connection. For each sub-issue read the body, the `## Blocked by` list, the labels, and the spec path on its first line. Build the table: ticket, blockers, effort, phases, agent or human. `ready-for-human` tickets and tickets whose acceptance criteria need a remote environment are human; everything else is agent work. Effort is `high` for tickets that touch scripts or more than one domain, `medium` otherwise. Phases default to `implement, pr, review`; a small ticket may merge two, as `implement+pr`, when one session can finish the merged work inside the same bound.
 
 Post the table as a comment on the parent and show it to the user with at most three questions, each with choices `a`, `b`, `c` and a recommendation. Ask only what changes the work: status tracking when there is no project, effort overrides, and what to do with human-only criteria found inside agent tickets.
 
@@ -96,7 +96,7 @@ Workers send fixed first lines. Match on them:
 - `PR #<pr> opened for #<n>`: set In review.
 - `PR #<pr> approved for #<n> after round <k>` or `PR #<pr> rebased and approved`: go to step 6.
 - `PR #<pr> unresolved for #<n> after 3 rounds`: launch the arbiter from the worktree with `claude --bg --name arbiter-<n> --model fable --effort high --permission-mode auto "<prompt>"` and subscribe, where the prompt holds, on separate lines, `/arbitrate-review <pr> <n>`, then `Author: author-<n>. Reviewer: reviewer-<n>. Supervisor: <supervisor-name>.`, then the author's full unresolved report verbatim, then the handoff block. No record of the dispute exists on GitHub, so the launch message is the arbiter's only source. Its `PR #<pr> arbitrated for #<n>` report is treated as approval.
-- `Handoff written for #<n>`: read the file on the second line, then `claude stop` the sender. Launch its successor from the worktree with the sender's name and first-launch flags, so an author comes back as `--name author-<n>`. The prompt holds, on separate lines, a skill line, a phase line, `Read <file> first and skip re-reading what it settles.`, and the handoff block. An author's skill line is `Read ~/.agents/skills/author-ticket/SKILL.md, arguments <n> <n>-<slug> <supervisor-name>`, and its phase line is the one from step 3. An author continues the same phase after a 110k handoff and moves to the plan's next phase otherwise. A reviewer or arbiter gets its first launch's command line and no phase line. Record the new session id and phase in the state file, and subscribe.
+- `Handoff written for #<n>`: read the file on the second line, then `claude stop` the sender. Launch its successor from the worktree with the sender's name and first-launch flags, so an author comes back as `--name author-<n>`. The prompt holds, on separate lines, a skill line, a phase line, `Read <file> first and skip re-reading what it settles.`, and the handoff block. An author's skill line is `Read ~/.agents/skills/author-ticket/SKILL.md, arguments <n> <n>-<slug> <supervisor-name>`, and its phase line is the one from step 3. An author continues the same phase after a context-bound handoff and moves to the plan's next phase otherwise. A reviewer or arbiter gets its first launch's command line and no phase line. Record the new session id and phase in the state file, and subscribe.
 
 A `[Cross-session delivery notice]` saying a message was held means the peer runs in another permission class; relaunch it with `--permission-mode auto`.
 

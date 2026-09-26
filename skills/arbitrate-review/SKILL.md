@@ -4,7 +4,7 @@ description: Settle a review loop that ran out of rounds by deciding each open f
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.1.1"
+  version: "0.2.0"
 ---
 
 # Arbitrate review
@@ -14,14 +14,14 @@ Arguments: `<pr> <n>`. The author and the reviewer of PR `#<pr>` for ticket `#<n
 ## 1. Read
 
 1. The launch message. It carries the author's and reviewer's session names and the author's unresolved report verbatim: each open finding with the reviewer's position and the author's. Nothing about the dispute exists on GitHub, so this message is the only source; when a position is unclear, ask `author-<n>` or `reviewer-<n>` over SendMessage.
-2. `gh issue view <n> --comments`, the spec sections it names, `docs/adr/*.md`, `AGENTS.md`, and the Coding and Code review rules in `~/.agents/AGENTS.md`.
+2. `gh issue view <n> --comments`, the spec sections it names, `docs/adr/*.md`, `AGENTS.md`, the Coding rules in `~/.agents/AGENTS.md`, and the Arbitrating rules in `~/.agents/docs/agents/code-review.md`.
 3. `gh pr view <pr> --json body` and `gh pr diff <pr>`.
 
 Done when: every open finding is listed with both positions and the evidence each side cited.
 
 ## 2. Decide
 
-For each finding, check the claim against the code and the ticket, not against who said it. Reproduce it when a read-only command can. Decide `uphold` or `dismiss` with one line of reason that quotes the criterion, the rule, or the failing input. A finding that is real but outside the ticket's criteria is dismissed for this PR and named as a follow-up with the sibling ticket that owns it.
+For each finding, check the claim against the code and the ticket, not against who said it. Reproduce it when a read-only command can. Decide each by the Arbitrating rules. A finding that is real but outside the ticket's criteria is dismissed for this PR and named as a follow-up with the sibling ticket that owns it.
 
 Done when: every finding has a decision and a one-line reason.
 

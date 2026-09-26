@@ -4,7 +4,7 @@ description: Implement one GitHub sub-issue in its own worktree as the author se
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Author ticket
@@ -66,19 +66,19 @@ Launch the reviewer from the worktree:
 claude --bg --name reviewer-<n> --model opus --effort high --permission-mode auto "/review-pr <pr> <n> author-<n>"
 ```
 
-When the launch prompt carries a reviewer copy of the handoff block, append it verbatim to the reviewer prompt on its own line after `/review-pr <pr> <n> author-<n>`. It gives the reviewer a 140k-token budget and has it write `handoff-<n>-reviewer.md` when its context nears 110k.
+When the launch prompt carries a reviewer copy of the handoff block, append it verbatim to the reviewer prompt on its own line after `/review-pr <pr> <n> author-<n>`. It names the reviewer's handoff file, `handoff-<n>-reviewer.md`.
 
-Wait for its message. It ends with `VERDICT: APPROVED` or `VERDICT: CHANGES REQUESTED` and lists findings with a risk level and a recommendation.
+Wait for its message. It ends with `verdict: agree` or `verdict: changes requested` and lists findings in the shape the Reviewing rules of `~/.agents/docs/agents/code-review.md` give.
 
-On changes requested: fix every `fix` finding you agree with; for each you reject, reply with the reason. Re-run step 3, commit, push, and message `reviewer-<n>` with `re-review round <k>`. Three rounds in total, counting the first.
+On changes requested: answer it by the Answering rules in the same file. Re-run step 3, commit, push, and message `reviewer-<n>` with `re-review round <k>`. Three rounds in total, counting the first.
 
 When the supervisor sends `Rebase #<n> onto <default>`: `git fetch origin`, `git rebase origin/<default>`, resolve with the resolving-merge-conflicts skill keeping both sides' intent, re-run step 3, `git push --force-with-lease origin <worktree>`, then message `reviewer-<n>` with `re-review round <k>, conflict resolution only`. That round does not count toward the three.
 
-Done when: the reviewer has sent APPROVED, or three rounds have passed.
+Done when: the reviewer has sent `verdict: agree`, or three rounds have passed.
 
 ## 6. Record, report, and wait
 
-Append a `## Review` section to the PR body with `gh pr edit <pr> --body-file`: the rounds run, the findings fixed with their commits, the findings deferred with the ticket that owns each, and the final verdict line. That section is the only record of the review, since a same-account PR cannot carry a GitHub approval.
+Append a `## Review` section to the PR body with `gh pr edit <pr> --body-file`, holding the record the Answering rules name. That section is the only record of the review, since a same-account PR cannot carry a GitHub approval.
 
 Then send the supervisor one of these first lines, then the detail:
 

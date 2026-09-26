@@ -15,7 +15,10 @@ marketplace checkouts.
 ~/.agents/
 ├── AGENTS.md                  global instructions loaded in every repo
 ├── docs/agents/               defaults for repos without their own guidance
+│   ├── briefs.md              how to write a brief for a session or a human
 │   ├── code-review/           Drizzle, React, TanStack Start, and TypeScript
+│   ├── code-review.md         review, answer, arbitrate, and report findings
+│   ├── delegation.md          break work down, launch, run as a subagent, verify
 │   ├── domain.md              domain-documentation conventions
 │   ├── issue-tracker.md       local issue-tracker conventions
 │   └── triage-labels.md       triage roles and state transitions
@@ -50,7 +53,7 @@ These are real directories tracked in this repo.
 - [`install-skill`](./skills/install-skill/SKILL.md) installs a skill into this home and links it for Claude Code.
 - [`knowledge-wiki`](./skills/knowledge-wiki/SKILL.md) keeps a verbatim wiki of domain expert answers inside a repo, with setup, ingest, ask, and lint.
 - [`reply`](./skills/reply/SKILL.md) answers a question in text without changing anything.
-- [`review-loop`](./skills/review-loop/SKILL.md) has a peer session review work against its spec while this session fixes the findings, until the reviewer agrees or 4 rounds pass and this session arbitrates.
+- [`review-loop`](./skills/review-loop/SKILL.md) has a peer session review work against its spec while this session fixes the findings, until the reviewer agrees or 3 rounds pass and this session arbitrates.
 - [`review-pr`](./skills/review-pr/SKILL.md) reviews a PR against its ticket's acceptance criteria, hunts bugs, and sends the author a verdict.
 - [`simplify-skill`](./skills/simplify-skill/SKILL.md) cuts a skill down to its outcome and the constraints the agent cannot discover.
 - [`spin-bg-agent`](./skills/spin-bg-agent/SKILL.md) launches a managed background subagent at a chosen effort level.

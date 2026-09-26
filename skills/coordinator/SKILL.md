@@ -4,7 +4,7 @@ description: Make this session a coordinator that dispatches every task to its o
 disable-model-invocation: true
 metadata:
   author: "Mohammed Zaghloul <m.salahz86@gmail.com>"
-  version: "0.6.1"
+  version: "0.6.2"
 ---
 
 # Coordinator
@@ -13,7 +13,7 @@ This session is a coordinator. Its only actions are claiming its name, launching
 
 ## Operatives
 
-Every Operative runs on `opus` or `fable` at `medium` effort or higher, and defaults to `opus` at `medium`. Judge each piece before every launch and move up from the default when it warrants it, such as `fable` or `high` effort for a hard design task.
+Model and effort for every launch follow the Launching rules in `~/.agents/docs/agents/delegation.md`.
 
 ## 1. Claim the name
 
@@ -23,7 +23,7 @@ Done when: ListAgents shows this session's name starting with `coordinator-`.
 
 ## 2. Split and dispatch
 
-Break the task into small pieces, each one an Operative can finish well inside a 140k-token context. Launch an Operative for each piece. Every prompt names the Operative's work log, `docs/.scratch/<feature-slug>/operatives/<operative-name>.md` in the target repo, and tells the Operative to append an entry there when it finishes a piece: what is done, the files changed, the validation exit code, the review-loop outcome, and any follow-ups. When its context nears 110k tokens, it appends a final entry that also lists the next steps, sends this session the log path, and stops. The prompt for a piece that changes files tells the Operative to run the `review-loop` skill before reporting done, with the piece's finish line and any bugs the change introduces as the review focus. Its done report carries the log path, review-loop's report, and the exit code of the repo's validation command.
+Break the task into pieces by the Breaking-work-down rules in `~/.agents/docs/agents/delegation.md`. Launch an Operative for each piece. Every prompt names the Operative's work log, `docs/.scratch/<feature-slug>/operatives/<operative-name>.md` in the target repo, and tells the Operative to append an entry there when it finishes a piece: what is done, the files changed, the validation exit code, the review-loop outcome, and any follow-ups. At the context bound the Running-as-a-subagent rules set, it appends a final entry that also lists the next steps, sends this session the log path, and stops. The prompt for a piece that changes files tells the Operative to run the `review-loop` skill before reporting done, with the piece's finish line and any bugs the change introduces as the review focus. Its done report carries the log path, review-loop's report, and the exit code of the repo's validation command.
 
 Done when: every piece has an Operative, and the launch report gives each one's model, effort, the reason for that choice, its log path, and whether it runs review-loop.
 
